@@ -1,5 +1,8 @@
-# 471-Final-Project  
-Final Project for ECE 471 Umaine class using Raspberry Pi 3B+.  
+# PiSynth
+  
+Final Project for ECE 471 at University of Maine.
+
+PiSynth is a functional hardware FM synthesizer featuring the Yamaha YM2612/YM3438 chips. It is driven by a Raspberry Pi running Raspbian Linux.  
 
 Includes code for interfacing with a I2C 16x2 LCD display and configuring GPIO pins, all using the linux interface.  
 
@@ -24,6 +27,6 @@ Future Plans:         Add OLED displays to view and adjust operators (ideally x4
                           - Output, for interfacing and exporting audio to a DAW of user's choice  
                       VGM Playback(difficult)  
                       VGM export from songs recorded in hardware (v. difficult)  
-                      Add Schematic and PCB files (ez)  
+                      Add Schematic and PCB files 
                       
- 
+
