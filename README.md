@@ -13,6 +13,8 @@ Current Status:
 The YM3438 is fully playable, with several presets to choose from. An alarm "song" can also be automatically played back.  
 The SN76489AN is non-functional at this time.  
 
+YM2151 stuff may work with some modifications. I cannot test that, however, since I do not have a working YM2151/YM3012 to test it with at this time.
+
 Currently working on: SN76489AN sound chip support (for full Sega Genesis song support)  
                       YM3438 Keyboard mode with polyphony support (up to 6 channels per chip, at once)  
                       
