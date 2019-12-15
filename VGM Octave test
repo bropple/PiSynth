@@ -1,0 +1,512 @@
+0x00000080: 52 22 08    YM2612:		Low Frequency Oscillator: 3.98 Hz
+--- Loop Point ---
+0x00000083: 52 27 00    YM2612:		CSM Mode: Disable, 3 Slot Mode: Disable, Timer B Disable, Timer A Disable, Stop Timer B, Stop Timer A
+0x00000086: 52 B4 C0    YM2612:		Ch 0 PMS: 0x0, AMS: 0x0, Stereo: LR
+0x00000089: 52 B5 C0    YM2612:		Ch 1 PMS: 0x0, AMS: 0x0, Stereo: LR
+0x0000008C: 52 B6 C0    YM2612:		Ch 2 PMS: 0x0, AMS: 0x0, Stereo: LR
+0x0000008F: 53 B4 C0    YM2612:		Ch 3 PMS: 0x0, AMS: 0x0, Stereo: LR
+0x00000092: 53 B5 C0    YM2612:		Ch 4 PMS: 0x0, AMS: 0x0, Stereo: LR
+0x00000095: 53 B6 C0    YM2612:		Ch 5 PMS: 0x0, AMS: 0x0, Stereo: LR
+0x00000098: 52 28 00    YM2612:		Channel 0 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x0000009B: 52 28 01    YM2612:		Channel 1 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x0000009E: 52 28 02    YM2612:		Channel 2 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000000A1: 52 28 03    YM2612:		Key On/Off: Invalid Channel
+0x000000A4: 52 28 04    YM2612:		Channel 3 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000000A7: 52 28 05    YM2612:		Channel 4 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000000AA: 52 28 06    YM2612:		Channel 5 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000000AD: 50 9F       SN76496:	Latch/Data: Volume Ch 0 -> 0xF = 0%
+0x000000AF: 50 BF       SN76496:	Latch/Data: Volume Ch 1 -> 0xF = 0%
+0x000000B1: 50 DF       SN76496:	Latch/Data: Volume Ch 2 -> 0xF = 0%
+0x000000B3: 50 FF       SN76496:	Latch/Data: Volume Ch 3 -> 0xF = 0%
+0x000000B5: 52 30 16    YM2612:		Ch 0 Slot 0 Detune: 1, Multiple: Freq * 0
+0x000000B8: 52 40 21    YM2612:		Ch 0 Slot 0 Total Level: 0x21 = 92%
+0x000000BB: 52 50 1F    YM2612:		Ch 0 Slot 0 Attack Rate: 1F, Key Scale: 1 / 3
+0x000000BE: 52 60 07    YM2612:		Ch 0 Slot 0 Amplitude Modulation: Disable, Decay Rate: 07
+0x000000C1: 52 70 00    YM2612:		Ch 0 Slot 0 Sustain Rate: 00
+0x000000C4: 52 80 5F    YM2612:		Ch 0 Slot 0 Sustain Level: 5, Release Rate: F
+0x000000C7: 52 90 00    YM2612:		Ch 0 Slot 0 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x000000CA: 52 34 00    YM2612:		Ch 0 Slot 1 Detune: 0, Multiple: Freq * 0
+0x000000CD: 52 44 17    YM2612:		Ch 0 Slot 1 Total Level: 0x17 = 96%
+0x000000D0: 52 54 1F    YM2612:		Ch 0 Slot 1 Attack Rate: 1F, Key Scale: 1 / 3
+0x000000D3: 52 64 03    YM2612:		Ch 0 Slot 1 Amplitude Modulation: Disable, Decay Rate: 03
+0x000000D6: 52 74 00    YM2612:		Ch 0 Slot 1 Sustain Rate: 00
+0x000000D9: 52 84 7F    YM2612:		Ch 0 Slot 1 Sustain Level: 7, Release Rate: F
+0x000000DC: 52 94 00    YM2612:		Ch 0 Slot 1 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x000000DF: 52 38 54    YM2612:		Ch 0 Slot 2 Detune: 1, Multiple: Freq * 0
+0x000000E2: 52 48 21    YM2612:		Ch 0 Slot 2 Total Level: 0x21 = 92%
+0x000000E5: 52 58 1F    YM2612:		Ch 0 Slot 2 Attack Rate: 1F, Key Scale: 1 / 3
+0x000000E8: 52 68 03    YM2612:		Ch 0 Slot 2 Amplitude Modulation: Disable, Decay Rate: 03
+0x000000EB: 52 78 00    YM2612:		Ch 0 Slot 2 Sustain Rate: 00
+0x000000EE: 52 88 5F    YM2612:		Ch 0 Slot 2 Sustain Level: 5, Release Rate: F
+0x000000F1: 52 98 00    YM2612:		Ch 0 Slot 2 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x000000F4: 52 3C 00    YM2612:		Ch 0 Slot 3 Detune: 0, Multiple: Freq * 0
+0x000000F7: 52 4C 07    YM2612:		Ch 0 Slot 3 Total Level: 0x07 = 100%
+0x000000FA: 52 5C 1F    YM2612:		Ch 0 Slot 3 Attack Rate: 1F, Key Scale: 1 / 3
+0x000000FD: 52 6C 00    YM2612:		Ch 0 Slot 3 Amplitude Modulation: Disable, Decay Rate: 00
+0x00000100: 52 7C 00    YM2612:		Ch 0 Slot 3 Sustain Rate: 00
+0x00000103: 52 8C 0F    YM2612:		Ch 0 Slot 3 Sustain Level: 0, Release Rate: F
+0x00000106: 52 9C 00    YM2612:		Ch 0 Slot 3 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x00000109: 52 B0 39    YM2612:		Ch 0 Feedback: 13, Algorithm: 1
+0x0000010C: 52 A4 1A    YM2612:		Ch 0 F-Num (prepare) MSB = 2, Octave 3
+0x0000010F: 52 A0 84    YM2612:		Ch 0 F-Num (set) LSB = 84
+0x00000112: 52 28 F0    YM2612:		Channel 0 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000115: 52 31 16    YM2612:		Ch 1 Slot 0 Detune: 1, Multiple: Freq * 0
+0x00000118: 52 41 21    YM2612:		Ch 1 Slot 0 Total Level: 0x21 = 92%
+0x0000011B: 52 51 1F    YM2612:		Ch 1 Slot 0 Attack Rate: 1F, Key Scale: 1 / 3
+0x0000011E: 52 61 07    YM2612:		Ch 1 Slot 0 Amplitude Modulation: Disable, Decay Rate: 07
+0x00000121: 52 71 00    YM2612:		Ch 1 Slot 0 Sustain Rate: 00
+0x00000124: 52 81 5F    YM2612:		Ch 1 Slot 0 Sustain Level: 5, Release Rate: F
+0x00000127: 52 91 00    YM2612:		Ch 1 Slot 0 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x0000012A: 52 35 00    YM2612:		Ch 1 Slot 1 Detune: 0, Multiple: Freq * 0
+0x0000012D: 52 45 17    YM2612:		Ch 1 Slot 1 Total Level: 0x17 = 96%
+0x00000130: 52 55 1F    YM2612:		Ch 1 Slot 1 Attack Rate: 1F, Key Scale: 1 / 3
+0x00000133: 52 65 03    YM2612:		Ch 1 Slot 1 Amplitude Modulation: Disable, Decay Rate: 03
+0x00000136: 52 75 00    YM2612:		Ch 1 Slot 1 Sustain Rate: 00
+0x00000139: 52 85 7F    YM2612:		Ch 1 Slot 1 Sustain Level: 7, Release Rate: F
+0x0000013C: 52 95 00    YM2612:		Ch 1 Slot 1 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x0000013F: 52 39 54    YM2612:		Ch 1 Slot 2 Detune: 1, Multiple: Freq * 0
+0x00000142: 52 49 21    YM2612:		Ch 1 Slot 2 Total Level: 0x21 = 92%
+0x00000145: 52 59 1F    YM2612:		Ch 1 Slot 2 Attack Rate: 1F, Key Scale: 1 / 3
+0x00000148: 52 69 03    YM2612:		Ch 1 Slot 2 Amplitude Modulation: Disable, Decay Rate: 03
+0x0000014B: 52 79 00    YM2612:		Ch 1 Slot 2 Sustain Rate: 00
+0x0000014E: 52 89 5F    YM2612:		Ch 1 Slot 2 Sustain Level: 5, Release Rate: F
+0x00000151: 52 99 00    YM2612:		Ch 1 Slot 2 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x00000154: 52 3D 00    YM2612:		Ch 1 Slot 3 Detune: 0, Multiple: Freq * 0
+0x00000157: 52 4D 07    YM2612:		Ch 1 Slot 3 Total Level: 0x07 = 100%
+0x0000015A: 52 5D 1F    YM2612:		Ch 1 Slot 3 Attack Rate: 1F, Key Scale: 1 / 3
+0x0000015D: 52 6D 00    YM2612:		Ch 1 Slot 3 Amplitude Modulation: Disable, Decay Rate: 00
+0x00000160: 52 7D 00    YM2612:		Ch 1 Slot 3 Sustain Rate: 00
+0x00000163: 52 8D 0F    YM2612:		Ch 1 Slot 3 Sustain Level: 0, Release Rate: F
+0x00000166: 52 9D 00    YM2612:		Ch 1 Slot 3 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x00000169: 52 B1 39    YM2612:		Ch 1 Feedback: 13, Algorithm: 1
+0x0000016C: 52 A5 1A    YM2612:		Ch 1 F-Num (prepare) MSB = 2, Octave 3
+0x0000016F: 52 A1 84    YM2612:		Ch 1 F-Num (set) LSB = 84
+0x00000172: 52 28 F1    YM2612:		Channel 1 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000175: 52 32 16    YM2612:		Ch 2 Slot 0 Detune: 1, Multiple: Freq * 0
+0x00000178: 52 42 21    YM2612:		Ch 2 Slot 0 Total Level: 0x21 = 92%
+0x0000017B: 52 52 1F    YM2612:		Ch 2 Slot 0 Attack Rate: 1F, Key Scale: 1 / 3
+0x0000017E: 52 62 07    YM2612:		Ch 2 Slot 0 Amplitude Modulation: Disable, Decay Rate: 07
+0x00000181: 52 72 00    YM2612:		Ch 2 Slot 0 Sustain Rate: 00
+0x00000184: 52 82 5F    YM2612:		Ch 2 Slot 0 Sustain Level: 5, Release Rate: F
+0x00000187: 52 92 00    YM2612:		Ch 2 Slot 0 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x0000018A: 52 36 00    YM2612:		Ch 2 Slot 1 Detune: 0, Multiple: Freq * 0
+0x0000018D: 52 46 17    YM2612:		Ch 2 Slot 1 Total Level: 0x17 = 96%
+0x00000190: 52 56 1F    YM2612:		Ch 2 Slot 1 Attack Rate: 1F, Key Scale: 1 / 3
+0x00000193: 52 66 03    YM2612:		Ch 2 Slot 1 Amplitude Modulation: Disable, Decay Rate: 03
+0x00000196: 52 76 00    YM2612:		Ch 2 Slot 1 Sustain Rate: 00
+0x00000199: 52 86 7F    YM2612:		Ch 2 Slot 1 Sustain Level: 7, Release Rate: F
+0x0000019C: 52 96 00    YM2612:		Ch 2 Slot 1 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x0000019F: 52 3A 54    YM2612:		Ch 2 Slot 2 Detune: 1, Multiple: Freq * 0
+0x000001A2: 52 4A 21    YM2612:		Ch 2 Slot 2 Total Level: 0x21 = 92%
+0x000001A5: 52 5A 1F    YM2612:		Ch 2 Slot 2 Attack Rate: 1F, Key Scale: 1 / 3
+0x000001A8: 52 6A 03    YM2612:		Ch 2 Slot 2 Amplitude Modulation: Disable, Decay Rate: 03
+0x000001AB: 52 7A 00    YM2612:		Ch 2 Slot 2 Sustain Rate: 00
+0x000001AE: 52 8A 5F    YM2612:		Ch 2 Slot 2 Sustain Level: 5, Release Rate: F
+0x000001B1: 52 9A 00    YM2612:		Ch 2 Slot 2 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x000001B4: 52 3E 00    YM2612:		Ch 2 Slot 3 Detune: 0, Multiple: Freq * 0
+0x000001B7: 52 4E 07    YM2612:		Ch 2 Slot 3 Total Level: 0x07 = 100%
+0x000001BA: 52 5E 1F    YM2612:		Ch 2 Slot 3 Attack Rate: 1F, Key Scale: 1 / 3
+0x000001BD: 52 6E 00    YM2612:		Ch 2 Slot 3 Amplitude Modulation: Disable, Decay Rate: 00
+0x000001C0: 52 7E 00    YM2612:		Ch 2 Slot 3 Sustain Rate: 00
+0x000001C3: 52 8E 0F    YM2612:		Ch 2 Slot 3 Sustain Level: 0, Release Rate: F
+0x000001C6: 52 9E 00    YM2612:		Ch 2 Slot 3 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x000001C9: 52 B2 39    YM2612:		Ch 2 Feedback: 13, Algorithm: 1
+0x000001CC: 52 A6 1A    YM2612:		Ch 2 F-Num (prepare) MSB = 2, Octave 3
+0x000001CF: 52 A2 84    YM2612:		Ch 2 F-Num (set) LSB = 84
+0x000001D2: 52 28 F2    YM2612:		Channel 2 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000001D5: 53 30 16    YM2612:		Ch 3 Slot 0 Detune: 1, Multiple: Freq * 0
+0x000001D8: 53 40 21    YM2612:		Ch 3 Slot 0 Total Level: 0x21 = 92%
+0x000001DB: 53 50 1F    YM2612:		Ch 3 Slot 0 Attack Rate: 1F, Key Scale: 1 / 3
+0x000001DE: 53 60 07    YM2612:		Ch 3 Slot 0 Amplitude Modulation: Disable, Decay Rate: 07
+0x000001E1: 53 70 00    YM2612:		Ch 3 Slot 0 Sustain Rate: 00
+0x000001E4: 53 80 5F    YM2612:		Ch 3 Slot 0 Sustain Level: 5, Release Rate: F
+0x000001E7: 53 90 00    YM2612:		Ch 3 Slot 0 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x000001EA: 53 34 00    YM2612:		Ch 3 Slot 1 Detune: 0, Multiple: Freq * 0
+0x000001ED: 53 44 17    YM2612:		Ch 3 Slot 1 Total Level: 0x17 = 96%
+0x000001F0: 53 54 1F    YM2612:		Ch 3 Slot 1 Attack Rate: 1F, Key Scale: 1 / 3
+0x000001F3: 53 64 03    YM2612:		Ch 3 Slot 1 Amplitude Modulation: Disable, Decay Rate: 03
+0x000001F6: 53 74 00    YM2612:		Ch 3 Slot 1 Sustain Rate: 00
+0x000001F9: 53 84 7F    YM2612:		Ch 3 Slot 1 Sustain Level: 7, Release Rate: F
+0x000001FC: 53 94 00    YM2612:		Ch 3 Slot 1 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x000001FF: 53 38 54    YM2612:		Ch 3 Slot 2 Detune: 1, Multiple: Freq * 0
+0x00000202: 53 48 21    YM2612:		Ch 3 Slot 2 Total Level: 0x21 = 92%
+0x00000205: 53 58 1F    YM2612:		Ch 3 Slot 2 Attack Rate: 1F, Key Scale: 1 / 3
+0x00000208: 53 68 03    YM2612:		Ch 3 Slot 2 Amplitude Modulation: Disable, Decay Rate: 03
+0x0000020B: 53 78 00    YM2612:		Ch 3 Slot 2 Sustain Rate: 00
+0x0000020E: 53 88 5F    YM2612:		Ch 3 Slot 2 Sustain Level: 5, Release Rate: F
+0x00000211: 53 98 00    YM2612:		Ch 3 Slot 2 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x00000214: 53 3C 00    YM2612:		Ch 3 Slot 3 Detune: 0, Multiple: Freq * 0
+0x00000217: 53 4C 07    YM2612:		Ch 3 Slot 3 Total Level: 0x07 = 100%
+0x0000021A: 53 5C 1F    YM2612:		Ch 3 Slot 3 Attack Rate: 1F, Key Scale: 1 / 3
+0x0000021D: 53 6C 00    YM2612:		Ch 3 Slot 3 Amplitude Modulation: Disable, Decay Rate: 00
+0x00000220: 53 7C 00    YM2612:		Ch 3 Slot 3 Sustain Rate: 00
+0x00000223: 53 8C 0F    YM2612:		Ch 3 Slot 3 Sustain Level: 0, Release Rate: F
+0x00000226: 53 9C 00    YM2612:		Ch 3 Slot 3 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x00000229: 53 B0 39    YM2612:		Ch 3 Feedback: 13, Algorithm: 1
+0x0000022C: 53 A4 1A    YM2612:		Ch 3 F-Num (prepare) MSB = 2, Octave 3
+0x0000022F: 53 A0 84    YM2612:		Ch 3 F-Num (set) LSB = 84
+0x00000232: 52 28 F4    YM2612:		Channel 3 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000235: 53 31 16    YM2612:		Ch 4 Slot 0 Detune: 1, Multiple: Freq * 0
+0x00000238: 53 41 21    YM2612:		Ch 4 Slot 0 Total Level: 0x21 = 92%
+0x0000023B: 53 51 1F    YM2612:		Ch 4 Slot 0 Attack Rate: 1F, Key Scale: 1 / 3
+0x0000023E: 53 61 07    YM2612:		Ch 4 Slot 0 Amplitude Modulation: Disable, Decay Rate: 07
+0x00000241: 53 71 00    YM2612:		Ch 4 Slot 0 Sustain Rate: 00
+0x00000244: 53 81 5F    YM2612:		Ch 4 Slot 0 Sustain Level: 5, Release Rate: F
+0x00000247: 53 91 00    YM2612:		Ch 4 Slot 0 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x0000024A: 53 35 00    YM2612:		Ch 4 Slot 1 Detune: 0, Multiple: Freq * 0
+0x0000024D: 53 45 17    YM2612:		Ch 4 Slot 1 Total Level: 0x17 = 96%
+0x00000250: 53 55 1F    YM2612:		Ch 4 Slot 1 Attack Rate: 1F, Key Scale: 1 / 3
+0x00000253: 53 65 03    YM2612:		Ch 4 Slot 1 Amplitude Modulation: Disable, Decay Rate: 03
+0x00000256: 53 75 00    YM2612:		Ch 4 Slot 1 Sustain Rate: 00
+0x00000259: 53 85 7F    YM2612:		Ch 4 Slot 1 Sustain Level: 7, Release Rate: F
+0x0000025C: 53 95 00    YM2612:		Ch 4 Slot 1 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x0000025F: 53 39 54    YM2612:		Ch 4 Slot 2 Detune: 1, Multiple: Freq * 0
+0x00000262: 53 49 21    YM2612:		Ch 4 Slot 2 Total Level: 0x21 = 92%
+0x00000265: 53 59 1F    YM2612:		Ch 4 Slot 2 Attack Rate: 1F, Key Scale: 1 / 3
+0x00000268: 53 69 03    YM2612:		Ch 4 Slot 2 Amplitude Modulation: Disable, Decay Rate: 03
+0x0000026B: 53 79 00    YM2612:		Ch 4 Slot 2 Sustain Rate: 00
+0x0000026E: 53 89 5F    YM2612:		Ch 4 Slot 2 Sustain Level: 5, Release Rate: F
+0x00000271: 53 99 00    YM2612:		Ch 4 Slot 2 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x00000274: 53 3D 00    YM2612:		Ch 4 Slot 3 Detune: 0, Multiple: Freq * 0
+0x00000277: 53 4D 07    YM2612:		Ch 4 Slot 3 Total Level: 0x07 = 100%
+0x0000027A: 53 5D 1F    YM2612:		Ch 4 Slot 3 Attack Rate: 1F, Key Scale: 1 / 3
+0x0000027D: 53 6D 00    YM2612:		Ch 4 Slot 3 Amplitude Modulation: Disable, Decay Rate: 00
+0x00000280: 53 7D 00    YM2612:		Ch 4 Slot 3 Sustain Rate: 00
+0x00000283: 53 8D 0F    YM2612:		Ch 4 Slot 3 Sustain Level: 0, Release Rate: F
+0x00000286: 53 9D 00    YM2612:		Ch 4 Slot 3 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x00000289: 53 B1 39    YM2612:		Ch 4 Feedback: 13, Algorithm: 1
+0x0000028C: 53 A5 1A    YM2612:		Ch 4 F-Num (prepare) MSB = 2, Octave 3
+0x0000028F: 53 A1 84    YM2612:		Ch 4 F-Num (set) LSB = 84
+0x00000292: 52 28 F5    YM2612:		Channel 4 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000295: 53 32 16    YM2612:		Ch 5 Slot 0 Detune: 1, Multiple: Freq * 0
+0x00000298: 53 42 21    YM2612:		Ch 5 Slot 0 Total Level: 0x21 = 92%
+0x0000029B: 53 52 1F    YM2612:		Ch 5 Slot 0 Attack Rate: 1F, Key Scale: 1 / 3
+0x0000029E: 53 62 07    YM2612:		Ch 5 Slot 0 Amplitude Modulation: Disable, Decay Rate: 07
+0x000002A1: 53 72 00    YM2612:		Ch 5 Slot 0 Sustain Rate: 00
+0x000002A4: 53 82 5F    YM2612:		Ch 5 Slot 0 Sustain Level: 5, Release Rate: F
+0x000002A7: 53 92 00    YM2612:		Ch 5 Slot 0 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x000002AA: 53 36 00    YM2612:		Ch 5 Slot 1 Detune: 0, Multiple: Freq * 0
+0x000002AD: 53 46 17    YM2612:		Ch 5 Slot 1 Total Level: 0x17 = 96%
+0x000002B0: 53 56 1F    YM2612:		Ch 5 Slot 1 Attack Rate: 1F, Key Scale: 1 / 3
+0x000002B3: 53 66 03    YM2612:		Ch 5 Slot 1 Amplitude Modulation: Disable, Decay Rate: 03
+0x000002B6: 53 76 00    YM2612:		Ch 5 Slot 1 Sustain Rate: 00
+0x000002B9: 53 86 7F    YM2612:		Ch 5 Slot 1 Sustain Level: 7, Release Rate: F
+0x000002BC: 53 96 00    YM2612:		Ch 5 Slot 1 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x000002BF: 53 3A 54    YM2612:		Ch 5 Slot 2 Detune: 1, Multiple: Freq * 0
+0x000002C2: 53 4A 21    YM2612:		Ch 5 Slot 2 Total Level: 0x21 = 92%
+0x000002C5: 53 5A 1F    YM2612:		Ch 5 Slot 2 Attack Rate: 1F, Key Scale: 1 / 3
+0x000002C8: 53 6A 03    YM2612:		Ch 5 Slot 2 Amplitude Modulation: Disable, Decay Rate: 03
+0x000002CB: 53 7A 00    YM2612:		Ch 5 Slot 2 Sustain Rate: 00
+0x000002CE: 53 8A 5F    YM2612:		Ch 5 Slot 2 Sustain Level: 5, Release Rate: F
+0x000002D1: 53 9A 00    YM2612:		Ch 5 Slot 2 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x000002D4: 53 3E 00    YM2612:		Ch 5 Slot 3 Detune: 0, Multiple: Freq * 0
+0x000002D7: 53 4E 07    YM2612:		Ch 5 Slot 3 Total Level: 0x07 = 100%
+0x000002DA: 53 5E 1F    YM2612:		Ch 5 Slot 3 Attack Rate: 1F, Key Scale: 1 / 3
+0x000002DD: 53 6E 00    YM2612:		Ch 5 Slot 3 Amplitude Modulation: Disable, Decay Rate: 00
+0x000002E0: 53 7E 00    YM2612:		Ch 5 Slot 3 Sustain Rate: 00
+0x000002E3: 53 8E 0F    YM2612:		Ch 5 Slot 3 Sustain Level: 0, Release Rate: F
+0x000002E6: 53 9E 00    YM2612:		Ch 5 Slot 3 SSG-EG Flags: Envelope Off, Attack Off, Alternate Off, Hold Off
+0x000002E9: 53 B2 39    YM2612:		Ch 5 Feedback: 13, Algorithm: 1
+0x000002EC: 53 A6 1A    YM2612:		Ch 5 F-Num (prepare) MSB = 2, Octave 3
+0x000002EF: 53 A2 84    YM2612:		Ch 5 F-Num (set) LSB = 84
+0x000002F2: 52 28 F6    YM2612:		Channel 5 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000002F5: 61 9D 08    Wait:	2205 samples (   50.00 ms)	(total	2205 (00:00.05))
+0x000002F8: 52 28 00    YM2612:		Channel 0 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000002FB: 52 A4 1A    YM2612:		Ch 0 F-Num (prepare) MSB = 2, Octave 3
+0x000002FE: 52 A0 AA    YM2612:		Ch 0 F-Num (set) LSB = AA
+0x00000301: 52 28 F0    YM2612:		Channel 0 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000304: 52 28 01    YM2612:		Channel 1 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000307: 52 A5 1A    YM2612:		Ch 1 F-Num (prepare) MSB = 2, Octave 3
+0x0000030A: 52 A1 AA    YM2612:		Ch 1 F-Num (set) LSB = AA
+0x0000030D: 52 28 F1    YM2612:		Channel 1 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000310: 52 28 02    YM2612:		Channel 2 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000313: 52 A6 1A    YM2612:		Ch 2 F-Num (prepare) MSB = 2, Octave 3
+0x00000316: 52 A2 AA    YM2612:		Ch 2 F-Num (set) LSB = AA
+0x00000319: 52 28 F2    YM2612:		Channel 2 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x0000031C: 52 28 04    YM2612:		Channel 3 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x0000031F: 53 A4 1A    YM2612:		Ch 3 F-Num (prepare) MSB = 2, Octave 3
+0x00000322: 53 A0 AA    YM2612:		Ch 3 F-Num (set) LSB = AA
+0x00000325: 52 28 F4    YM2612:		Channel 3 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000328: 52 28 05    YM2612:		Channel 4 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x0000032B: 53 A5 1A    YM2612:		Ch 4 F-Num (prepare) MSB = 2, Octave 3
+0x0000032E: 53 A1 AA    YM2612:		Ch 4 F-Num (set) LSB = AA
+0x00000331: 52 28 F5    YM2612:		Channel 4 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000334: 52 28 06    YM2612:		Channel 5 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000337: 53 A6 1A    YM2612:		Ch 5 F-Num (prepare) MSB = 2, Octave 3
+0x0000033A: 53 A2 AA    YM2612:		Ch 5 F-Num (set) LSB = AA
+0x0000033D: 52 28 F6    YM2612:		Channel 5 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000340: 61 9D 08    Wait:	2205 samples (   50.00 ms)	(total	4410 (00:00.10))
+0x00000343: 52 28 00    YM2612:		Channel 0 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000346: 52 A4 1A    YM2612:		Ch 0 F-Num (prepare) MSB = 2, Octave 3
+0x00000349: 52 A0 D3    YM2612:		Ch 0 F-Num (set) LSB = D3
+0x0000034C: 52 28 F0    YM2612:		Channel 0 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x0000034F: 52 28 01    YM2612:		Channel 1 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000352: 52 A5 1A    YM2612:		Ch 1 F-Num (prepare) MSB = 2, Octave 3
+0x00000355: 52 A1 D3    YM2612:		Ch 1 F-Num (set) LSB = D3
+0x00000358: 52 28 F1    YM2612:		Channel 1 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x0000035B: 52 28 02    YM2612:		Channel 2 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x0000035E: 52 A6 1A    YM2612:		Ch 2 F-Num (prepare) MSB = 2, Octave 3
+0x00000361: 52 A2 D3    YM2612:		Ch 2 F-Num (set) LSB = D3
+0x00000364: 52 28 F2    YM2612:		Channel 2 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000367: 52 28 04    YM2612:		Channel 3 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x0000036A: 53 A4 1A    YM2612:		Ch 3 F-Num (prepare) MSB = 2, Octave 3
+0x0000036D: 53 A0 D3    YM2612:		Ch 3 F-Num (set) LSB = D3
+0x00000370: 52 28 F4    YM2612:		Channel 3 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000373: 52 28 05    YM2612:		Channel 4 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000376: 53 A5 1A    YM2612:		Ch 4 F-Num (prepare) MSB = 2, Octave 3
+0x00000379: 53 A1 D3    YM2612:		Ch 4 F-Num (set) LSB = D3
+0x0000037C: 52 28 F5    YM2612:		Channel 4 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x0000037F: 52 28 06    YM2612:		Channel 5 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000382: 53 A6 1A    YM2612:		Ch 5 F-Num (prepare) MSB = 2, Octave 3
+0x00000385: 53 A2 D3    YM2612:		Ch 5 F-Num (set) LSB = D3
+0x00000388: 52 28 F6    YM2612:		Channel 5 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x0000038B: 61 9D 08    Wait:	2205 samples (   50.00 ms)	(total	6615 (00:00.15))
+0x0000038E: 52 28 00    YM2612:		Channel 0 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000391: 52 A4 1A    YM2612:		Ch 0 F-Num (prepare) MSB = 2, Octave 3
+0x00000394: 52 A0 FE    YM2612:		Ch 0 F-Num (set) LSB = FE
+0x00000397: 52 28 F0    YM2612:		Channel 0 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x0000039A: 52 28 01    YM2612:		Channel 1 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x0000039D: 52 A5 1A    YM2612:		Ch 1 F-Num (prepare) MSB = 2, Octave 3
+0x000003A0: 52 A1 FE    YM2612:		Ch 1 F-Num (set) LSB = FE
+0x000003A3: 52 28 F1    YM2612:		Channel 1 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000003A6: 52 28 02    YM2612:		Channel 2 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000003A9: 52 A6 1A    YM2612:		Ch 2 F-Num (prepare) MSB = 2, Octave 3
+0x000003AC: 52 A2 FE    YM2612:		Ch 2 F-Num (set) LSB = FE
+0x000003AF: 52 28 F2    YM2612:		Channel 2 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000003B2: 52 28 04    YM2612:		Channel 3 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000003B5: 53 A4 1A    YM2612:		Ch 3 F-Num (prepare) MSB = 2, Octave 3
+0x000003B8: 53 A0 FE    YM2612:		Ch 3 F-Num (set) LSB = FE
+0x000003BB: 52 28 F4    YM2612:		Channel 3 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000003BE: 52 28 05    YM2612:		Channel 4 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000003C1: 53 A5 1A    YM2612:		Ch 4 F-Num (prepare) MSB = 2, Octave 3
+0x000003C4: 53 A1 FE    YM2612:		Ch 4 F-Num (set) LSB = FE
+0x000003C7: 52 28 F5    YM2612:		Channel 4 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000003CA: 52 28 06    YM2612:		Channel 5 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000003CD: 53 A6 1A    YM2612:		Ch 5 F-Num (prepare) MSB = 2, Octave 3
+0x000003D0: 53 A2 FE    YM2612:		Ch 5 F-Num (set) LSB = FE
+0x000003D3: 52 28 F6    YM2612:		Channel 5 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000003D6: 61 9D 08    Wait:	2205 samples (   50.00 ms)	(total	8820 (00:00.20))
+0x000003D9: 52 28 00    YM2612:		Channel 0 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000003DC: 52 A4 1B    YM2612:		Ch 0 F-Num (prepare) MSB = 3, Octave 3
+0x000003DF: 52 A0 2B    YM2612:		Ch 0 F-Num (set) LSB = 2B
+0x000003E2: 52 28 F0    YM2612:		Channel 0 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000003E5: 52 28 01    YM2612:		Channel 1 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000003E8: 52 A5 1B    YM2612:		Ch 1 F-Num (prepare) MSB = 3, Octave 3
+0x000003EB: 52 A1 2B    YM2612:		Ch 1 F-Num (set) LSB = 2B
+0x000003EE: 52 28 F1    YM2612:		Channel 1 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000003F1: 52 28 02    YM2612:		Channel 2 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000003F4: 52 A6 1B    YM2612:		Ch 2 F-Num (prepare) MSB = 3, Octave 3
+0x000003F7: 52 A2 2B    YM2612:		Ch 2 F-Num (set) LSB = 2B
+0x000003FA: 52 28 F2    YM2612:		Channel 2 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000003FD: 52 28 04    YM2612:		Channel 3 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000400: 53 A4 1B    YM2612:		Ch 3 F-Num (prepare) MSB = 3, Octave 3
+0x00000403: 53 A0 2B    YM2612:		Ch 3 F-Num (set) LSB = 2B
+0x00000406: 52 28 F4    YM2612:		Channel 3 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000409: 52 28 05    YM2612:		Channel 4 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x0000040C: 53 A5 1B    YM2612:		Ch 4 F-Num (prepare) MSB = 3, Octave 3
+0x0000040F: 53 A1 2B    YM2612:		Ch 4 F-Num (set) LSB = 2B
+0x00000412: 52 28 F5    YM2612:		Channel 4 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000415: 52 28 06    YM2612:		Channel 5 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000418: 53 A6 1B    YM2612:		Ch 5 F-Num (prepare) MSB = 3, Octave 3
+0x0000041B: 53 A2 2B    YM2612:		Ch 5 F-Num (set) LSB = 2B
+0x0000041E: 52 28 F6    YM2612:		Channel 5 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000421: 61 9D 08    Wait:	2205 samples (   50.00 ms)	(total	11025 (00:00.25))
+0x00000424: 52 28 00    YM2612:		Channel 0 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000427: 52 A4 1B    YM2612:		Ch 0 F-Num (prepare) MSB = 3, Octave 3
+0x0000042A: 52 A0 5B    YM2612:		Ch 0 F-Num (set) LSB = 5B
+0x0000042D: 52 28 F0    YM2612:		Channel 0 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000430: 52 28 01    YM2612:		Channel 1 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000433: 52 A5 1B    YM2612:		Ch 1 F-Num (prepare) MSB = 3, Octave 3
+0x00000436: 52 A1 5B    YM2612:		Ch 1 F-Num (set) LSB = 5B
+0x00000439: 52 28 F1    YM2612:		Channel 1 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x0000043C: 52 28 02    YM2612:		Channel 2 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x0000043F: 52 A6 1B    YM2612:		Ch 2 F-Num (prepare) MSB = 3, Octave 3
+0x00000442: 52 A2 5B    YM2612:		Ch 2 F-Num (set) LSB = 5B
+0x00000445: 52 28 F2    YM2612:		Channel 2 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000448: 52 28 04    YM2612:		Channel 3 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x0000044B: 53 A4 1B    YM2612:		Ch 3 F-Num (prepare) MSB = 3, Octave 3
+0x0000044E: 53 A0 5B    YM2612:		Ch 3 F-Num (set) LSB = 5B
+0x00000451: 52 28 F4    YM2612:		Channel 3 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000454: 52 28 05    YM2612:		Channel 4 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000457: 53 A5 1B    YM2612:		Ch 4 F-Num (prepare) MSB = 3, Octave 3
+0x0000045A: 53 A1 5B    YM2612:		Ch 4 F-Num (set) LSB = 5B
+0x0000045D: 52 28 F5    YM2612:		Channel 4 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000460: 52 28 06    YM2612:		Channel 5 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000463: 53 A6 1B    YM2612:		Ch 5 F-Num (prepare) MSB = 3, Octave 3
+0x00000466: 53 A2 5B    YM2612:		Ch 5 F-Num (set) LSB = 5B
+0x00000469: 52 28 F6    YM2612:		Channel 5 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x0000046C: 61 9D 08    Wait:	2205 samples (   50.00 ms)	(total	13230 (00:00.30))
+0x0000046F: 52 28 00    YM2612:		Channel 0 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000472: 52 A4 1B    YM2612:		Ch 0 F-Num (prepare) MSB = 3, Octave 3
+0x00000475: 52 A0 8E    YM2612:		Ch 0 F-Num (set) LSB = 8E
+0x00000478: 52 28 F0    YM2612:		Channel 0 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x0000047B: 52 28 01    YM2612:		Channel 1 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x0000047E: 52 A5 1B    YM2612:		Ch 1 F-Num (prepare) MSB = 3, Octave 3
+0x00000481: 52 A1 8E    YM2612:		Ch 1 F-Num (set) LSB = 8E
+0x00000484: 52 28 F1    YM2612:		Channel 1 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000487: 52 28 02    YM2612:		Channel 2 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x0000048A: 52 A6 1B    YM2612:		Ch 2 F-Num (prepare) MSB = 3, Octave 3
+0x0000048D: 52 A2 8E    YM2612:		Ch 2 F-Num (set) LSB = 8E
+0x00000490: 52 28 F2    YM2612:		Channel 2 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000493: 52 28 04    YM2612:		Channel 3 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000496: 53 A4 1B    YM2612:		Ch 3 F-Num (prepare) MSB = 3, Octave 3
+0x00000499: 53 A0 8E    YM2612:		Ch 3 F-Num (set) LSB = 8E
+0x0000049C: 52 28 F4    YM2612:		Channel 3 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x0000049F: 52 28 05    YM2612:		Channel 4 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000004A2: 53 A5 1B    YM2612:		Ch 4 F-Num (prepare) MSB = 3, Octave 3
+0x000004A5: 53 A1 8E    YM2612:		Ch 4 F-Num (set) LSB = 8E
+0x000004A8: 52 28 F5    YM2612:		Channel 4 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000004AB: 52 28 06    YM2612:		Channel 5 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000004AE: 53 A6 1B    YM2612:		Ch 5 F-Num (prepare) MSB = 3, Octave 3
+0x000004B1: 53 A2 8E    YM2612:		Ch 5 F-Num (set) LSB = 8E
+0x000004B4: 52 28 F6    YM2612:		Channel 5 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000004B7: 61 9D 08    Wait:	2205 samples (   50.00 ms)	(total	15435 (00:00.35))
+0x000004BA: 52 28 00    YM2612:		Channel 0 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000004BD: 52 A4 1B    YM2612:		Ch 0 F-Num (prepare) MSB = 3, Octave 3
+0x000004C0: 52 A0 C5    YM2612:		Ch 0 F-Num (set) LSB = C5
+0x000004C3: 52 28 F0    YM2612:		Channel 0 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000004C6: 52 28 01    YM2612:		Channel 1 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000004C9: 52 A5 1B    YM2612:		Ch 1 F-Num (prepare) MSB = 3, Octave 3
+0x000004CC: 52 A1 C5    YM2612:		Ch 1 F-Num (set) LSB = C5
+0x000004CF: 52 28 F1    YM2612:		Channel 1 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000004D2: 52 28 02    YM2612:		Channel 2 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000004D5: 52 A6 1B    YM2612:		Ch 2 F-Num (prepare) MSB = 3, Octave 3
+0x000004D8: 52 A2 C5    YM2612:		Ch 2 F-Num (set) LSB = C5
+0x000004DB: 52 28 F2    YM2612:		Channel 2 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000004DE: 52 28 04    YM2612:		Channel 3 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000004E1: 53 A4 1B    YM2612:		Ch 3 F-Num (prepare) MSB = 3, Octave 3
+0x000004E4: 53 A0 C5    YM2612:		Ch 3 F-Num (set) LSB = C5
+0x000004E7: 52 28 F4    YM2612:		Channel 3 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000004EA: 52 28 05    YM2612:		Channel 4 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000004ED: 53 A5 1B    YM2612:		Ch 4 F-Num (prepare) MSB = 3, Octave 3
+0x000004F0: 53 A1 C5    YM2612:		Ch 4 F-Num (set) LSB = C5
+0x000004F3: 52 28 F5    YM2612:		Channel 4 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000004F6: 52 28 06    YM2612:		Channel 5 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000004F9: 53 A6 1B    YM2612:		Ch 5 F-Num (prepare) MSB = 3, Octave 3
+0x000004FC: 53 A2 C5    YM2612:		Ch 5 F-Num (set) LSB = C5
+0x000004FF: 52 28 F6    YM2612:		Channel 5 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000502: 61 9D 08    Wait:	2205 samples (   50.00 ms)	(total	17640 (00:00.40))
+0x00000505: 52 28 00    YM2612:		Channel 0 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000508: 52 A4 1B    YM2612:		Ch 0 F-Num (prepare) MSB = 3, Octave 3
+0x0000050B: 52 A0 FE    YM2612:		Ch 0 F-Num (set) LSB = FE
+0x0000050E: 52 28 F0    YM2612:		Channel 0 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000511: 52 28 01    YM2612:		Channel 1 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000514: 52 A5 1B    YM2612:		Ch 1 F-Num (prepare) MSB = 3, Octave 3
+0x00000517: 52 A1 FE    YM2612:		Ch 1 F-Num (set) LSB = FE
+0x0000051A: 52 28 F1    YM2612:		Channel 1 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x0000051D: 52 28 02    YM2612:		Channel 2 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000520: 52 A6 1B    YM2612:		Ch 2 F-Num (prepare) MSB = 3, Octave 3
+0x00000523: 52 A2 FE    YM2612:		Ch 2 F-Num (set) LSB = FE
+0x00000526: 52 28 F2    YM2612:		Channel 2 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000529: 52 28 04    YM2612:		Channel 3 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x0000052C: 53 A4 1B    YM2612:		Ch 3 F-Num (prepare) MSB = 3, Octave 3
+0x0000052F: 53 A0 FE    YM2612:		Ch 3 F-Num (set) LSB = FE
+0x00000532: 52 28 F4    YM2612:		Channel 3 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000535: 52 28 05    YM2612:		Channel 4 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000538: 53 A5 1B    YM2612:		Ch 4 F-Num (prepare) MSB = 3, Octave 3
+0x0000053B: 53 A1 FE    YM2612:		Ch 4 F-Num (set) LSB = FE
+0x0000053E: 52 28 F5    YM2612:		Channel 4 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000541: 52 28 06    YM2612:		Channel 5 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000544: 53 A6 1B    YM2612:		Ch 5 F-Num (prepare) MSB = 3, Octave 3
+0x00000547: 53 A2 FE    YM2612:		Ch 5 F-Num (set) LSB = FE
+0x0000054A: 52 28 F6    YM2612:		Channel 5 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x0000054D: 61 9D 08    Wait:	2205 samples (   50.00 ms)	(total	19845 (00:00.45))
+0x00000550: 52 28 00    YM2612:		Channel 0 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000553: 52 A4 1C    YM2612:		Ch 0 F-Num (prepare) MSB = 4, Octave 3
+0x00000556: 52 A0 3B    YM2612:		Ch 0 F-Num (set) LSB = 3B
+0x00000559: 52 28 F0    YM2612:		Channel 0 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x0000055C: 52 28 01    YM2612:		Channel 1 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x0000055F: 52 A5 1C    YM2612:		Ch 1 F-Num (prepare) MSB = 4, Octave 3
+0x00000562: 52 A1 3B    YM2612:		Ch 1 F-Num (set) LSB = 3B
+0x00000565: 52 28 F1    YM2612:		Channel 1 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000568: 52 28 02    YM2612:		Channel 2 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x0000056B: 52 A6 1C    YM2612:		Ch 2 F-Num (prepare) MSB = 4, Octave 3
+0x0000056E: 52 A2 3B    YM2612:		Ch 2 F-Num (set) LSB = 3B
+0x00000571: 52 28 F2    YM2612:		Channel 2 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000574: 52 28 04    YM2612:		Channel 3 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000577: 53 A4 1C    YM2612:		Ch 3 F-Num (prepare) MSB = 4, Octave 3
+0x0000057A: 53 A0 3B    YM2612:		Ch 3 F-Num (set) LSB = 3B
+0x0000057D: 52 28 F4    YM2612:		Channel 3 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000580: 52 28 05    YM2612:		Channel 4 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000583: 53 A5 1C    YM2612:		Ch 4 F-Num (prepare) MSB = 4, Octave 3
+0x00000586: 53 A1 3B    YM2612:		Ch 4 F-Num (set) LSB = 3B
+0x00000589: 52 28 F5    YM2612:		Channel 4 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x0000058C: 52 28 06    YM2612:		Channel 5 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x0000058F: 53 A6 1C    YM2612:		Ch 5 F-Num (prepare) MSB = 4, Octave 3
+0x00000592: 53 A2 3B    YM2612:		Ch 5 F-Num (set) LSB = 3B
+0x00000595: 52 28 F6    YM2612:		Channel 5 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000598: 61 9D 08    Wait:	2205 samples (   50.00 ms)	(total	22050 (00:00.50))
+0x0000059B: 52 28 00    YM2612:		Channel 0 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x0000059E: 52 A4 1C    YM2612:		Ch 0 F-Num (prepare) MSB = 4, Octave 3
+0x000005A1: 52 A0 7B    YM2612:		Ch 0 F-Num (set) LSB = 7B
+0x000005A4: 52 28 F0    YM2612:		Channel 0 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000005A7: 52 28 01    YM2612:		Channel 1 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000005AA: 52 A5 1C    YM2612:		Ch 1 F-Num (prepare) MSB = 4, Octave 3
+0x000005AD: 52 A1 7B    YM2612:		Ch 1 F-Num (set) LSB = 7B
+0x000005B0: 52 28 F1    YM2612:		Channel 1 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000005B3: 52 28 02    YM2612:		Channel 2 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000005B6: 52 A6 1C    YM2612:		Ch 2 F-Num (prepare) MSB = 4, Octave 3
+0x000005B9: 52 A2 7B    YM2612:		Ch 2 F-Num (set) LSB = 7B
+0x000005BC: 52 28 F2    YM2612:		Channel 2 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000005BF: 52 28 04    YM2612:		Channel 3 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000005C2: 53 A4 1C    YM2612:		Ch 3 F-Num (prepare) MSB = 4, Octave 3
+0x000005C5: 53 A0 7B    YM2612:		Ch 3 F-Num (set) LSB = 7B
+0x000005C8: 52 28 F4    YM2612:		Channel 3 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000005CB: 52 28 05    YM2612:		Channel 4 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000005CE: 53 A5 1C    YM2612:		Ch 4 F-Num (prepare) MSB = 4, Octave 3
+0x000005D1: 53 A1 7B    YM2612:		Ch 4 F-Num (set) LSB = 7B
+0x000005D4: 52 28 F5    YM2612:		Channel 4 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000005D7: 52 28 06    YM2612:		Channel 5 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000005DA: 53 A6 1C    YM2612:		Ch 5 F-Num (prepare) MSB = 4, Octave 3
+0x000005DD: 53 A2 7B    YM2612:		Ch 5 F-Num (set) LSB = 7B
+0x000005E0: 52 28 F6    YM2612:		Channel 5 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000005E3: 61 9D 08    Wait:	2205 samples (   50.00 ms)	(total	24255 (00:00.55))
+0x000005E6: 52 28 00    YM2612:		Channel 0 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000005E9: 52 A4 1C    YM2612:		Ch 0 F-Num (prepare) MSB = 4, Octave 3
+0x000005EC: 52 A0 BF    YM2612:		Ch 0 F-Num (set) LSB = BF
+0x000005EF: 52 28 F0    YM2612:		Channel 0 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000005F2: 52 28 01    YM2612:		Channel 1 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x000005F5: 52 A5 1C    YM2612:		Ch 1 F-Num (prepare) MSB = 4, Octave 3
+0x000005F8: 52 A1 BF    YM2612:		Ch 1 F-Num (set) LSB = BF
+0x000005FB: 52 28 F1    YM2612:		Channel 1 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x000005FE: 52 28 02    YM2612:		Channel 2 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000601: 52 A6 1C    YM2612:		Ch 2 F-Num (prepare) MSB = 4, Octave 3
+0x00000604: 52 A2 BF    YM2612:		Ch 2 F-Num (set) LSB = BF
+0x00000607: 52 28 F2    YM2612:		Channel 2 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x0000060A: 52 28 04    YM2612:		Channel 3 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x0000060D: 53 A4 1C    YM2612:		Ch 3 F-Num (prepare) MSB = 4, Octave 3
+0x00000610: 53 A0 BF    YM2612:		Ch 3 F-Num (set) LSB = BF
+0x00000613: 52 28 F4    YM2612:		Channel 3 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000616: 52 28 05    YM2612:		Channel 4 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000619: 53 A5 1C    YM2612:		Ch 4 F-Num (prepare) MSB = 4, Octave 3
+0x0000061C: 53 A1 BF    YM2612:		Ch 4 F-Num (set) LSB = BF
+0x0000061F: 52 28 F5    YM2612:		Channel 4 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000622: 52 28 06    YM2612:		Channel 5 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000625: 53 A6 1C    YM2612:		Ch 5 F-Num (prepare) MSB = 4, Octave 3
+0x00000628: 53 A2 BF    YM2612:		Ch 5 F-Num (set) LSB = BF
+0x0000062B: 52 28 F6    YM2612:		Channel 5 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x0000062E: 61 9D 08    Wait:	2205 samples (   50.00 ms)	(total	26460 (00:00.60))
+0x00000631: 52 28 00    YM2612:		Channel 0 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000634: 52 A4 22    YM2612:		Ch 0 F-Num (prepare) MSB = 2, Octave 4
+0x00000637: 52 A0 84    YM2612:		Ch 0 F-Num (set) LSB = 84
+0x0000063A: 52 28 F0    YM2612:		Channel 0 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x0000063D: 52 28 01    YM2612:		Channel 1 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000640: 52 A5 22    YM2612:		Ch 1 F-Num (prepare) MSB = 2, Octave 4
+0x00000643: 52 A1 84    YM2612:		Ch 1 F-Num (set) LSB = 84
+0x00000646: 52 28 F1    YM2612:		Channel 1 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000649: 52 28 02    YM2612:		Channel 2 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x0000064C: 52 A6 22    YM2612:		Ch 2 F-Num (prepare) MSB = 2, Octave 4
+0x0000064F: 52 A2 84    YM2612:		Ch 2 F-Num (set) LSB = 84
+0x00000652: 52 28 F2    YM2612:		Channel 2 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000655: 52 28 04    YM2612:		Channel 3 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000658: 53 A4 22    YM2612:		Ch 3 F-Num (prepare) MSB = 2, Octave 4
+0x0000065B: 53 A0 84    YM2612:		Ch 3 F-Num (set) LSB = 84
+0x0000065E: 52 28 F4    YM2612:		Channel 3 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x00000661: 52 28 05    YM2612:		Channel 4 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000664: 53 A5 22    YM2612:		Ch 4 F-Num (prepare) MSB = 2, Octave 4
+0x00000667: 53 A1 84    YM2612:		Ch 4 F-Num (set) LSB = 84
+0x0000066A: 52 28 F5    YM2612:		Channel 4 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
+0x0000066D: 52 28 06    YM2612:		Channel 5 Key On/Off: Slot1 Off, Slot2 Off, Slot3 Off, Slot4 Off
+0x00000670: 53 A6 22    YM2612:		Ch 5 F-Num (prepare) MSB = 2, Octave 4
+0x00000673: 53 A2 84    YM2612:		Ch 5 F-Num (set) LSB = 84
+0x00000676: 52 28 F6    YM2612:		Channel 5 Key On/Off: Slot1 On, Slot2 On, Slot3 On, Slot4 On
