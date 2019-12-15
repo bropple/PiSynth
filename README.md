@@ -2,7 +2,7 @@
   
 Final Project for ECE 471 at University of Maine.
 
-PiSynth is a functional hardware FM synthesizer featuring the Yamaha YM2612/YM3438 chips. It is driven by a Raspberry Pi running Raspbian Linux.  
+PiSynth is a functional hardware FM synthesizer featuring the Yamaha YM3438 (or YM2612) chip. It is driven by a Raspberry Pi running Raspbian Linux.  
 
 Includes code for interfacing with a I2C 16x2 LCD display and configuring GPIO pins, all using the linux interface.  
 
