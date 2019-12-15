@@ -16,17 +16,17 @@ The SN76489AN is non-functional at this time.
 Currently working on: SN76489AN sound chip support (for full Sega Genesis song support)  
                       YM3438 Keyboard mode with polyphony support (up to 6 channels per chip, at once)  
                       
-Future Plans:         Add OLED displays to view and adjust operators (ideally x4).  
+Future Plans:         Add 128x64 OLED displays to view and adjust operators (ideally x4, 1 per operator).  
                       Add rotary encoders for ADSR envelope / LFO adjustment (number matching amount of OLED displays?)  
-                      Support up to 3 YM3438 chips at once to support up to 18 channels (on-par with 'real' 80's synths)  
+                      Support up to 3 YM3438 chips at once to support up to 18 channels  
                       Add the ability to create and save your own custom patches  
                       Add ability to record songs entirely with the hardware, without needing a DAW  
-                      Additional output circuitry to add advanced afterFX (reverb, chorus), surpass chip limitations a bit  
-                      MIDI input/output support(v. difficult)   
+                      Additional output circuitry to add advanced afterFX (reverb, chorus)
+                      MIDI input/output support(eventually)  
                           - Input, for using an external MIDI device to play notes and adjust YM3438, instead of GPIO buttons  
                           - Output, for interfacing and exporting audio to a DAW of user's choice  
-                      VGM Playback(difficult)  
-                      VGM export from songs recorded in hardware (v. difficult)  
+                      .VGM Playback(eventually)  
+                      export .VGM from songs recorded in hardware (eventually)  
                       Add Schematic and PCB files 
                       
 
