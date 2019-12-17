@@ -11,6 +11,8 @@
 
 #include "Keyboard.h"
 
+//these are essentially more powerful versions of the functions used in the GPIO homeworks.
+
 //enable any given GPIO pin
 void pin_enable(char *pin_num, int bytes) {
         int fd = open("/sys/class/gpio/export", O_WRONLY); //open file for$

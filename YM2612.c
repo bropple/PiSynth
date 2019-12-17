@@ -11,24 +11,21 @@ static const int hw_addr = 0;
 static int last_channel = 0;//last number of channels playing
  
 int mcp23s17_fd;	//for YM3438 #1
-static int mcp23s17_fd_2; //for YM3438 #2 and #3
+//static int mcp23s17_fd_2; //for YM3438 #2
+//static int mcp23s17_fd_2; //for YM3438 #3
 
 static int num_YMchips = 1; //We only have one working FM chip for now
  
 static int octave = 3;
-static int last_octave = 3;
+static int last_octave = 0;
 
 static int note_num;
+
+static char Keyboard_Basic_Mode[16] = "YM3438 Key.Basic";
 
 static char * KeyPins[13] = {"17","27","22","5","6","13","19","26","21","20","16","12","25"}; //Corresponding GPIO pin numbers for each key, in an array for scanning
 																							  //Ordered w/ sharps, as shown below:
 						  //{C, C#, D, D#, E, F, F#, G, G#, A, A#, B, C(oct+1)}
-
-static int KeyStatus[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0}; //0 for off, 1 for on
-														//check the status of each key in a loop or two
-														
-static int CH1_channels[6] = {0,0,0,0,0,0}; //keep track of each channel, using array to make sure the same one keeps playing on the actual hardware when it's supposed to
-static int CH1_last_channels[6] = {0,0,0,0,0,0}; //holds last values of channel so we can compare it to current
  
 //Define bit numbers
 static const uint8_t YM_IC = 5;
@@ -45,14 +42,16 @@ static uint8_t YM_CTRL_PORT = 0x00; //keeping track of the control port value
 
 int Play_YM2612(char * path, char * direction, char * value, char* active_low, int str_pos){  //Play the YM2612 on the keyboard
 	
+	Channel_Info CI = {{0,0,0,0,0,0},{0,0,0,0,0,0},0,0}; //initialize all members of the channel info struct
+	
 	char * Current_Voice = "Grand Piano     "; //The default instrument is the piano
 	int cur_voice = 0;
 	int last_voice = 1;
 	int returning_from_menu = 0;
 	char * Current_Octave = "3"; //default octave is 3
 	char * Default_Note = " "; //no note by default
-	char * IsSharp = " "; //not sharp by default
-	LCD_sendString("YM3438  Keyboard", 1);
+	char * BlankSharp = " "; //not sharp by default
+	LCD_sendString(Keyboard_Basic_Mode, 1);
 	LCD_sendString("Initializing... ", 2);
 	setup_chips();
 	YM2612_Grand_Piano(); //Default voice is the Grand Piano from the Application manual
@@ -74,7 +73,7 @@ int Play_YM2612(char * path, char * direction, char * value, char* active_low, i
 	{
 		YM2612_Begin:
 		
-		scan_keys(path, direction, value, active_low, str_pos); //no longer a huge verbose list of notes! still just one at a time.
+		scan_multiKeys(path, direction, value, active_low, str_pos, CI); //no longer a huge verbose list of notes! still just one at a time.
 																//will need more complicated routine for multiple presses, while keeping track of all needed variables
 		
 		if(pin_read("15", value, path, str_pos) == 0x31) { //Open menu for YM module, a way to switch or quit programs
@@ -437,7 +436,7 @@ int Play_YM2612(char * path, char * direction, char * value, char* active_low, i
 			
 		}
 		else { //everything here is lower priority than the keys!
-			LCD_sendString("YM3438  Keyboard", 1);
+			LCD_sendString(Keyboard_Basic_Mode, 1);
 			if(cur_voice != last_voice){
 				LCD_sendString(Current_Voice, 2); //show nothing for note
 				cur_voice = last_voice;
@@ -453,7 +452,7 @@ int Play_YM2612(char * path, char * direction, char * value, char* active_low, i
 				returning_from_menu = 0;
 			}
 			LCD_WritePos(2, 13, Default_Note);
-			LCD_WritePos(2, 15, IsSharp);
+			LCD_WritePos(2, 15, BlankSharp);
 		}
 	}
 	YM_end:
@@ -470,16 +469,18 @@ int Play_YM2612(char * path, char * direction, char * value, char* active_low, i
 	 *				 Connected to SN76489AN #1 (only one?)
 	 * 				 -Shared data lines, separate control pins for SN76489AN
 	 *
-	 *  MCP23S17 #2: Connected to YM3438 #2 and #3
-	 * 				 -Shared data lines, shared control pins except for CS? //need to test
+	 *  MCP23S17 #2: Connected to YM3438 #2
+	 * 	
+	 * MCP23S17 #3: Connected to YM3438 #3
 	 * 
 	 * 	The MCP23S17 chips can be daisy chained on the same SPI bus, as long as the chip select is changed
 	 * 	(1st CS is 0, 2nd is 1, etc.)
 	 *
 	 */
 	 
-	if(num_YMchips == 1 || num_YMchips == 2) chip_select = 0; //2 will be on 1 mcp, sharing most lines (will see how that works)
-	else if(num_YMchips == 3) chip_select = 1;
+	if(num_YMchips == 1) chip_select = 0; //2 will be on 1 mcp, sharing most lines (will see how that works)
+	else if(num_YMchips == 2) chip_select = 1;
+	else if(num_YMchips == 3) chip_select = 2;
 	else {
 			printf("Invalid number of YM chips called... setting chip select to 0 for now.\n");
 			chip_select = 0;
@@ -615,24 +616,6 @@ static char * Octave_String(int octave){ //returns an octave string from a repre
 		return retval;
 }
 
-void channel_tracker(int num_YMchips, int channels){
-	if(channels == 0) setreg(0x28, 0x00); // Channel 1 Key off
-	if(channels == 1){
-		setreg(0x28, 0xf0); // Channel 1 Key on
-		if(last_channel == 2) setreg(0x28, 0x01); // Channel 2 Key off
-		last_channel = 1;
-	}
-	if(channels == 2){
-		setreg(0x28, 0xf1); // Channel 2 Key on
-		if(last_channel == 3) setreg(0x28, 0x02); // Channel 3 Key off
-		last_channel = 2;
-	}
-	if(channels == 3){
-		setreg(0x28, 0xf2); // Channel 3 Key on
-		last_channel = 3;
-	}
-}
-
 void scan_keys(char * path, char * direction, char * value, char* active_low, int str_pos) { //one key at a time, much more efficient than previous implementation
 	int coctave;
 	for(int arrnum = 0; arrnum<13; arrnum++){ //scan through the KeyPin array using arrnum index
@@ -644,9 +627,7 @@ void scan_keys(char * path, char * direction, char * value, char* active_low, in
 			note_num = KeyVal(KeyPins[arrnum]);
 			note_picker(note_num, coctave);
 	
-			setreg(0x28, 0xf0); // Key on
-			setreg(0x28, 0xf1); // Key on
-			setreg(0x28, 0xf2); // Key on
+			setreg(0x28, 0xf0); // CH1 Key on
 			
 			while(pin_read(KeyPins[arrnum], value, path, str_pos) == 0x31){
 				LCD_WritePos(2, 13, NoteString(note_num)); //convert note number to corresponding string and write it to lcd
@@ -654,9 +635,7 @@ void scan_keys(char * path, char * direction, char * value, char* active_low, in
 				LCD_WritePos(2, 15, SharpCheck(note_num)); //write a sharp indicator to the screen if it is indeed a sharp (black key)
 			}
 			
-			setreg(0x28, 0x00); // Key off
-			setreg(0x28, 0x01); // Key off
-			setreg(0x28, 0x02); // Key off
+			setreg(0x28, 0x00); // CH1 Key off
 			
 			last_octave = coctave;
 			
@@ -664,24 +643,29 @@ void scan_keys(char * path, char * direction, char * value, char* active_low, in
 	}
 }
 
-void scan_multiKeys(char * path, char * direction, char * value, char* active_low, int str_pos){ //WIP
+void scan_multiKeys(char * path, char * direction, char * value, char* active_low, int str_pos, Channel_Info CI){ //WIP
 																								 //when completed, scan_keys will be depreciated
-	for(int arrnum = 0; arrnum<13; arrnum++){
-		if(pin_read(KeyPins[arrnum], value, path, str_pos) == 0x31){
-			setreg(0x28, 0xf0); // CH1 Key on
-			if(strcmp("25", KeyPins[arrnum]) == 0) note_picker(KeyVal(KeyPins[arrnum]), octave+1);
-			else note_picker(KeyVal(KeyPins[arrnum]), octave);
+	for(int x = 0; x < 13; x++){
+		if(pin_read(KeyPins[x], value, path, str_pos) == 0x31){
+			printf("Note %s%s is ON.\n", NoteString(KeyVal(KeyPins[x])),SharpCheck(KeyVal(KeyPins[x])));
+			if(CI.Channels < 5) CI.Channels++;
+			note_picker_multi(KeyVal(KeyPins[x]), octave, CI.Channels);
+			CI = channel_handler(CI); 
 		}
 	}
-	for(int arrnum = 0; arrnum<13; arrnum++){
-		if(pin_read(KeyPins[arrnum], value, path, str_pos) != 0x31){
-			setreg(0x28, 0x00); // CH1 Key off
+	
+	for(int x = 0; x < 13; x++){
+		if(pin_read(KeyPins[x], value, path, str_pos) != 0x31){
+			printf("					Note %s%s is OFF.\n", NoteString(KeyVal(KeyPins[x])),SharpCheck(KeyVal(KeyPins[x])));
+			if(CI.Channels > 0) CI.Channels--;
+			CI = channel_handler(CI); 
 		}
 	}
+	
 }
 
 //static char * KeyPins[13] = {"17","27","22","5","6","13","19","26","21","20","16","12","25"}
-int KeyVal(char * key){
+int KeyVal(char * key){ //return int keycodes to set notes, intended to be used with note_picker
 		if(strcmp("17", key) == 0) return 1;
 		else if(strcmp("27", key) == 0) return 2; //sharp
 		else if(strcmp("22", key) == 0) return 3;
@@ -694,12 +678,16 @@ int KeyVal(char * key){
 		else if(strcmp("20", key) == 0) return 10;
 		else if(strcmp("16", key) == 0) return 11;  //sharp
 		else if(strcmp("12", key) == 0) return 12; 
-		else if(strcmp("25", key) == 0) return 1;
+		else if(strcmp("25", key) == 0) return 1; //but increase octave by 1
 		else {	//none of them match!
 			printf("Invalid GPIO pin!\n");
 			return 0;
 		}
 			 
+}
+
+char * KeyStatus_Updater(char * KeyStatus, char * LastKeyStatus){
+	
 }
 
 char * NoteString(int note_num){ //returns letter note value for LCD, does not care if sharp or not
@@ -732,6 +720,67 @@ char * SharpCheck(int note_num){
 	}
 }
 
-void Channel_Checker(void){
-	
+static void Note_ToggleHandler(char * state, int ch){ //toggles a note on and off on a specified channel, uses strings for input
+	if(strcmp("ON", state) == 0){
+		switch(ch){
+			case 1: CH1_ON;
+					break;
+			case 2: CH2_ON;
+					break;
+			case 3: CH3_ON;
+					break;
+			case 4: CH4_ON;
+					break;
+			case 5: CH5_ON;
+					break;
+			case 6: CH6_ON;
+					break;
+			default: printf("Invalid channel number in Note_ToggleHandler!\n");
+					 break;
+			}
+		}
+		else if(strcmp("OFF", state) == 0){
+		switch(ch){
+			case 1: CH1_OFF;
+					break;
+			case 2: CH2_OFF;
+					break;
+			case 3: CH3_OFF;
+					break;
+			case 4: CH4_OFF;
+					break;
+			case 5: CH5_OFF;
+					break;
+			case 6: CH6_OFF;
+					break;
+			default: printf("Invalid channel number in Note_ToggleHandler!\n");
+					 break;
+			}
+		}
+		else {
+			printf("Invalid note state in Note_ToggleHandler!\n");
+		}
+}
+
+Channel_Info channel_handler(Channel_Info CI){ //for multichannel mode
+	if(CI.Channels < CI.Prev_Channels){ //if we need to remove a channel
+		for(int x = 5; x > -1; x--){  //find the last occupied spot
+			if(CI.Current_Channels[x] == 1) { 
+				CI.Current_Channels[x] = 0; //turn off note on occupied channel
+				Note_ToggleHandler("OFF", x+1);
+			}
+			break; //exit loop immediately after turning channel off
+		}
+	}
+	if(CI.Channels > CI.Prev_Channels){
+		for(int x = 0; x <  6; x++){ //find the first free spot
+			if(CI.Current_Channels[x] == 0){
+				 CI.Current_Channels[x] = 1;
+				 Note_ToggleHandler("ON", x+1); //turn on note at free channel
+			 }
+			break; //exit loop immediately after turning channel on
+		}
+	}
+	CI.Channels = CI.Prev_Channels;
+	return CI; //return the struct containing channel information
 }
