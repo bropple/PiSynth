@@ -5,7 +5,7 @@
 #include "YM2612_Songs.h"
 
 static const int bus = 0;			//MCP23S17 parameters
-static int chip_select;
+static int chip_select; //this is defined later, multiple SPI expanders can be involved
 static const int hw_addr = 0;
 
 static int last_channel = 0;//last number of channels playing
@@ -21,11 +21,14 @@ static int last_octave = 0;
 
 static int note_num;
 
-static char Keyboard_Basic_Mode[16] = "YM3438 Key.Basic";
+static char Keyboard_Basic_Mode[16] = "YM3438     Basic";
+static char Keyboard_Advanced_Mode[16] = "YM3438          ";
 
 static char * KeyPins[13] = {"17","27","22","5","6","13","19","26","21","20","16","12","25"}; //Corresponding GPIO pin numbers for each key, in an array for scanning
 																							  //Ordered w/ sharps, as shown below:
 						  //{C, C#, D, D#, E, F, F#, G, G#, A, A#, B, C(oct+1)}
+static int KeyStatus[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0}; //Hold the current status of key
+static int Prev_KeyStatus[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0}; //Hold previous status of key
  
 //Define bit numbers
 static const uint8_t YM_IC = 5;
@@ -40,19 +43,19 @@ static const uint8_t SN_WE = 7;		//important select lines for the SN76489AN, use
 
 static uint8_t YM_CTRL_PORT = 0x00; //keeping track of the control port value
 
-int Play_YM2612(char * path, char * direction, char * value, char* active_low, int str_pos){  //Play the YM2612 on the keyboard
+int Play_YM2612(int mode, char * path, char * direction, char * value, char* active_low, int str_pos){  //Play the YM2612 on the keyboard
 	
 	Channel_Info CI = {{0,0,0,0,0,0},{0,0,0,0,0,0},0,0}; //initialize all members of the channel info struct
 	
-	char * Current_Voice = "Grand Piano     "; //The default instrument is the piano
+	char * Current_Voice = "Gnd Piano       "; //The default instrument is the piano
 	int cur_voice = 0;
 	int last_voice = 1;
 	int returning_from_menu = 0;
 	char * Current_Octave = "3"; //default octave is 3
 	char * Default_Note = " "; //no note by default
 	char * BlankSharp = " "; //not sharp by default
-	LCD_sendString(Keyboard_Basic_Mode, 1);
-	LCD_sendString("Initializing... ", 2);
+	LCD_sendString("YM3438  Loading ", 1);
+	LCD_sendString("Please wait...  ", 2);
 	setup_chips();
 	YM2612_Grand_Piano(); //Default voice is the Grand Piano from the Application manual
 	LCD_sendString(Current_Voice, 2);
@@ -73,9 +76,15 @@ int Play_YM2612(char * path, char * direction, char * value, char* active_low, i
 	{
 		YM2612_Begin:
 		
-		scan_multiKeys(path, direction, value, active_low, str_pos, CI); //no longer a huge verbose list of notes! still just one at a time.
-																//will need more complicated routine for multiple presses, while keeping track of all needed variables
-		
+		if(mode == 0) {
+			scan_keys(path, direction, value, active_low, str_pos); //play one note at a time
+			LCD_sendString(Keyboard_Basic_Mode, 1); //reflect mode change
+		}
+		if(mode == 1) {
+			scan_multiKeys(path, direction, value, active_low, str_pos, CI); //WIP -> Enable polyphony
+			LCD_sendString(Keyboard_Advanced_Mode, 1); //reflect mode change
+																
+		}
 		if(pin_read("15", value, path, str_pos) == 0x31) { //Open menu for YM module, a way to switch or quit programs
 			YM_menu_start:
 			usleep(150000); //gives user time to release button without menu exiting (150ms)
@@ -139,7 +148,7 @@ int Play_YM2612(char * path, char * direction, char * value, char* active_low, i
 								}
 							}
 							while(preset_select == 1) {
-								LCD_sendString("->Grand Piano   ", 2);
+								LCD_sendString("->Gnd Piano     ", 2);
 								if(pin_read("18", value, path, str_pos) == 0x31){
 								usleep(150000);
 								preset_select = 0;
@@ -150,7 +159,7 @@ int Play_YM2612(char * path, char * direction, char * value, char* active_low, i
 								}
 								if(pin_read("15", value, path, str_pos) == 0x31){
 									usleep(150000);
-									Current_Voice = "Grand Piano     ";
+									Current_Voice = "Grd Piano       ";
 									cur_voice = 0;
 									reset_2612();
 									YM2612_Grand_Piano();
@@ -265,7 +274,7 @@ int Play_YM2612(char * path, char * direction, char * value, char* active_low, i
 								}
 							}
 							while(preset_select == 7) {
-								LCD_sendString("->SSEG          ", 2);
+								LCD_sendString("->SS-EG         ", 2);
 								if(pin_read("18", value, path, str_pos) == 0x31){
 								usleep(150000);
 								preset_select = 6;
@@ -276,7 +285,7 @@ int Play_YM2612(char * path, char * direction, char * value, char* active_low, i
 								}
 								if(pin_read("15", value, path, str_pos) == 0x31){
 									usleep(150000);
-									Current_Voice = "SSEG            "; //this instrument sounds like a voice, kind of
+									Current_Voice = "SS-EG           "; //this instrument sounds like a voice, kind of
 									cur_voice = 6;
 									reset_2612();
 									YM2612_SSEG();
@@ -389,7 +398,7 @@ int Play_YM2612(char * path, char * direction, char * value, char* active_low, i
 										if(song_loop == 0){ //reset the chip and go back to default instrument, avoids note staying on
 											reset_2612();
 											YM2612_Grand_Piano();
-											Current_Voice = "Grand Piano     ";
+											Current_Voice = "Gnd Piano       ";
 											cur_voice = 0;
 											break;
 										}
@@ -412,7 +421,6 @@ int Play_YM2612(char * path, char * direction, char * value, char* active_low, i
 					}
 					if(pin_read("15", value, path, str_pos) == 0x31){
 						usleep(150000);
-						close(mcp23s17_fd); //close the file descriptor for the SPI GPIO expander, but only happens if you exit this way!
 						run = 0;
 						goto YM_end;	//exit the entire function
 					 }
@@ -436,7 +444,8 @@ int Play_YM2612(char * path, char * direction, char * value, char* active_low, i
 			
 		}
 		else { //everything here is lower priority than the keys!
-			LCD_sendString(Keyboard_Basic_Mode, 1);
+			if (mode == 0) LCD_sendString(Keyboard_Basic_Mode, 1);
+			if (mode == 1) LCD_sendString(Keyboard_Advanced_Mode, 1);
 			if(cur_voice != last_voice){
 				LCD_sendString(Current_Voice, 2); //show nothing for note
 				cur_voice = last_voice;
@@ -456,6 +465,8 @@ int Play_YM2612(char * path, char * direction, char * value, char* active_low, i
 		}
 	}
 	YM_end:
+	reset_2612(); //make sure the chip stops before exiting to menu
+	close(mcp23s17_fd); //close the file descriptor for the SPI GPIO expander, but only happens if you exit this way!
 	printf("Returning to main menu...\n");
 	return 0;
  }
@@ -488,7 +499,7 @@ int Play_YM2612(char * path, char * direction, char * value, char* active_low, i
 		
 	for(chip_select; chip_select > -1; chip_select--){
 		
-	    mcp23s17_fd = mcp23s17_open(bus, chip_select);
+	    mcp23s17_fd = mcp23s17_open(bus, chip_select); //need to do something about this to actually make it dynamic
 	    //mcp23s17_fd_2 = mcp23s17_open(bus, chip_select);
 	
 	    // config register, SEQOP_ON -> sequential execution (MSB -> LSB?)
@@ -643,25 +654,33 @@ void scan_keys(char * path, char * direction, char * value, char* active_low, in
 	}
 }
 
-void scan_multiKeys(char * path, char * direction, char * value, char* active_low, int str_pos, Channel_Info CI){ //WIP
-																								 //when completed, scan_keys will be depreciated
-	for(int x = 0; x < 13; x++){
+void scan_multiKeys(char * path, char * direction, char * value, char* active_low, int str_pos, Channel_Info CI){ //WIP	
+	int coctave;																			 					  //when completed, scan_keys will be depreciated
+	for(int x = 0; x < 12; x++){
 		if(pin_read(KeyPins[x], value, path, str_pos) == 0x31){
-			printf("Note %s%s is ON.\n", NoteString(KeyVal(KeyPins[x])),SharpCheck(KeyVal(KeyPins[x])));
-			if(CI.Channels < 5) CI.Channels++;
-			note_picker_multi(KeyVal(KeyPins[x]), octave, CI.Channels);
-			CI = channel_handler(CI); 
+			KeyStatus[x] = 1;
+			if(KeyStatus[x] != Prev_KeyStatus[x]){
+				CI.Channels++;
+				note_picker_multi(KeyVal(KeyPins[x]), octave, CI.Channels);
+				CI = channel_handler(CI); 
+			}
 		}
 	}
 	
-	for(int x = 0; x < 13; x++){
+	for(int x = 0; x < 12; x++){
 		if(pin_read(KeyPins[x], value, path, str_pos) != 0x31){
-			printf("					Note %s%s is OFF.\n", NoteString(KeyVal(KeyPins[x])),SharpCheck(KeyVal(KeyPins[x])));
-			if(CI.Channels > 0) CI.Channels--;
-			CI = channel_handler(CI); 
+			KeyStatus[x] = 0;
+			if(KeyStatus[x] != Prev_KeyStatus[x]){
+				CI.Channels--;
+			    CI = channel_handler(CI); 
+			}
 		}
 	}
 	
+	//memcpy(KeyStatus, Prev_KeyStatus, sizeof(KeyStatus)); //set both arrays equal at the end
+	
+	printf("					Current Channels = %d\n", CI.Channels);
+	printf("					Previous Channels = %d\n\n", CI.Prev_Channels);
 }
 
 //static char * KeyPins[13] = {"17","27","22","5","6","13","19","26","21","20","16","12","25"}
@@ -739,7 +758,7 @@ static void Note_ToggleHandler(char * state, int ch){ //toggles a note on and of
 					 break;
 			}
 		}
-		else if(strcmp("OFF", state) == 0){
+	else if(strcmp("OFF", state) == 0){
 		switch(ch){
 			case 1: CH1_OFF;
 					break;
@@ -757,9 +776,10 @@ static void Note_ToggleHandler(char * state, int ch){ //toggles a note on and of
 					 break;
 			}
 		}
-		else {
+	else {
 			printf("Invalid note state in Note_ToggleHandler!\n");
 		}
+	printf("Channel %d: %s\n\n", ch, state);
 }
 
 Channel_Info channel_handler(Channel_Info CI){ //for multichannel mode

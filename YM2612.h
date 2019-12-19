@@ -53,7 +53,7 @@ typedef struct { //struct contains important channel information, allowing us to
 	int Prev_Channels; //the int number of channels playing previously
 }Channel_Info;
 
-int Play_YM2612(char * path, char * direction, char * value, char* active_low, int str_pos);
+int Play_YM2612(int mode, char * path, char * direction, char * value, char* active_low, int str_pos);
 static int MCPS_init(int num_YMchips);
 static void write_2612(uint8_t data);
 void setreg(uint8_t reg, uint8_t data);
