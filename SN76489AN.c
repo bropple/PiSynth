@@ -88,10 +88,11 @@ void reset_SN(uint8_t SN_CTRL_PORT,int mcp23s17_fd){
 void write_SN(uint8_t data){
 	SN_CTRL_PORT |= _BV(SN_WE); //set WE HIGH
 	mcp23s17_write_reg(SN_CTRL_PORT, GPIOA, hw_addr, mcp23s17_fd); //write change
-	mcp23s17_write_reg(0xff, GPIOB, hw_addr, mcp23s17_fd); //write data to register
+	mcp23s17_write_reg(data, GPIOB, hw_addr, mcp23s17_fd); //write data to register
 	SN_CTRL_PORT &= ~_BV(SN_WE); //set WE LOW
 	mcp23s17_write_reg(SN_CTRL_PORT, GPIOA, hw_addr, mcp23s17_fd); //write change
-	usleep(25);
+	usleep(14);
+	SN_CTRL_PORT |= _BV(SN_WE); //set WE HIGH
 }
 
 static int MCPS_init_SN(void){

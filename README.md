@@ -11,7 +11,8 @@ This library can be found at https://github.com/piface/libmcp23s17
 
 Current Status:
 The YM3438 is fully playable, with several presets to choose from. An alarm "song" can also be automatically played back.  
-The SN76489AN is non-functional at this time.  
+The SN76489AN is non-functional at this time.
+There is a clock function with an alarm you can set completely in hardware.
 
 YM2151 stuff may work with some modifications. I cannot test that, however, since I do not have a working YM2151/YM3012 to test it with at this time.
 
@@ -37,6 +38,6 @@ Add Schematic and PCB files
 
 Build Instructions  
 -------------------------------------------------  
-gcc i2c_1602.c i2c_1602.h Keyboard.c Keyboard.h main.c mcps.c mcps.h Piezo.c Piezo.h YM2612.c YM2612.h YM2612_Presets.c YM2612_Presets.h YM2612_Note_Picker.c YM2612_Note_Picker.h YM2612_Songs.c YM2612_Songs.h SN76489AN.c SN76489AN.h -o PiSynth  
+gcc i2c_1602.c i2c_1602.h Keyboard.c Keyboard.h main.c mcps.c mcps.h YM2612.c YM2612.h YM2612_Presets.c YM2612_Presets.h YM2612_Note_Picker.c YM2612_Note_Picker.h YM2612_Songs.c YM2612_Songs.h SN76489AN.c SN76489AN.h -o PiSynth  
 
 Will create a makefile soon!

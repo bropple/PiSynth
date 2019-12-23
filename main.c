@@ -13,6 +13,7 @@
 #include "mcps.h"
 #include "YM2612.h"
 #include "SN76489AN.h"
+#include "Clock.h"
 
 #include <sys/ioctl.h>
 #include <linux/i2c-dev.h>
@@ -45,7 +46,7 @@ int main(void){
 				LCD_sendString("->YM3438   SN76 ", 2); //used to be piezo, depreciated
 				if(pin_read("18", value, path, str_pos) == 0x31){
 					usleep(150000);
-					menu_select = 2;
+					menu_select = 3;
 				}
 				if(pin_read("14", value, path, str_pos) == 0x31){
 					usleep(150000);
@@ -102,10 +103,27 @@ int main(void){
 				}
 			}
 			while(menu_select == 2) {
-				LCD_sendString("  SN76    ->Exit", 2);
+				LCD_sendString("  SN76   ->Clock", 2);
 				if(pin_read("18", value, path, str_pos) == 0x31){
 					usleep(150000);
 					menu_select = 1;
+				}
+				if(pin_read("14", value, path, str_pos) == 0x31){
+					usleep(150000);
+					menu_select = 3;
+				}
+				if(pin_read("15", value, path, str_pos) == 0x31){
+					usleep(150000);
+					Inst_Active = display_clock(path, direction, value, active_low, str_pos);
+					usleep(150000);
+					if(Inst_Active == 0) goto menu_start;
+				}
+			}
+			while(menu_select == 3) {
+				LCD_sendString("  Clock   ->Exit", 2);
+				if(pin_read("18", value, path, str_pos) == 0x31){
+					usleep(150000);
+					menu_select = 2;
 				}
 				if(pin_read("14", value, path, str_pos) == 0x31){
 					usleep(150000);

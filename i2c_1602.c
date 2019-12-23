@@ -81,7 +81,7 @@ void i2c_transact(unsigned char * buffer, int nBytes){ //Consolidates a i2c tran
 void LCD_writeCommand(int command){ //Send a single command to the LCD.
 	int dataUpper, dataLower; //
 	uint8_t buffer[4];
-	dataUpper = command&0xF0;
+	dataUpper = command&0xF0;								//0x04 = LCDENTRYMODESET
 	dataLower = (command<<4)&0xF0;							//ORing the backlight and enable keeps backlight on
 	buffer[0] = dataUpper | 0x04 | LCD_BACKLIGHT | En;		//enable=1
 	buffer[1] = dataUpper | LCD_BACKLIGHT | ~En;		    //enable=0

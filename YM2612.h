@@ -57,9 +57,9 @@ int Play_YM2612(int mode, char * path, char * direction, char * value, char* act
 static int MCPS_init(int num_YMchips);
 static void write_2612(uint8_t data);
 void setreg(uint8_t reg, uint8_t data);
-static void reset_2612(void);
+void reset_2612(void);
 static void setup_2612(void);
-static void setup_chips(void);
+void setup_chips(void);
 static void YM_Test();
 static char * Octave_String(int octave);
 static void Quiet_SN(void);

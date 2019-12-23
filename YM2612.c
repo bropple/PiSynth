@@ -545,6 +545,10 @@ static void write_2612(uint8_t data){
 }
 
 void setreg(uint8_t reg, uint8_t data){
+	/*	To write to channels 4, 5, and 6:
+	 * 	You need to set A1 HIGH as well!
+	 * 	Do this outside this function, as this function only has two variables for convenience.
+	 */
 	YM_CTRL_PORT &= ~_BV(YM_A0); // A0 low (select register), tell chip we are choosing register to write to
 	//printf("				setreg addr ST_CTRL %02X\n", YM_CTRL_PORT); //debug information
 	mcp23s17_write_reg(YM_CTRL_PORT, GPIOA, hw_addr, mcp23s17_fd); //apply change
@@ -553,9 +557,11 @@ void setreg(uint8_t reg, uint8_t data){
 	mcp23s17_write_reg(YM_CTRL_PORT, GPIOA, hw_addr, mcp23s17_fd); //apply change
 	write_2612(data); //write the data to the chosen register from earlier
 	//printf("				setreg data ST_CTRL %02X\n", YM_CTRL_PORT); //debug information
+	YM_CTRL_PORT &= ~_BV(YM_A0); //Set A0 low for next time
+	YM_CTRL_PORT &= ~_BV(YM_A1); //Set A1 low if it already isn't (for addressing parallel banks)
 }
 
-static void reset_2612(void){
+void reset_2612(void){
 	YM_CTRL_PORT &= ~_BV(YM_IC); //Set IC LOW (inverted)
 	mcp23s17_write_reg(YM_CTRL_PORT, GPIOA, hw_addr, mcp23s17_fd); //apply change
 	usleep(10);
@@ -574,7 +580,7 @@ static void setup_2612(void){
 	usleep(10);											 
 }
 
-static void setup_chips(void){
+void setup_chips(void){
 	MCPS_init(num_YMchips); //initialize mcp23s17
 	setup_2612(); //initialize YM2612
 }
@@ -677,7 +683,7 @@ void scan_multiKeys(char * path, char * direction, char * value, char* active_lo
 		}
 	}
 	
-	//memcpy(KeyStatus, Prev_KeyStatus, sizeof(KeyStatus)); //set both arrays equal at the end
+	memcpy(KeyStatus, Prev_KeyStatus, sizeof(KeyStatus)); //set both arrays equal at the end
 	
 	printf("					Current Channels = %d\n", CI.Channels);
 	printf("					Previous Channels = %d\n\n", CI.Prev_Channels);
