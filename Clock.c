@@ -44,7 +44,7 @@ int display_clock(char * path, char * direction, char * value, char* active_low,
 		clock_begin:
 		LCD_sendString(get_date(), 1);
 		LCD_sendString(get_time(), 2);
-		LCD_WritePos(1, 11, "     "); //keep menu text from staying on the screen
+		LCD_WritePos(1, 12, "    "); //keep menu text from staying on the screen
 		LCD_WritePos(2, 11, "     "); //keep menu text from staying on the screen
 		
 		
@@ -120,13 +120,15 @@ char * get_time(void) {
         return "localtime() fail!";
     }
     
-    if(ptm->tm_hour > 12){
+    if(ptm->tm_hour < 12){
+		twelvehr = "AM";
+	}
+	if(ptm->tm_hour > 12){
 		ptm->tm_hour = ptm->tm_hour - 12;
 		twelvehr = "PM";
 	}
-    else {
-		if(ptm->tm_hour == 0) ptm->tm_hour = 12;
-		twelvehr = "AM";
+    if(ptm->tm_hour == 0){
+		ptm->tm_hour = 12;
 	}
 	
 	if(ptm->tm_hour < 10) sprintf(space, "%s", " ");
@@ -155,7 +157,7 @@ char * get_date(void){
         return "localtime() fail!";
     }
 	
-	sprintf(datestr, "%s %d,%d", month_picker(ptm->tm_mon), ptm->tm_mday, ptm->tm_year + 1900);
+	sprintf(datestr, "%s %d, %d", month_picker(ptm->tm_mon), ptm->tm_mday, ptm->tm_year + 1900);
 	
 	return datestr;
 }
@@ -232,7 +234,16 @@ int Set_Alarm(char * path, char * direction, char * value, char* active_low, int
 	
 	int hour_selector = alarm_hour; //corresponds with hour
 	int minute_selector = alarm_minute; //corresponds with minute
-	int ampm_selector = 0; //0 for AM, 1 for PM
+	int ampm_selector; //0 for AM, 1 for PM
+	
+	if(strcmp(alarm_twelvehr, "AM") == 0) {
+		sprintf(ampm, "%s", "AM");
+		ampm_selector = 0;
+	}
+	else {
+		sprintf(ampm, "%s", "PM");
+		ampm_selector = 1;
+	}
 	
 	sprintf(hour, "%d", hour_selector);  //get the current alarm setting, whether if its the preset or a previously set value
 	sprintf(minute, "%d", minute_selector);
@@ -255,6 +266,7 @@ int Set_Alarm(char * path, char * direction, char * value, char* active_low, int
 					usleep(150000);
 					state = 1;
 				}
+				if(minute_selector < 10) sprintf(minute, "%d%d", 0, minute_selector); //update minute text;
 				if(hour_selector < 10) sprintf(hour, "%s%d", " ", hour_selector); //update hour text;
 				else sprintf(hour, "%d", hour_selector); //update hour text;
 				sprintf(select_string, "->%s :  %s   %s", hour, minute, ampm);
@@ -286,14 +298,12 @@ int Set_Alarm(char * path, char * direction, char * value, char* active_low, int
 		if(pin_read("18", value, path, str_pos) == 0x31){
 					usleep(150000);
 					ampm_selector--;
-					if(ampm_selector > 1) ampm_selector = 0;
-					else if(ampm_selector < 0) ampm_selector = 1;
+					if(ampm_selector < 0) ampm_selector = 1;
 				}
 				if(pin_read("14", value, path, str_pos) == 0x31){
 					usleep(150000);
 					ampm_selector++;
 					if(ampm_selector > 1) ampm_selector = 0;
-					else if(ampm_selector < 0) ampm_selector = 1;
 				}
 				if(pin_read("15", value, path, str_pos) == 0x31){
 					usleep(150000);
