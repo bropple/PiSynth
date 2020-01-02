@@ -1,6 +1,4 @@
-#include <alsa/asoundlib.h>
+#include <alsa/asoundlib.h> /* Interface to the ALSA system */
 
-void midi_open(void);
-snd_seq_event_t *midi_read(void);
-void midi_process(snd_seq_event_t *ev);
-
+int MIDI_input(void);
+void errormessage(const char *format, ...);

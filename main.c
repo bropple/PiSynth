@@ -14,6 +14,7 @@
 #include "YM2612.h"
 #include "SN76489AN.h"
 #include "Clock.h"
+#include "MIDI.h"
 
 #include <sys/ioctl.h>
 #include <linux/i2c-dev.h>
@@ -64,7 +65,11 @@ int main(void){
 								usleep(150000);
 								Inst_Active = Play_YM2612(mode_selection, path, direction, value, active_low, str_pos);
 							}
-							if((pin_read("18", value, path, str_pos) == 0x31) || (pin_read("14", value, path, str_pos) == 0x31)){
+							if(pin_read("18", value, path, str_pos) == 0x31){
+								usleep(150000);
+								mode_selection = 2;
+							}
+							if(pin_read("14", value, path, str_pos) == 0x31){
 								usleep(150000);
 								mode_selection = 1;
 							}
@@ -76,7 +81,27 @@ int main(void){
 								usleep(150000);
 								Inst_Active = Play_YM2612(mode_selection, path, direction, value, active_low, str_pos);
 							}
+							if(pin_read("18", value, path, str_pos) == 0x31){
+								usleep(150000);
+								mode_selection = 0;
+							}
+							if(pin_read("14", value, path, str_pos) == 0x31){
+								usleep(150000);
+								mode_selection = 2;
+							}
+							if(Inst_Active == 0) goto menu_start;
+						}
+						while(mode_selection == 2){
+							LCD_sendString("  Adv.  ->MIDI  ", 2);
+							if(pin_read("15", value, path, str_pos) == 0x31){
+								usleep(150000);
+								Inst_Active = MIDI_input();
+							}
 							if((pin_read("18", value, path, str_pos) == 0x31) || (pin_read("14", value, path, str_pos) == 0x31)){
+								usleep(150000);
+								mode_selection = 1;
+							}
+							if(pin_read("14", value, path, str_pos) == 0x31){
 								usleep(150000);
 								mode_selection = 0;
 							}
