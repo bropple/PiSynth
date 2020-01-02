@@ -34,6 +34,7 @@
 static int tx_bytes = 4;
 int fd;
 int result;
+int address = 0x3F; //address of i2c display
 
 //LCD commands and flags are listed in the i2c_1602.h file.
 
@@ -136,7 +137,7 @@ void LCD_init(void){
 	}
 	
 	/* Set slave address */
-	result=ioctl(fd, I2C_SLAVE, 0x3f); //set slave address to the address of the display
+	result=ioctl(fd, I2C_SLAVE, 0x27); //set slave address to the address of the display
 	if(fd<0){ //check for errors
 		printf("Error setting the i2c slave address!\n");
 	}
