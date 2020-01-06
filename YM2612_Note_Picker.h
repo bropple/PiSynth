@@ -15,6 +15,3 @@
 //static uint8_t C3_Ch2[2] = {0x
 
 void note_picker(int note, int octave);
-void note_picker_multi(int note, int octave, int channel);
-
-void KeyStatus_2_Command(int * KeyStatus, int octave);

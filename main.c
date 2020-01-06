@@ -95,7 +95,7 @@ int main(void){
 							LCD_sendString("  Adv.  ->MIDI  ", 2);
 							if(pin_read("15", value, path, str_pos) == 0x31){
 								usleep(150000);
-								Inst_Active = MIDI_input();
+								Inst_Active = MIDI_2612(path, direction, value, active_low, str_pos);
 							}
 							if((pin_read("18", value, path, str_pos) == 0x31) || (pin_read("14", value, path, str_pos) == 0x31)){
 								usleep(150000);

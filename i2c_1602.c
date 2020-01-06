@@ -137,7 +137,7 @@ void LCD_init(void){
 	}
 	
 	/* Set slave address */
-	result=ioctl(fd, I2C_SLAVE, 0x27); //set slave address to the address of the display
+	result=ioctl(fd, I2C_SLAVE, address); //set slave address to the address of the display
 	if(fd<0){ //check for errors
 		printf("Error setting the i2c slave address!\n");
 	}

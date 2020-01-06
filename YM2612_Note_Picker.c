@@ -48,100 +48,100 @@ void note_picker(int note, int octave){ //only works for the basic note scanner!
 	 */ 
 	if(octave == 1) {
 		switch (note){
-			case 1:  	setreg(0xA4, 0x0A);   //Note C, channel 1
-						setreg(0xA0, 0x84);
-						setreg(0xA5, 0x0A);   //Note C, channel 2
-						setreg(0xA1, 0x84);
-						setreg(0xA6, 0x0A);   //Note C, channel 3
-						setreg(0xA2, 0x84);
+			case 1:  	setreg(0xA4, 0x0A, 0);   //Note C, channel 1
+						setreg(0xA0, 0x84, 0);
+						setreg(0xA5, 0x0A, 0);   //Note C, channel 2
+						setreg(0xA1, 0x84, 0);
+						setreg(0xA6, 0x0A, 0);   //Note C, channel 3
+						setreg(0xA2, 0x84, 0);
 						break;
 					
-			case 2:  	setreg(0xA4, 0x0A);   //Note C#, channel 1
-						setreg(0xA0, 0xAA);
-						setreg(0xA5, 0x0A);   //Note C#, channel 2
-						setreg(0xA1, 0xAA);
-						setreg(0xA6, 0x0A);   //Note C#, channel 3
-						setreg(0xA2, 0xAA);
-						break;
-					
-			case 3:  	setreg(0xA4, 0x0A);   //Note D, channel 1
-						setreg(0xA0, 0xD3);
-						setreg(0xA5, 0x0A);   //Note D, channel 2
-						setreg(0xA1, 0xD3);
-						setreg(0xA6, 0x0A);   //Note D, channel 3
-						setreg(0xA2, 0xD3);
-						break;
-								
-			case 4:  	setreg(0xA4, 0x0A);   //Note D#, channel 1
-						setreg(0xA0, 0xFE);
-						setreg(0xA5, 0x0A);   //Note D#, channel 2
-						setreg(0xA1, 0xFE);
-						setreg(0xA6, 0x0A);   //Note D#, channel 3
-						setreg(0xA2, 0xFE);
-						break;
-								
-			case 5:  	setreg(0xA4, 0x0B);   //Note E, channel 1
-						setreg(0xA0, 0x2B);
-						setreg(0xA5, 0x0B);   //Note E, channel 2
-						setreg(0xA1, 0x2B);
-						setreg(0xA6, 0x0B);   //Note E, channel 3
-						setreg(0xA2, 0x2B);
-						break;
-								
-			case 6:  	setreg(0xA4, 0x0B);   //Note F, channel 1
-						setreg(0xA0, 0x5B);
-						setreg(0xA5, 0x0B);   //Note F, channel 2
-						setreg(0xA1, 0x5B);
-						setreg(0xA6, 0x0B);   //Note F, channel 3
-						setreg(0xA2, 0x5B);
-						break;
-									
-			case 7:  	setreg(0xA4, 0x0B);   //Note F#, channel 1
-						setreg(0xA0, 0x8E);
-						setreg(0xA5, 0x0B);   //Note F#, channel 2
-						setreg(0xA1, 0x8E);
-						setreg(0xA6, 0x0B);   //Note F#, channel 3
-						setreg(0xA2, 0x8E);
-						break;
-									
-			case 8:  	setreg(0xA4, 0x0B);   //Note G, channel 1
-						setreg(0xA0, 0xC5);
-						setreg(0xA5, 0x0B);   //Note G, channel 2
-						setreg(0xA1, 0xC5);
-						setreg(0xA6, 0x0B);   //Note G, channel 3
-						setreg(0xA2, 0xC5);
-						break;
-								
-			case 9:  	setreg(0xA4, 0x0B);   //Note G#, channel 1
-						setreg(0xA0, 0xFE);
-						setreg(0xA5, 0x0B);   //Note G#, channel 2
-						setreg(0xA1, 0xFE);
-						setreg(0xA6, 0x0B);   //Note G#, channel 3
-						setreg(0xA2, 0xFE);
-						break;
-								
-			case 10:  	setreg(0xA4, 0x0C);   //Note A, channel 1
-						setreg(0xA0, 0x3B);
-						setreg(0xA5, 0x0C);   //Note A, channel 2
-						setreg(0xA1, 0x3B);
-						setreg(0xA6, 0x0C);   //Note A, channel 3
-						setreg(0xA2, 0x3B);
-						break;
-									
-			case 11:  	setreg(0xA4, 0x0C);   //Note A#, channel 1
-						setreg(0xA0, 0x7B);
-						setreg(0xA5, 0x0C);   //Note A#, channel 2
-						setreg(0xA1, 0x7B);
-						setreg(0xA6, 0x0C);   //Note A#, channel 3
-						setreg(0xA2, 0x7B);
-						break;
-									
-			case 12:  	setreg(0xA4, 0x0C);   //Note B, channel 1
-						setreg(0xA0, 0xBF);
-						setreg(0xA5, 0x0C);   //Note B, channel 2
-						setreg(0xA1, 0xBF);
-						setreg(0xA6, 0x0C);   //Note B, channel 3
-						setreg(0xA2, 0xBF);
+			case 2:  	setreg(0xA4, 0x0A, 0);   //Note C#, channel 1
+						setreg(0xA0, 0xAA, 0);
+						setreg(0xA5, 0x0A, 0);   //Note C#, channel 2
+						setreg(0xA1, 0xAA, 0);
+						setreg(0xA6, 0x0A, 0);   //Note C#, channel 3
+						setreg(0xA2, 0xAA, 0);
+						break;          
+										 
+			case 3:  	setreg(0xA4, 0x0A, 0);   //Note D, channel 1
+						setreg(0xA0, 0xD3, 0);
+						setreg(0xA5, 0x0A, 0);   //Note D, channel 2
+						setreg(0xA1, 0xD3, 0);
+						setreg(0xA6, 0x0A, 0);   //Note D, channel 3
+						setreg(0xA2, 0xD3, 0);
+						break;           
+										 
+			case 4:  	setreg(0xA4, 0x0A, 0);   //Note D#, channel 1
+						setreg(0xA0, 0xFE, 0);
+						setreg(0xA5, 0x0A, 0);   //Note D#, channel 2
+						setreg(0xA1, 0xFE, 0);
+						setreg(0xA6, 0x0A, 0);   //Note D#, channel 3
+						setreg(0xA2, 0xFE, 0);
+						break;           
+										 
+			case 5:  	setreg(0xA4, 0x0B, 0);   //Note E, channel 1
+						setreg(0xA0, 0x2B, 0);
+						setreg(0xA5, 0x0B, 0);   //Note E, channel 2
+						setreg(0xA1, 0x2B, 0);
+						setreg(0xA6, 0x0B, 0);   //Note E, channel 3
+						setreg(0xA2, 0x2B, 0);
+						break;           
+										 
+			case 6:  	setreg(0xA4, 0x0B, 0);   //Note F, channel 1
+						setreg(0xA0, 0x5B, 0);
+						setreg(0xA5, 0x0B, 0);   //Note F, channel 2
+						setreg(0xA1, 0x5B, 0);
+						setreg(0xA6, 0x0B, 0);   //Note F, channel 3
+						setreg(0xA2, 0x5B, 0);
+						break;           
+										 
+			case 7:  	setreg(0xA4, 0x0B, 0);   //Note F#, channel 1
+						setreg(0xA0, 0x8E, 0);
+						setreg(0xA5, 0x0B, 0);   //Note F#, channel 2
+						setreg(0xA1, 0x8E, 0);
+						setreg(0xA6, 0x0B, 0);   //Note F#, channel 3
+						setreg(0xA2, 0x8E, 0);
+						break;          
+										 
+			case 8:  	setreg(0xA4, 0x0B, 0);   //Note G, channel 1
+						setreg(0xA0, 0xC5, 0);
+						setreg(0xA5, 0x0B, 0);   //Note G, channel 2
+						setreg(0xA1, 0xC5, 0);
+						setreg(0xA6, 0x0B, 0);   //Note G, channel 3
+						setreg(0xA2, 0xC5, 0);
+						break;           
+										 
+			case 9:  	setreg(0xA4, 0x0B, 0);   //Note G#, channel 1
+						setreg(0xA0, 0xFE, 0);
+						setreg(0xA5, 0x0B, 0);   //Note G#, channel 2
+						setreg(0xA1, 0xFE, 0);
+						setreg(0xA6, 0x0B, 0);   //Note G#, channel 3
+						setreg(0xA2, 0xFE, 0);
+						break;           
+										
+			case 10:  	setreg(0xA4, 0x0C, 0);   //Note A, channel 1
+						setreg(0xA0, 0x3B, 0);
+						setreg(0xA5, 0x0C, 0);   //Note A, channel 2
+						setreg(0xA1, 0x3B, 0);
+						setreg(0xA6, 0x0C, 0);   //Note A, channel 3
+						setreg(0xA2, 0x3B, 0);
+						break;           
+										 
+			case 11:  	setreg(0xA4, 0x0C, 0);   //Note A#, channel 1
+						setreg(0xA0, 0x7B, 0);
+						setreg(0xA5, 0x0C, 0);   //Note A#, channel 2
+						setreg(0xA1, 0x7B, 0);
+						setreg(0xA6, 0x0C, 0);   //Note A#, channel 3
+						setreg(0xA2, 0x7B, 0);
+						break;           
+										 
+			case 12:  	setreg(0xA4, 0x0C, 0);   //Note B, channel 1
+						setreg(0xA0, 0xBF, 0);
+						setreg(0xA5, 0x0C, 0);   //Note B, channel 2
+						setreg(0xA1, 0xBF, 0);
+						setreg(0xA6, 0x0C, 0);   //Note B, channel 3
+						setreg(0xA2, 0xBF, 0);
 						break;
 					
 			default: printf("Invalid octave!\n");
@@ -154,100 +154,100 @@ void note_picker(int note, int octave){ //only works for the basic note scanner!
 	
 	if(octave == 2) {
 		switch (note){
-			case 1:  	setreg(0xA4, 0x12);   //Note C, channel 1
-						setreg(0xA0, 0x84);
-						setreg(0xA5, 0x12);   //Note C, channel 2
-						setreg(0xA1, 0x84);
-						setreg(0xA6, 0x12);   //Note C, channel 3
-						setreg(0xA2, 0x84);
-						break;
-					
-			case 2:  	setreg(0xA4, 0x12);   //Note C#, channel 1
-						setreg(0xA0, 0xAA);
-						setreg(0xA5, 0x12);   //Note C#, channel 2
-						setreg(0xA1, 0xAA);
-						setreg(0xA6, 0x12);   //Note C#, channel 3
-						setreg(0xA2, 0xAA);
-						break;
-					
-			case 3:  	setreg(0xA4, 0x12);   //Note D, channel 1
-						setreg(0xA0, 0xD3);
-						setreg(0xA5, 0x12);   //Note D, channel 2
-						setreg(0xA1, 0xD3);
-						setreg(0xA6, 0x12);   //Note D, channel 3
-						setreg(0xA2, 0xD3);
-						break;
-								
-			case 4:  	setreg(0xA4, 0x12);   //Note D#, channel 1
-						setreg(0xA0, 0xFE);
-						setreg(0xA5, 0x12);   //Note D#, channel 2
-						setreg(0xA1, 0xFE);
-						setreg(0xA6, 0x12);   //Note D#, channel 3
-						setreg(0xA2, 0xFE);
-						break;
-								
-			case 5:  	setreg(0xA4, 0x13);   //Note D, channel 1
-						setreg(0xA0, 0x2B);
-						setreg(0xA5, 0x13);   //Note D, channel 2
-						setreg(0xA1, 0x2B);
-						setreg(0xA6, 0x13);   //Note D, channel 3
-						setreg(0xA2, 0x2B);
-						break;
-								
-			case 6:  	setreg(0xA4, 0x13);   //Note D, channel 1
-						setreg(0xA0, 0x5B);
-						setreg(0xA5, 0x13);   //Note D, channel 2
-						setreg(0xA1, 0x5B);
-						setreg(0xA6, 0x13);   //Note D, channel 3
-						setreg(0xA2, 0x5B);
-						break;
-									
-			case 7:  	setreg(0xA4, 0x13);   //Note D, channel 1
-						setreg(0xA0, 0x8E);
-						setreg(0xA5, 0x13);   //Note D, channel 2
-						setreg(0xA1, 0x8E);
-						setreg(0xA6, 0x13);   //Note D, channel 3
-						setreg(0xA2, 0x8E);
-						break;
-									
-			case 8:  	setreg(0xA4, 0x13);   //Note D, channel 1
-						setreg(0xA0, 0xC5);
-						setreg(0xA5, 0x13);   //Note D, channel 2
-						setreg(0xA1, 0xC5);
-						setreg(0xA6, 0x13);   //Note D, channel 3
-						setreg(0xA2, 0xC5);
-						break;
-								
-			case 9:  	setreg(0xA4, 0x13);   //Note D, channel 1
-						setreg(0xA0, 0xFE);
-						setreg(0xA5, 0x13);   //Note D, channel 2
-						setreg(0xA1, 0xFE);
-						setreg(0xA6, 0x13);   //Note D, channel 3
-						setreg(0xA2, 0xFE);
-						break;
-								
-			case 10:  	setreg(0xA4, 0x14);   //Note D, channel 1
-						setreg(0xA0, 0x3B);
-						setreg(0xA5, 0x14);   //Note D, channel 2
-						setreg(0xA1, 0x3B);
-						setreg(0xA6, 0x14);   //Note D, channel 3
-						setreg(0xA2, 0x3B);
-						break;
-									
-			case 11:  	setreg(0xA4, 0x14);   //Note D, channel 1
-						setreg(0xA0, 0x7B);
-						setreg(0xA5, 0x14);   //Note D, channel 2
-						setreg(0xA1, 0x7B);
-						setreg(0xA6, 0x14);   //Note D, channel 3
-						setreg(0xA2, 0x7B);
-						break;
-									
-			case 12:  	setreg(0xA4, 0x14);   //Note D, channel 1
-						setreg(0xA0, 0xBF);
-						setreg(0xA5, 0x14);   //Note D, channel 2
-						setreg(0xA1, 0xBF);
-						setreg(0xA6, 0x14);   //Note D, channel 3
-						setreg(0xA2, 0xBF);
+			case 1:  	setreg(0xA4, 0x12, 0);   //Note C, channel 1
+						setreg(0xA0, 0x84, 0);
+						setreg(0xA5, 0x12, 0);   //Note C, channel 2
+						setreg(0xA1, 0x84, 0);
+						setreg(0xA6, 0x12, 0);   //Note C, channel 3
+						setreg(0xA2, 0x84, 0);
+						break;           
+										 
+			case 2:  	setreg(0xA4, 0x12, 0);   //Note C#, channel 1
+						setreg(0xA0, 0xAA, 0);
+						setreg(0xA5, 0x12, 0);   //Note C#, channel 2
+						setreg(0xA1, 0xAA, 0);
+						setreg(0xA6, 0x12, 0);   //Note C#, channel 3
+						setreg(0xA2, 0xAA, 0);
+						break;           
+										 
+			case 3:  	setreg(0xA4, 0x12, 0);   //Note D, channel 1
+						setreg(0xA0, 0xD3, 0);
+						setreg(0xA5, 0x12, 0);   //Note D, channel 2
+						setreg(0xA1, 0xD3, 0);
+						setreg(0xA6, 0x12, 0);   //Note D, channel 3
+						setreg(0xA2, 0xD3, 0);
+						break;           
+										 
+			case 4:  	setreg(0xA4, 0x12, 0);   //Note D#, channel 1
+						setreg(0xA0, 0xFE, 0);
+						setreg(0xA5, 0x12, 0);   //Note D#, channel 2
+						setreg(0xA1, 0xFE, 0);
+						setreg(0xA6, 0x12, 0);   //Note D#, channel 3
+						setreg(0xA2, 0xFE, 0);
+						break;           
+										
+			case 5:  	setreg(0xA4, 0x13, 0);   //Note D, channel 1
+						setreg(0xA0, 0x2B, 0);
+						setreg(0xA5, 0x13, 0);   //Note D, channel 2
+						setreg(0xA1, 0x2B, 0);
+						setreg(0xA6, 0x13, 0);   //Note D, channel 3
+						setreg(0xA2, 0x2B, 0);
+						break;           
+										 
+			case 6:  	setreg(0xA4, 0x13, 0);   //Note D, channel 1
+						setreg(0xA0, 0x5B, 0);
+						setreg(0xA5, 0x13, 0);   //Note D, channel 2
+						setreg(0xA1, 0x5B, 0);
+						setreg(0xA6, 0x13, 0);   //Note D, channel 3
+						setreg(0xA2, 0x5B, 0);
+						break;           
+										 
+			case 7:  	setreg(0xA4, 0x13, 0);   //Note D, channel 1
+						setreg(0xA0, 0x8E, 0);
+						setreg(0xA5, 0x13, 0);   //Note D, channel 2
+						setreg(0xA1, 0x8E, 0);
+						setreg(0xA6, 0x13, 0);   //Note D, channel 3
+						setreg(0xA2, 0x8E, 0);
+						break;           
+										 
+			case 8:  	setreg(0xA4, 0x13, 0);   //Note D, channel 1
+						setreg(0xA0, 0xC5, 0);
+						setreg(0xA5, 0x13, 0);   //Note D, channel 2
+						setreg(0xA1, 0xC5, 0);
+						setreg(0xA6, 0x13, 0);   //Note D, channel 3
+						setreg(0xA2, 0xC5, 0);
+						break;           
+										 
+			case 9:  	setreg(0xA4, 0x13, 0);   //Note D, channel 1
+						setreg(0xA0, 0xFE, 0);
+						setreg(0xA5, 0x13, 0);   //Note D, channel 2
+						setreg(0xA1, 0xFE, 0);
+						setreg(0xA6, 0x13, 0);   //Note D, channel 3
+						setreg(0xA2, 0xFE, 0);
+						break;           
+										 
+			case 10:  	setreg(0xA4, 0x14, 0);   //Note D, channel 1
+						setreg(0xA0, 0x3B, 0);
+						setreg(0xA5, 0x14, 0);   //Note D, channel 2
+						setreg(0xA1, 0x3B, 0);
+						setreg(0xA6, 0x14, 0);   //Note D, channel 3
+						setreg(0xA2, 0x3B, 0);
+						break;           
+										 
+			case 11:  	setreg(0xA4, 0x14, 0);   //Note D, channel 1
+						setreg(0xA0, 0x7B, 0);
+						setreg(0xA5, 0x14, 0);   //Note D, channel 2
+						setreg(0xA1, 0x7B, 0);
+						setreg(0xA6, 0x14, 0);   //Note D, channel 3
+						setreg(0xA2, 0x7B, 0);
+						break;           
+										 
+			case 12:  	setreg(0xA4, 0x14, 0);   //Note D, channel 1
+						setreg(0xA0, 0xBF, 0);
+						setreg(0xA5, 0x14, 0);   //Note D, channel 2
+						setreg(0xA1, 0xBF, 0);
+						setreg(0xA6, 0x14, 0);   //Note D, channel 3
+						setreg(0xA2, 0xBF, 0);
 						break;
 					
 			default: printf("Invalid octave!\n");
@@ -257,100 +257,100 @@ void note_picker(int note, int octave){ //only works for the basic note scanner!
 	
 	if(octave == 3){
 		switch (note){
-			case 1:  	setreg(0xA4, 0x1A);   //Note C, channel 1
-						setreg(0xA0, 0x84);
-						setreg(0xA5, 0x1A);   //Note C, channel 2
-						setreg(0xA1, 0x84);
-						setreg(0xA6, 0x1A);   //Note C, channel 3
-						setreg(0xA2, 0x84);
-						break;
-					
-			case 2:  	setreg(0xA4, 0x1A);   //Note C#, channel 1
-						setreg(0xA0, 0xAA);
-						setreg(0xA5, 0x1A);   //Note C#, channel 2
-						setreg(0xA1, 0xAA);
-						setreg(0xA6, 0x1A);   //Note C#, channel 3
-						setreg(0xA2, 0xAA);
-						break;
-					
-			case 3:  	setreg(0xA4, 0x1A);   //Note D, channel 1
-						setreg(0xA0, 0xD3);
-						setreg(0xA5, 0x1A);   //Note D, channel 2
-						setreg(0xA1, 0xD3);
-						setreg(0xA6, 0x1A);   //Note D, channel 3
-						setreg(0xA2, 0xD3);
-						break;
-								
-			case 4:  	setreg(0xA4, 0x1A);   //Note D#, channel 1
-						setreg(0xA0, 0xFE);
-						setreg(0xA5, 0x1A);   //Note D#, channel 2
-						setreg(0xA1, 0xFE);
-						setreg(0xA6, 0x1A);   //Note D#, channel 3
-						setreg(0xA2, 0xFE);
-						break;
-								
-			case 5:  	setreg(0xA4, 0x1B);   //Note E, channel 1
-						setreg(0xA0, 0x2B);
-						setreg(0xA5, 0x1B);   //Note E, channel 2
-						setreg(0xA1, 0x2B);
-						setreg(0xA6, 0x1B);   //Note E, channel 3
-						setreg(0xA2, 0x2B);
-						break;
-								
-			case 6:  	setreg(0xA4, 0x1B);   //Note F, channel 1
-						setreg(0xA0, 0x5B);
-						setreg(0xA5, 0x1B);   //Note F, channel 2
-						setreg(0xA1, 0x5B);
-						setreg(0xA6, 0x1B);   //Note F, channel 3
-						setreg(0xA2, 0x5B);
-						break;
-									
-			case 7:  	setreg(0xA4, 0x1B);   //Note D, channel 1
-						setreg(0xA0, 0x8E);
-						setreg(0xA5, 0x1B);   //Note D, channel 2
-						setreg(0xA1, 0x8E);
-						setreg(0xA6, 0x1B);   //Note D, channel 3
-						setreg(0xA2, 0x8E);
-						break;
-									
-			case 8:  	setreg(0xA4, 0x1B);   //Note D, channel 1
-						setreg(0xA0, 0xC5);
-						setreg(0xA5, 0x1B);   //Note D, channel 2
-						setreg(0xA1, 0xC5);
-						setreg(0xA6, 0x1B);   //Note D, channel 3
-						setreg(0xA2, 0xC5);
-						break;
-								
-			case 9:  	setreg(0xA4, 0x1B);   //Note D, channel 1
-						setreg(0xA0, 0xFE);
-						setreg(0xA5, 0x1B);   //Note D, channel 2
-						setreg(0xA1, 0xFE);
-						setreg(0xA6, 0x1B);   //Note D, channel 3
-						setreg(0xA2, 0xFE);
-						break;
-								
-			case 10:  	setreg(0xA4, 0x1C);   //Note D, channel 1
-						setreg(0xA0, 0x3B);
-						setreg(0xA5, 0x1C);   //Note D, channel 2
-						setreg(0xA1, 0x3B);
-						setreg(0xA6, 0x1C);   //Note D, channel 3
-						setreg(0xA2, 0x3B);
-						break;
-									
-			case 11:  	setreg(0xA4, 0x1C);   //Note D, channel 1
-						setreg(0xA0, 0x7B);
-						setreg(0xA5, 0x1C);   //Note D, channel 2
-						setreg(0xA1, 0x7B);
-						setreg(0xA6, 0x1C);   //Note D, channel 3
-						setreg(0xA2, 0x7B);
-						break;
-									
-			case 12:  	setreg(0xA4, 0x1C);   //Note D, channel 1
-						setreg(0xA0, 0xBF);
-						setreg(0xA5, 0x1C);   //Note D, channel 2
-						setreg(0xA1, 0xBF);
-						setreg(0xA6, 0x1C);   //Note D, channel 3
-						setreg(0xA2, 0xBF);
+			case 1:  	setreg(0xA4, 0x1A, 0);   //Note C, channel 1
+						setreg(0xA0, 0x84, 0);
+						setreg(0xA5, 0x1A, 0);   //Note C, channel 2
+						setreg(0xA1, 0x84, 0);
+						setreg(0xA6, 0x1A, 0);   //Note C, channel 3
+						setreg(0xA2, 0x84, 0);
+						break;           
+										 
+			case 2:  	setreg(0xA4, 0x1A, 0);   //Note C#, channel 1
+						setreg(0xA0, 0xAA, 0);
+						setreg(0xA5, 0x1A, 0);   //Note C#, channel 2
+						setreg(0xA1, 0xAA, 0);
+						setreg(0xA6, 0x1A, 0);   //Note C#, channel 3
+						setreg(0xA2, 0xAA, 0);
+						break;           
+										
+			case 3:  	setreg(0xA4, 0x1A, 0);   //Note D, channel 1
+						setreg(0xA0, 0xD3, 0);
+						setreg(0xA5, 0x1A, 0);   //Note D, channel 2
+						setreg(0xA1, 0xD3, 0);
+						setreg(0xA6, 0x1A, 0);   //Note D, channel 3
+						setreg(0xA2, 0xD3, 0);
+						break;           
+										 
+			case 4:  	setreg(0xA4, 0x1A, 0);   //Note D#, channel 1
+						setreg(0xA0, 0xFE, 0);
+						setreg(0xA5, 0x1A, 0);   //Note D#, channel 2
+						setreg(0xA1, 0xFE, 0);
+						setreg(0xA6, 0x1A, 0);   //Note D#, channel 3
+						setreg(0xA2, 0xFE, 0);
+						break;           
+										
+			case 5:  	setreg(0xA4, 0x1B, 0);   //Note E, channel 1
+						setreg(0xA0, 0x2B, 0);
+						setreg(0xA5, 0x1B, 0);   //Note E, channel 2
+						setreg(0xA1, 0x2B, 0);
+						setreg(0xA6, 0x1B, 0);   //Note E, channel 3
+						setreg(0xA2, 0x2B, 0);
+						break;           
+										 
+			case 6:  	setreg(0xA4, 0x1B, 0);   //Note F, channel 1
+						setreg(0xA0, 0x5B, 0);
+						setreg(0xA5, 0x1B, 0);   //Note F, channel 2
+						setreg(0xA1, 0x5B, 0);
+						setreg(0xA6, 0x1B, 0);   //Note F, channel 3
+						setreg(0xA2, 0x5B, 0);
+						break;           
+										 
+			case 7:  	setreg(0xA4, 0x1B, 0);   //Note D, channel 1
+						setreg(0xA0, 0x8E, 0);
+						setreg(0xA5, 0x1B, 0);   //Note D, channel 2
+						setreg(0xA1, 0x8E, 0);
+						setreg(0xA6, 0x1B, 0);   //Note D, channel 3
+						setreg(0xA2, 0x8E, 0);
+						break;           
+										 
+			case 8:  	setreg(0xA4, 0x1B, 0);   //Note D, channel 1
+						setreg(0xA0, 0xC5, 0);
+						setreg(0xA5, 0x1B, 0);   //Note D, channel 2
+						setreg(0xA1, 0xC5, 0);
+						setreg(0xA6, 0x1B, 0);   //Note D, channel 3
+						setreg(0xA2, 0xC5, 0);
+						break;           
+										 
+			case 9:  	setreg(0xA4, 0x1B, 0);   //Note D, channel 1
+						setreg(0xA0, 0xFE, 0);
+						setreg(0xA5, 0x1B, 0);   //Note D, channel 2
+						setreg(0xA1, 0xFE, 0);
+						setreg(0xA6, 0x1B, 0);   //Note D, channel 3
+						setreg(0xA2, 0xFE, 0);
+						break;           
+										 
+			case 10:  	setreg(0xA4, 0x1C, 0);   //Note D, channel 1
+						setreg(0xA0, 0x3B, 0);
+						setreg(0xA5, 0x1C, 0);   //Note D, channel 2
+						setreg(0xA1, 0x3B, 0);
+						setreg(0xA6, 0x1C, 0);   //Note D, channel 3
+						setreg(0xA2, 0x3B, 0);
+						break;           
+										 
+			case 11:  	setreg(0xA4, 0x1C, 0);   //Note D, channel 1
+						setreg(0xA0, 0x7B, 0);
+						setreg(0xA5, 0x1C, 0);   //Note D, channel 2
+						setreg(0xA1, 0x7B, 0);
+						setreg(0xA6, 0x1C, 0);   //Note D, channel 3
+						setreg(0xA2, 0x7B, 0);
+						break;           
+										 
+			case 12:  	setreg(0xA4, 0x1C, 0);   //Note D, channel 1
+						setreg(0xA0, 0xBF, 0);
+						setreg(0xA5, 0x1C, 0);   //Note D, channel 2
+						setreg(0xA1, 0xBF, 0);
+						setreg(0xA6, 0x1C, 0);   //Note D, channel 3
+						setreg(0xA2, 0xBF, 0);
 						break;
 					
 			default: printf("Invalid octave!\n");
@@ -360,100 +360,100 @@ void note_picker(int note, int octave){ //only works for the basic note scanner!
 	
 	if(octave == 4){
 		switch (note){
-			case 1:  	setreg(0xA4, 0x22);   //Note C, channel 1
-						setreg(0xA0, 0x84);
-						setreg(0xA5, 0x22);   //Note C, channel 2
-						setreg(0xA1, 0x84);
-						setreg(0xA6, 0x22);   //Note C, channel 3
-						setreg(0xA2, 0x84);
-						break;
-					
-			case 2:  	setreg(0xA4, 0x22);   //Note C#, channel 1
-						setreg(0xA0, 0xAA);
-						setreg(0xA5, 0x22);   //Note C#, channel 2
-						setreg(0xA1, 0xAA);
-						setreg(0xA6, 0x22);   //Note C#, channel 3
-						setreg(0xA2, 0xAA);
-						break;
-					
-			case 3:  	setreg(0xA4, 0x22);   //Note D, channel 1
-						setreg(0xA0, 0xD3);
-						setreg(0xA5, 0x22);   //Note D, channel 2
-						setreg(0xA1, 0xD3);
-						setreg(0xA6, 0x22);   //Note D, channel 3
-						setreg(0xA2, 0xD3);
-						break;
-								
-			case 4:  	setreg(0xA4, 0x22);   //Note D, channel 1
-						setreg(0xA0, 0xFE);
-						setreg(0xA5, 0x22);   //Note D, channel 2
-						setreg(0xA1, 0xFE);
-						setreg(0xA6, 0x22);   //Note D, channel 3
-						setreg(0xA2, 0xFE);
-						break;
-								
-			case 5:  	setreg(0xA4, 0x23);   //Note D, channel 1
-						setreg(0xA0, 0x2B);
-						setreg(0xA5, 0x23);   //Note D, channel 2
-						setreg(0xA1, 0x2B);
-						setreg(0xA6, 0x23);   //Note D, channel 3
-						setreg(0xA2, 0x2B);
-						break;
-								
-			case 6:  	setreg(0xA4, 0x23);   //Note D, channel 1
-						setreg(0xA0, 0x5B);
-						setreg(0xA5, 0x23);   //Note D, channel 2
-						setreg(0xA1, 0x5B);
-						setreg(0xA6, 0x23);   //Note D, channel 3
-						setreg(0xA2, 0x5B);
-						break;
-									
-			case 7:  	setreg(0xA4, 0x23);   //Note D, channel 1
-						setreg(0xA0, 0x8E);
-						setreg(0xA5, 0x23);   //Note D, channel 2
-						setreg(0xA1, 0x8E);
-						setreg(0xA6, 0x23);   //Note D, channel 3
-						setreg(0xA2, 0x8E);
-						break;
-									
-			case 8:  	setreg(0xA4, 0x23);   //Note D, channel 1
-						setreg(0xA0, 0xC5);
-						setreg(0xA5, 0x23);   //Note D, channel 2
-						setreg(0xA1, 0xC5);
-						setreg(0xA6, 0x23);   //Note D, channel 3
-						setreg(0xA2, 0xC5);
-						break;
-								
-			case 9:  	setreg(0xA4, 0x23);   //Note D, channel 1
-						setreg(0xA0, 0xFE);
-						setreg(0xA5, 0x23);   //Note D, channel 2
-						setreg(0xA1, 0xFE);
-						setreg(0xA6, 0x23);   //Note D, channel 3
-						setreg(0xA2, 0xFE);
-						break;
-								
-			case 10:  	setreg(0xA4, 0x24);   //Note D, channel 1
-						setreg(0xA0, 0x3B);
-						setreg(0xA5, 0x24);   //Note D, channel 2
-						setreg(0xA1, 0x3B);
-						setreg(0xA6, 0x24);   //Note D, channel 3
-						setreg(0xA2, 0x3B);
-						break;
-									
-			case 11:  	setreg(0xA4, 0x24);   //Note D, channel 1
-						setreg(0xA0, 0x7B);
-						setreg(0xA5, 0x24);   //Note D, channel 2
-						setreg(0xA1, 0x7B);
-						setreg(0xA6, 0x24);   //Note D, channel 3
-						setreg(0xA2, 0x7B);
-						break;
-									
-			case 12:  	setreg(0xA4, 0x24);   //Note D, channel 1
-						setreg(0xA0, 0xBF);
-						setreg(0xA5, 0x24);   //Note D, channel 2
-						setreg(0xA1, 0xBF);
-						setreg(0xA6, 0x24);   //Note D, channel 3
-						setreg(0xA2, 0xBF);
+			case 1:  	setreg(0xA4, 0x22, 0);   //Note C, channel 1
+						setreg(0xA0, 0x84, 0);
+						setreg(0xA5, 0x22, 0);   //Note C, channel 2
+						setreg(0xA1, 0x84, 0);
+						setreg(0xA6, 0x22, 0);   //Note C, channel 3
+						setreg(0xA2, 0x84, 0);
+						break;           
+										 
+			case 2:  	setreg(0xA4, 0x22, 0);   //Note C#, channel 1
+						setreg(0xA0, 0xAA, 0);
+						setreg(0xA5, 0x22, 0);   //Note C#, channel 2
+						setreg(0xA1, 0xAA, 0);
+						setreg(0xA6, 0x22, 0);   //Note C#, channel 3
+						setreg(0xA2, 0xAA, 0);
+						break;           
+										 
+			case 3:  	setreg(0xA4, 0x22, 0);   //Note D, channel 1
+						setreg(0xA0, 0xD3, 0);
+						setreg(0xA5, 0x22, 0);   //Note D, channel 2
+						setreg(0xA1, 0xD3, 0);
+						setreg(0xA6, 0x22, 0);   //Note D, channel 3
+						setreg(0xA2, 0xD3, 0);
+						break;           
+										 
+			case 4:  	setreg(0xA4, 0x22, 0);   //Note D, channel 1
+						setreg(0xA0, 0xFE, 0);
+						setreg(0xA5, 0x22, 0);   //Note D, channel 2
+						setreg(0xA1, 0xFE, 0);
+						setreg(0xA6, 0x22, 0);   //Note D, channel 3
+						setreg(0xA2, 0xFE, 0);
+						break;           
+										 
+			case 5:  	setreg(0xA4, 0x23, 0);   //Note D, channel 1
+						setreg(0xA0, 0x2B, 0);
+						setreg(0xA5, 0x23, 0);   //Note D, channel 2
+						setreg(0xA1, 0x2B, 0);
+						setreg(0xA6, 0x23, 0);   //Note D, channel 3
+						setreg(0xA2, 0x2B, 0);
+						break;           
+										 
+			case 6:  	setreg(0xA4, 0x23, 0);   //Note D, channel 1
+						setreg(0xA0, 0x5B, 0);
+						setreg(0xA5, 0x23, 0);   //Note D, channel 2
+						setreg(0xA1, 0x5B, 0);
+						setreg(0xA6, 0x23, 0);   //Note D, channel 3
+						setreg(0xA2, 0x5B, 0);
+						break;           
+										 
+			case 7:  	setreg(0xA4, 0x23, 0);   //Note D, channel 1
+						setreg(0xA0, 0x8E, 0);
+						setreg(0xA5, 0x23, 0);   //Note D, channel 2
+						setreg(0xA1, 0x8E, 0);
+						setreg(0xA6, 0x23, 0);   //Note D, channel 3
+						setreg(0xA2, 0x8E, 0);
+						break;           
+										 
+			case 8:  	setreg(0xA4, 0x23, 0);   //Note D, channel 1
+						setreg(0xA0, 0xC5, 0);
+						setreg(0xA5, 0x23, 0);   //Note D, channel 2
+						setreg(0xA1, 0xC5, 0);
+						setreg(0xA6, 0x23, 0);   //Note D, channel 3
+						setreg(0xA2, 0xC5, 0);
+						break;           
+										 
+			case 9:  	setreg(0xA4, 0x23, 0);   //Note D, channel 1
+						setreg(0xA0, 0xFE, 0);
+						setreg(0xA5, 0x23, 0);   //Note D, channel 2
+						setreg(0xA1, 0xFE, 0);
+						setreg(0xA6, 0x23, 0);   //Note D, channel 3
+						setreg(0xA2, 0xFE, 0);
+						break;           
+										 
+			case 10:  	setreg(0xA4, 0x24, 0);   //Note D, channel 1
+						setreg(0xA0, 0x3B, 0);
+						setreg(0xA5, 0x24, 0);   //Note D, channel 2
+						setreg(0xA1, 0x3B, 0);
+						setreg(0xA6, 0x24, 0);   //Note D, channel 3
+						setreg(0xA2, 0x3B, 0);
+						break;           
+										 
+			case 11:  	setreg(0xA4, 0x24, 0);   //Note D, channel 1
+						setreg(0xA0, 0x7B, 0);
+						setreg(0xA5, 0x24, 0);   //Note D, channel 2
+						setreg(0xA1, 0x7B, 0);
+						setreg(0xA6, 0x24, 0);   //Note D, channel 3
+						setreg(0xA2, 0x7B, 0);
+						break;           
+										 
+			case 12:  	setreg(0xA4, 0x24, 0);   //Note D, channel 1
+						setreg(0xA0, 0xBF, 0);
+						setreg(0xA5, 0x24, 0);   //Note D, channel 2
+						setreg(0xA1, 0xBF, 0);
+						setreg(0xA6, 0x24, 0);   //Note D, channel 3
+						setreg(0xA2, 0xBF, 0);
 						break;
 					
 			default: printf("Invalid octave!\n");
@@ -463,100 +463,100 @@ void note_picker(int note, int octave){ //only works for the basic note scanner!
 	
 	if(octave == 5){
 		switch (note){
-			case 1:  	setreg(0xA4, 0x2A);   //Note C, channel 1
-						setreg(0xA0, 0x84);
-						setreg(0xA5, 0x2A);   //Note C, channel 2
-						setreg(0xA1, 0x84);
-						setreg(0xA6, 0x2A);   //Note C, channel 3
-						setreg(0xA2, 0x84);
-						break;
-					
-			case 2:  	setreg(0xA4, 0x2A);   //Note C#, channel 1
-						setreg(0xA0, 0xAA);
-						setreg(0xA5, 0x2A);   //Note C#, channel 2
-						setreg(0xA1, 0xAA);
-						setreg(0xA6, 0x2A);   //Note C#, channel 3
-						setreg(0xA2, 0xAA);
-						break;
-					
-			case 3:  	setreg(0xA4, 0x2A);   //Note D, channel 1
-						setreg(0xA0, 0xD3);
-						setreg(0xA5, 0x2A);   //Note D, channel 2
-						setreg(0xA1, 0xD3);
-						setreg(0xA6, 0x2A);   //Note D, channel 3
-						setreg(0xA2, 0xD3);
-						break;
-								
-			case 4:  	setreg(0xA4, 0x2A);   //Note D, channel 1
-						setreg(0xA0, 0xFE);
-						setreg(0xA5, 0x2A);   //Note D, channel 2
-						setreg(0xA1, 0xFE);
-						setreg(0xA6, 0x2A);   //Note D, channel 3
-						setreg(0xA2, 0xFE);
-						break;
-								
-			case 5:  	setreg(0xA4, 0x2B);   //Note D, channel 1
-						setreg(0xA0, 0x2B);
-						setreg(0xA5, 0x2B);   //Note D, channel 2
-						setreg(0xA1, 0x2B);
-						setreg(0xA6, 0x2B);   //Note D, channel 3
-						setreg(0xA2, 0x2B);
-						break;
-								
-			case 6:  	setreg(0xA4, 0x2B);   //Note D, channel 1
-						setreg(0xA0, 0x5B);
-						setreg(0xA5, 0x2B);   //Note D, channel 2
-						setreg(0xA1, 0x5B);
-						setreg(0xA6, 0x2B);   //Note D, channel 3
-						setreg(0xA2, 0x5B);
-						break;
-									
-			case 7:  	setreg(0xA4, 0x2B);   //Note D, channel 1
-						setreg(0xA0, 0x8E);
-						setreg(0xA5, 0x2B);   //Note D, channel 2
-						setreg(0xA1, 0x8E);
-						setreg(0xA6, 0x2B);   //Note D, channel 3
-						setreg(0xA2, 0x8E);
-						break;
-									
-			case 8:  	setreg(0xA4, 0x2B);   //Note D, channel 1
-						setreg(0xA0, 0xC5);
-						setreg(0xA5, 0x2B);   //Note D, channel 2
-						setreg(0xA1, 0xC5);
-						setreg(0xA6, 0x2B);   //Note D, channel 3
-						setreg(0xA2, 0xC5);
-						break;
-								
-			case 9:  	setreg(0xA4, 0x2B);   //Note D, channel 1
-						setreg(0xA0, 0xFE);
-						setreg(0xA5, 0x2B);   //Note D, channel 2
-						setreg(0xA1, 0xFE);
-						setreg(0xA6, 0x2B);   //Note D, channel 3
-						setreg(0xA2, 0xFE);
-						break;
-								
-			case 10:  	setreg(0xA4, 0x2C);   //Note D, channel 1
-						setreg(0xA0, 0x3B);
-						setreg(0xA5, 0x2C);   //Note D, channel 2
-						setreg(0xA1, 0x3B);
-						setreg(0xA6, 0x2C);   //Note D, channel 3
-						setreg(0xA2, 0x3B);
-						break;
-									
-			case 11:  	setreg(0xA4, 0x2C);   //Note D, channel 1
-						setreg(0xA0, 0x7B);
-						setreg(0xA5, 0x2C);   //Note D, channel 2
-						setreg(0xA1, 0x7B);
-						setreg(0xA6, 0x2C);   //Note D, channel 3
-						setreg(0xA2, 0x7B);
-						break;
-									
-			case 12:  	setreg(0xA4, 0x2C);   //Note D, channel 1
-						setreg(0xA0, 0xBF);
-						setreg(0xA5, 0x2C);   //Note D, channel 2
-						setreg(0xA1, 0xBF);
-						setreg(0xA6, 0x2C);   //Note D, channel 3
-						setreg(0xA2, 0xBF);
+			case 1:  	setreg(0xA4, 0x2A, 0);   //Note C, channel 1
+						setreg(0xA0, 0x84, 0);
+						setreg(0xA5, 0x2A, 0);   //Note C, channel 2
+						setreg(0xA1, 0x84, 0);
+						setreg(0xA6, 0x2A, 0);   //Note C, channel 3
+						setreg(0xA2, 0x84, 0);
+						break;           
+										 
+			case 2:  	setreg(0xA4, 0x2A, 0);   //Note C#, channel 1
+						setreg(0xA0, 0xAA, 0);
+						setreg(0xA5, 0x2A, 0);   //Note C#, channel 2
+						setreg(0xA1, 0xAA, 0);
+						setreg(0xA6, 0x2A, 0);   //Note C#, channel 3
+						setreg(0xA2, 0xAA, 0);
+						break;          
+										 
+			case 3:  	setreg(0xA4, 0x2A, 0);   //Note D, channel 1
+						setreg(0xA0, 0xD3, 0);
+						setreg(0xA5, 0x2A, 0);   //Note D, channel 2
+						setreg(0xA1, 0xD3, 0);
+						setreg(0xA6, 0x2A, 0);   //Note D, channel 3
+						setreg(0xA2, 0xD3, 0);
+						break;           
+										 
+			case 4:  	setreg(0xA4, 0x2A, 0);   //Note D, channel 1
+						setreg(0xA0, 0xFE, 0);
+						setreg(0xA5, 0x2A, 0);   //Note D, channel 2
+						setreg(0xA1, 0xFE, 0);
+						setreg(0xA6, 0x2A, 0);   //Note D, channel 3
+						setreg(0xA2, 0xFE, 0);
+						break;           
+										 
+			case 5:  	setreg(0xA4, 0x2B, 0);   //Note D, channel 1
+						setreg(0xA0, 0x2B, 0);
+						setreg(0xA5, 0x2B, 0);   //Note D, channel 2
+						setreg(0xA1, 0x2B, 0);
+						setreg(0xA6, 0x2B, 0);   //Note D, channel 3
+						setreg(0xA2, 0x2B, 0);
+						break;           
+										 
+			case 6:  	setreg(0xA4, 0x2B, 0);   //Note D, channel 1
+						setreg(0xA0, 0x5B, 0);
+						setreg(0xA5, 0x2B, 0);   //Note D, channel 2
+						setreg(0xA1, 0x5B, 0);
+						setreg(0xA6, 0x2B, 0);   //Note D, channel 3
+						setreg(0xA2, 0x5B, 0);
+						break;           
+										 
+			case 7:  	setreg(0xA4, 0x2B, 0);   //Note D, channel 1
+						setreg(0xA0, 0x8E, 0);
+						setreg(0xA5, 0x2B, 0);   //Note D, channel 2
+						setreg(0xA1, 0x8E, 0);
+						setreg(0xA6, 0x2B, 0);   //Note D, channel 3
+						setreg(0xA2, 0x8E, 0);
+						break;           
+										 
+			case 8:  	setreg(0xA4, 0x2B, 0);   //Note D, channel 1
+						setreg(0xA0, 0xC5, 0);
+						setreg(0xA5, 0x2B, 0);   //Note D, channel 2
+						setreg(0xA1, 0xC5, 0);
+						setreg(0xA6, 0x2B, 0);   //Note D, channel 3
+						setreg(0xA2, 0xC5, 0);
+						break;           
+										 
+			case 9:  	setreg(0xA4, 0x2B, 0);   //Note D, channel 1
+						setreg(0xA0, 0xFE, 0);
+						setreg(0xA5, 0x2B, 0);   //Note D, channel 2
+						setreg(0xA1, 0xFE, 0);
+						setreg(0xA6, 0x2B, 0);   //Note D, channel 3
+						setreg(0xA2, 0xFE, 0);
+						break;           
+										 
+			case 10:  	setreg(0xA4, 0x2C, 0);   //Note D, channel 1
+						setreg(0xA0, 0x3B, 0);
+						setreg(0xA5, 0x2C, 0);   //Note D, channel 2
+						setreg(0xA1, 0x3B, 0);
+						setreg(0xA6, 0x2C, 0);   //Note D, channel 3
+						setreg(0xA2, 0x3B, 0);
+						break;           
+										 
+			case 11:  	setreg(0xA4, 0x2C, 0);   //Note D, channel 1
+						setreg(0xA0, 0x7B, 0);
+						setreg(0xA5, 0x2C, 0);   //Note D, channel 2
+						setreg(0xA1, 0x7B, 0);
+						setreg(0xA6, 0x2C, 0);   //Note D, channel 3
+						setreg(0xA2, 0x7B, 0);
+						break;           
+										 
+			case 12:  	setreg(0xA4, 0x2C, 0);   //Note D, channel 1
+						setreg(0xA0, 0xBF, 0);
+						setreg(0xA5, 0x2C, 0);   //Note D, channel 2
+						setreg(0xA1, 0xBF, 0);
+						setreg(0xA6, 0x2C, 0);   //Note D, channel 3
+						setreg(0xA2, 0xBF, 0);
 						break;
 					
 			default: printf("Invalid octave!\n");
@@ -566,100 +566,100 @@ void note_picker(int note, int octave){ //only works for the basic note scanner!
 
 	if(octave == 6){
 		switch (note){
-			case 1:  	setreg(0xA4, 0x32);   //Note C, channel 1
-						setreg(0xA0, 0x84);
-						setreg(0xA5, 0x32);   //Note C, channel 2
-						setreg(0xA1, 0x84);
-						setreg(0xA6, 0x32);   //Note C, channel 3
-						setreg(0xA2, 0x84);
-						break;
-					
-			case 2:  	setreg(0xA4, 0x32);   //Note C#, channel 1
-						setreg(0xA0, 0xAA);
-						setreg(0xA5, 0x32);   //Note C#, channel 2
-						setreg(0xA1, 0xAA);
-						setreg(0xA6, 0x32);   //Note C#, channel 3
-						setreg(0xA2, 0xAA);
-						break;
-					
-			case 3:  	setreg(0xA4, 0x32);   //Note D, channel 1
-						setreg(0xA0, 0xD3);
-						setreg(0xA5, 0x32);   //Note D, channel 2
-						setreg(0xA1, 0xD3);
-						setreg(0xA6, 0x32);   //Note D, channel 3
-						setreg(0xA2, 0xD3);
-						break;
-								
-			case 4:  	setreg(0xA4, 0x32);   //Note D, channel 1
-						setreg(0xA0, 0xFE);
-						setreg(0xA5, 0x32);   //Note D, channel 2
-						setreg(0xA1, 0xFE);
-						setreg(0xA6, 0x32);   //Note D, channel 3
-						setreg(0xA2, 0xFE);
-						break;
-								
-			case 5:  	setreg(0xA4, 0x33);   //Note D, channel 1
-						setreg(0xA0, 0x2B);
-						setreg(0xA5, 0x33);   //Note D, channel 2
-						setreg(0xA1, 0x2B);
-						setreg(0xA6, 0x33);   //Note D, channel 3
-						setreg(0xA2, 0x2B);
-						break;
-								
-			case 6:  	setreg(0xA4, 0x33);   //Note D, channel 1
-						setreg(0xA0, 0x5B);
-						setreg(0xA5, 0x33);   //Note D, channel 2
-						setreg(0xA1, 0x5B);
-						setreg(0xA6, 0x33);   //Note D, channel 3
-						setreg(0xA2, 0x5B);
-						break;
-									
-			case 7:  	setreg(0xA4, 0x33);   //Note D, channel 1
-						setreg(0xA0, 0x8E);
-						setreg(0xA5, 0x33);   //Note D, channel 2
-						setreg(0xA1, 0x8E);
-						setreg(0xA6, 0x33);   //Note D, channel 3
-						setreg(0xA2, 0x8E);
-						break;
-									
-			case 8:  	setreg(0xA4, 0x33);   //Note D, channel 1
-						setreg(0xA0, 0xC5);
-						setreg(0xA5, 0x33);   //Note D, channel 2
-						setreg(0xA1, 0xC5);
-						setreg(0xA6, 0x33);   //Note D, channel 3
-						setreg(0xA2, 0xC5);
-						break;
-								
-			case 9:  	setreg(0xA4, 0x33);   //Note D, channel 1
-						setreg(0xA0, 0xFE);
-						setreg(0xA5, 0x33);   //Note D, channel 2
-						setreg(0xA1, 0xFE);
-						setreg(0xA6, 0x33);   //Note D, channel 3
-						setreg(0xA2, 0xFE);
-						break;
-								
-			case 10:  	setreg(0xA4, 0x34);   //Note D, channel 1
-						setreg(0xA0, 0x3B);
-						setreg(0xA5, 0x34);   //Note D, channel 2
-						setreg(0xA1, 0x3B);
-						setreg(0xA6, 0x34);   //Note D, channel 3
-						setreg(0xA2, 0x3B);
-						break;
-									
-			case 11:  	setreg(0xA4, 0x34);   //Note D, channel 1
-						setreg(0xA0, 0x7B);
-						setreg(0xA5, 0x34);   //Note D, channel 2
-						setreg(0xA1, 0x7B);
-						setreg(0xA6, 0x34);   //Note D, channel 3
-						setreg(0xA2, 0x7B);
-						break;
-									
-			case 12:  	setreg(0xA4, 0x34);   //Note D, channel 1
-						setreg(0xA0, 0xBF);
-						setreg(0xA5, 0x34);   //Note D, channel 2
-						setreg(0xA1, 0xBF);
-						setreg(0xA6, 0x34);   //Note D, channel 3
-						setreg(0xA2, 0xBF);
+			case 1:  	setreg(0xA4, 0x32, 0);   //Note C, channel 1
+						setreg(0xA0, 0x84, 0);
+						setreg(0xA5, 0x32, 0);   //Note C, channel 2
+						setreg(0xA1, 0x84, 0);
+						setreg(0xA6, 0x32, 0);   //Note C, channel 3
+						setreg(0xA2, 0x84, 0);
+						break;           
+										 
+			case 2:  	setreg(0xA4, 0x32, 0);   //Note C#, channel 1
+						setreg(0xA0, 0xAA, 0);
+						setreg(0xA5, 0x32, 0);   //Note C#, channel 2
+						setreg(0xA1, 0xAA, 0);
+						setreg(0xA6, 0x32, 0);   //Note C#, channel 3
+						setreg(0xA2, 0xAA, 0);
+						break;           
+										 
+			case 3:  	setreg(0xA4, 0x32, 0);   //Note D, channel 1
+						setreg(0xA0, 0xD3, 0);
+						setreg(0xA5, 0x32, 0);   //Note D, channel 2
+						setreg(0xA1, 0xD3, 0);
+						setreg(0xA6, 0x32, 0);   //Note D, channel 3
+						setreg(0xA2, 0xD3, 0);
+						break;           
+										 
+			case 4:  	setreg(0xA4, 0x32, 0);   //Note D, channel 1
+						setreg(0xA0, 0xFE, 0);
+						setreg(0xA5, 0x32, 0);   //Note D, channel 2
+						setreg(0xA1, 0xFE, 0);
+						setreg(0xA6, 0x32, 0);   //Note D, channel 3
+						setreg(0xA2, 0xFE, 0);
+						break;           
+										 
+			case 5:  	setreg(0xA4, 0x33, 0);   //Note D, channel 1
+						setreg(0xA0, 0x2B, 0);
+						setreg(0xA5, 0x33, 0);   //Note D, channel 2
+						setreg(0xA1, 0x2B, 0);
+						setreg(0xA6, 0x33, 0);   //Note D, channel 3
+						setreg(0xA2, 0x2B, 0);
+						break;           
+										 
+			case 6:  	setreg(0xA4, 0x33, 0);   //Note D, channel 1
+						setreg(0xA0, 0x5B, 0);
+						setreg(0xA5, 0x33, 0);   //Note D, channel 2
+						setreg(0xA1, 0x5B, 0);
+						setreg(0xA6, 0x33, 0);   //Note D, channel 3
+						setreg(0xA2, 0x5B, 0);
+						break;           
+										 
+			case 7:  	setreg(0xA4, 0x33, 0);   //Note D, channel 1
+						setreg(0xA0, 0x8E, 0);
+						setreg(0xA5, 0x33, 0);   //Note D, channel 2
+						setreg(0xA1, 0x8E, 0);
+						setreg(0xA6, 0x33, 0);   //Note D, channel 3
+						setreg(0xA2, 0x8E, 0);
+						break;           
+										 
+			case 8:  	setreg(0xA4, 0x33, 0);   //Note D, channel 1
+						setreg(0xA0, 0xC5, 0);
+						setreg(0xA5, 0x33, 0);   //Note D, channel 2
+						setreg(0xA1, 0xC5, 0);
+						setreg(0xA6, 0x33, 0);   //Note D, channel 3
+						setreg(0xA2, 0xC5, 0);
+						break;           
+										 
+			case 9:  	setreg(0xA4, 0x33, 0);   //Note D, channel 1
+						setreg(0xA0, 0xFE, 0);
+						setreg(0xA5, 0x33, 0);   //Note D, channel 2
+						setreg(0xA1, 0xFE, 0);
+						setreg(0xA6, 0x33, 0);   //Note D, channel 3
+						setreg(0xA2, 0xFE, 0);
+						break;          
+										 
+			case 10:  	setreg(0xA4, 0x34, 0);   //Note D, channel 1
+						setreg(0xA0, 0x3B, 0);
+						setreg(0xA5, 0x34, 0);   //Note D, channel 2
+						setreg(0xA1, 0x3B, 0);
+						setreg(0xA6, 0x34, 0);   //Note D, channel 3
+						setreg(0xA2, 0x3B, 0);
+						break;          
+										 
+			case 11:  	setreg(0xA4, 0x34, 0);   //Note D, channel 1
+						setreg(0xA0, 0x7B, 0);
+						setreg(0xA5, 0x34, 0);   //Note D, channel 2
+						setreg(0xA1, 0x7B, 0);
+						setreg(0xA6, 0x34, 0);   //Note D, channel 3
+						setreg(0xA2, 0x7B, 0);
+						break;           
+										 
+			case 12:  	setreg(0xA4, 0x34, 0);   //Note D, channel 1
+						setreg(0xA0, 0xBF, 0);
+						setreg(0xA5, 0x34, 0);   //Note D, channel 2
+						setreg(0xA1, 0xBF, 0);
+						setreg(0xA6, 0x34, 0);   //Note D, channel 3
+						setreg(0xA2, 0xBF, 0);
 						break;
 					
 			default: printf("Invalid octave!\n");
@@ -669,237 +669,16 @@ void note_picker(int note, int octave){ //only works for the basic note scanner!
 	
 	if(octave == 7){
 		switch (note){
-			case 1:  	setreg(0xA4, 0x3A);   //Note C, channel 1
-						setreg(0xA0, 0x84);
-						setreg(0xA5, 0x3A);   //Note C, channel 2
-						setreg(0xA1, 0x84);
-						setreg(0xA6, 0x3A);   //Note C, channel 3
-						setreg(0xA2, 0x84);
+			case 1:  	setreg(0xA4, 0x3A, 0);   //Note C, channel 1
+						setreg(0xA0, 0x84, 0);
+						setreg(0xA5, 0x3A, 0);   //Note C, channel 2
+						setreg(0xA1, 0x84, 0);
+						setreg(0xA6, 0x3A, 0);   //Note C, channel 3
+						setreg(0xA2, 0x84, 0);
 						break;
 					
 			default: printf("Invalid octave!\n");
 						break;
-		}
-	}
-}
-
-void note_picker_multi(int note, int octave, int channel){
-	if(octave == 1){
-		if(channel == 1){
-			switch(note){
-				case 1: setreg(0xA4, 0x0A);
-						setreg(0xA0, 0x84);
-						break;
-						
-				case 2: setreg(0xA4, 0x0A);
-						setreg(0xA0, 0xAA);
-						break;
-						
-				case 3: setreg(0xA4, 0x0A);
-						setreg(0xA0, 0xD3);
-						break;
-						
-				case 4: setreg(0xA4, 0x0A);
-						setreg(0xA0, 0xFE);
-						break;
-						
-				case 5: setreg(0xA4, 0x0B);
-						setreg(0xA0, 0x2B);
-						break;
-						
-				case 6: setreg(0xA4, 0x0B);
-						setreg(0xA0, 0x5B);
-						break;
-						
-				case 7: setreg(0xA4, 0x0B);
-						setreg(0xA0, 0x8E);
-						break;
-						
-				case 8: setreg(0xA4, 0x0B);
-						setreg(0xA0, 0xC5);
-						break;
-						
-				case 9: setreg(0xA4, 0x0B);
-						setreg(0xA0, 0xFE);
-						break;
-						
-				case 10: setreg(0xA4, 0x0C);
-						 setreg(0xA0, 0x3B);
-						 break;
-						 
-				case 11: setreg(0xA4, 0x0C);
-						 setreg(0xA0, 0x7B);
-						 break;
-						 
-				case 12: setreg(0xA4, 0x0C);
-						 setreg(0xA0, 0xBF);
-						 break;
-						 
-				default: printf("Invalid note code!\n");
-						 break;
-			}
-		}
-		if(channel == 2) {
-			switch(note){
-				case 1: setreg(0xA5, 0x0A);
-						setreg(0xA1, 0x84);
-						break;
-						
-				case 2: setreg(0xA5, 0x0A);
-						setreg(0xA1, 0xAA);
-						break;
-						
-				case 3: setreg(0xA5, 0x0A);
-						setreg(0xA1, 0xD3);
-						break;
-						
-				case 4: setreg(0xA5, 0x0A);
-						setreg(0xA1, 0xFE);
-						break;
-						
-				case 5: setreg(0xA5, 0x0B);
-						setreg(0xA1, 0x2B);
-						break;
-						
-				case 6: setreg(0xA5, 0x0B);
-						setreg(0xA1, 0x5B);
-						break;
-						
-				case 7: setreg(0xA5, 0x0B);
-						setreg(0xA1, 0x8E);
-						break;
-						
-				case 8: setreg(0xA5, 0x0B);
-						setreg(0xA1, 0xC5);
-						break;
-						
-				case 9: setreg(0xA5, 0x0B);
-						setreg(0xA1, 0xFE);
-						break;
-						
-				case 10: setreg(0xA5, 0x0C);
-						 setreg(0xA1, 0x3B);
-						 break;
-						 
-				case 11: setreg(0xA5, 0x0C);
-						 setreg(0xA1, 0x7B);
-						 break;
-						 
-				case 12: setreg(0xA5, 0x0C);
-						 setreg(0xA1, 0xBF);
-						 break;
-						 
-				default: printf("Invalid note code!\n");
-						 break;
-			}
-		}
-		if(channel == 3) {
-			switch(note){
-				case 1: setreg(0xA6, 0x0A);
-						setreg(0xA2, 0x84);
-						break;
-						
-				case 2: setreg(0xA6, 0x0A);
-						setreg(0xA2, 0xAA);
-						break;
-						
-				case 3: setreg(0xA6, 0x0A);
-						setreg(0xA2, 0xD3);
-						break;
-						
-				case 4: setreg(0xA6, 0x0A);
-						setreg(0xA2, 0xFE);
-						break;
-						
-				case 5: setreg(0xA6, 0x0B);
-						setreg(0xA2, 0x2B);
-						break;
-						
-				case 6: setreg(0xA6, 0x0B);
-						setreg(0xA2, 0x5B);
-						break;
-						
-				case 7: setreg(0xA6, 0x0B);
-						setreg(0xA2, 0x8E);
-						break;
-						
-				case 8: setreg(0xA6, 0x0B);
-						setreg(0xA2, 0xC5);
-						break;
-						
-				case 9: setreg(0xA6, 0x0B);
-						setreg(0xA2, 0xFE);
-						break;
-						
-				case 10: setreg(0xA6, 0x0C);
-						 setreg(0xA2, 0x3B);
-						 break;
-						 
-				case 11: setreg(0xA6, 0x0C);
-						 setreg(0xA2, 0x7B);
-						 break;
-						 
-				case 12: setreg(0xA6, 0x0C);
-						 setreg(0xA2, 0xBF);
-						 break;
-						 
-				default: printf("Invalid note code!\n");
-						 break;
-			}
-		}
-		if(channel == 4) {
-			switch(note){
-				case 1: setreg(0xA4, 0x0A);
-						setreg(0xA0, 0x84);
-						break;
-						
-				case 2: setreg(0xA4, 0x0A);
-						setreg(0xA0, 0xAA);
-						break;
-						
-				case 3: setreg(0xA4, 0x0A);
-						setreg(0xA0, 0xD3);
-						break;
-						
-				case 4: setreg(0xA4, 0x0A);
-						setreg(0xA0, 0xFE);
-						break;
-						
-				case 5: setreg(0xA4, 0x0B);
-						setreg(0xA0, 0x2B);
-						break;
-						
-				case 6: setreg(0xA4, 0x0B);
-						setreg(0xA0, 0x5B);
-						break;
-						
-				case 7: setreg(0xA4, 0x0B);
-						setreg(0xA0, 0x8E);
-						break;
-						
-				case 8: setreg(0xA4, 0x0B);
-						setreg(0xA0, 0xC5);
-						break;
-						
-				case 9: setreg(0xA4, 0x0B);
-						setreg(0xA0, 0xFE);
-						break;
-						
-				case 10: setreg(0xA4, 0x0C);
-						 setreg(0xA0, 0x3B);
-						 break;
-						 
-				case 11: setreg(0xA4, 0x0C);
-						 setreg(0xA0, 0x7B);
-						 break;
-						 
-				case 12: setreg(0xA4, 0x0C);
-						 setreg(0xA0, 0xBF);
-						 break;
-						 
-				default: printf("Invalid note code!\n");
-						 break;
-			}
 		}
 	}
 }

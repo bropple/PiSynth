@@ -6,9 +6,12 @@
 #include <string.h>
 #include <getopt.h>
 #include <fcntl.h>
+#include <stdbool.h>
 #include <sys/ioctl.h>
 #include <linux/types.h>
 #include <linux/spi/spidev.h>
+
+#include <alsa/asoundlib.h> 
 
 #include "i2c_1602.h"
 #include "Keyboard.h"
@@ -32,19 +35,22 @@
 
 #define _BV(bit) (1<<(bit)) //creates mask for the given bit number automatically
 
-#define CH1_ON setreg(0x28, 0xf0) // Ch 1 key on
-#define CH2_ON setreg(0x28, 0xf1) // Ch 2 key on
-#define CH3_ON setreg(0x28, 0xf2) // Ch 3 key on
-#define CH4_ON setreg(0x28, 0xF4) // Ch 4 key on
-#define CH5_ON setreg(0x28, 0xF5) // Ch 5 key on
-#define CH6_ON setreg(0x28, 0xF6) // Ch 6 key on
+#define CH1_ON setreg(0x28, 0xf0, 0) // Ch 1 key on
+#define CH2_ON setreg(0x28, 0xf1, 0) // Ch 2 key on
+#define CH3_ON setreg(0x28, 0xf2, 0) // Ch 3 key on
+#define CH4_ON setreg(0x28, 0xF4, 0) // Ch 4 key on
+#define CH5_ON setreg(0x28, 0xF5, 0) // Ch 5 key on
+#define CH6_ON setreg(0x28, 0xF6, 0) // Ch 6 key on
 
-#define CH1_OFF setreg(0x28, 0x00) // Ch 1 Key off
-#define CH2_OFF setreg(0x28, 0x01) // Ch 2 Key off
-#define CH3_OFF setreg(0x28, 0x02) // Ch 3 Key off
-#define CH4_OFF setreg(0x28, 0x04) // Ch 4 Key off
-#define CH5_OFF setreg(0x28, 0x05) // Ch 5 Key off
-#define CH6_OFF setreg(0x28, 0x06) // Ch 6 Key off
+#define CH1_OFF setreg(0x28, 0x00, 0) // Ch 1 Key off
+#define CH2_OFF setreg(0x28, 0x01, 0) // Ch 2 Key off
+#define CH3_OFF setreg(0x28, 0x02, 0) // Ch 3 Key off
+#define CH4_OFF setreg(0x28, 0x04, 0) // Ch 4 Key off
+#define CH5_OFF setreg(0x28, 0x05, 0) // Ch 5 Key off
+#define CH6_OFF setreg(0x28, 0x06, 0) // Ch 6 Key off
+
+unsigned char array0[0xB7-0x21]; //Mirror register arrays
+unsigned char array1[0xB7-0x30];
 
 typedef struct { //struct contains important channel information, allowing us to return multiple vars at once from a single function
 	int Current_Channels[6]; //keep track of each channel, using array to make sure the same one keeps playing on the actual hardware when it's supposed to
@@ -56,7 +62,7 @@ typedef struct { //struct contains important channel information, allowing us to
 int Play_YM2612(int mode, char * path, char * direction, char * value, char* active_low, int str_pos);
 static int MCPS_init(int num_YMchips);
 static void write_2612(uint8_t data);
-void setreg(uint8_t reg, uint8_t data);
+void setreg(uint8_t reg, uint8_t data, uint8_t isYM_A1);
 void reset_2612(void);
 static void setup_2612(void);
 void setup_chips(void);
@@ -70,3 +76,7 @@ char * NoteString(int note_num);
 char * SharpCheck(int note_num);
 static void Note_ToggleHandler(char * state, int ch);
 Channel_Info channel_handler(Channel_Info CI);
+
+int MIDI_2612(char * path, char * direction, char * value, char* active_low, int str_pos);
+void MIDI_errormessage(const char *format, ...);
+void MIDI_menu(char * path, char * direction, char * value, char* active_low, int str_pos);

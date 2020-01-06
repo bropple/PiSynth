@@ -544,11 +544,17 @@ static void write_2612(uint8_t data){
 	//printf("				WR_CTRL %02X\n", YM_CTRL_PORT); //debug info
 }
 
-void setreg(uint8_t reg, uint8_t data){
+void setreg(uint8_t reg, uint8_t data, uint8_t isYM_A1){
 	/*	To write to channels 4, 5, and 6:
 	 * 	You need to set A1 HIGH as well!
-	 * 	Do this outside this function, as this function only has two variables for convenience.
 	 */
+	
+	if(isYM_A1 > 0){
+		YM_CTRL_PORT |= _BV(YM_A1);
+		array1[reg-0x30] = data;
+	}
+	else array0[reg-0x21] = data;
+	
 	YM_CTRL_PORT &= ~_BV(YM_A0); // A0 low (select register), tell chip we are choosing register to write to
 	//printf("				setreg addr ST_CTRL %02X\n", YM_CTRL_PORT); //debug information
 	mcp23s17_write_reg(YM_CTRL_PORT, GPIOA, hw_addr, mcp23s17_fd); //apply change
@@ -586,13 +592,13 @@ void setup_chips(void){
 }
 
 static void YM_Test(void){ //Turns a note on and off, but must choose a preset first to use
-		setreg(0x28, 0xf0); // Key on
-		setreg(0x28, 0xf1); // Key on
-		setreg(0x28, 0xf2); // Key on
+		setreg(0x28, 0xf0, 0); // Key on
+		setreg(0x28, 0xf1, 0); // Key on
+		setreg(0x28, 0xf2, 0); // Key on
 		usleep(1000000);
-		setreg(0x28, 0x00); // Key off
-		setreg(0x28, 0x01); // Key off
-		setreg(0x28, 0x02); // Key off
+		setreg(0x28, 0x00, 0); // Key off
+		setreg(0x28, 0x01, 0); // Key off
+		setreg(0x28, 0x02, 0); // Key off
 		usleep(1000000);
 }
 
@@ -644,7 +650,7 @@ void scan_keys(char * path, char * direction, char * value, char* active_low, in
 			note_num = KeyVal(KeyPins[arrnum]);
 			note_picker(note_num, coctave);
 	
-			setreg(0x28, 0xf0); // CH1 Key on
+			setreg(0x28, 0xf0, 0); // CH1 Key on
 			
 			while(pin_read(KeyPins[arrnum], value, path, str_pos) == 0x31){
 				LCD_WritePos(2, 13, NoteString(note_num)); //convert note number to corresponding string and write it to lcd
@@ -652,7 +658,7 @@ void scan_keys(char * path, char * direction, char * value, char* active_low, in
 				LCD_WritePos(2, 15, SharpCheck(note_num)); //write a sharp indicator to the screen if it is indeed a sharp (black key)
 			}
 			
-			setreg(0x28, 0x00); // CH1 Key off
+			setreg(0x28, 0x00, 0); // CH1 Key off
 			
 			last_octave = coctave;
 			
@@ -667,7 +673,7 @@ void scan_multiKeys(char * path, char * direction, char * value, char* active_lo
 			KeyStatus[x] = 1;
 			if(KeyStatus[x] != Prev_KeyStatus[x]){
 				CI.Channels++;
-				note_picker_multi(KeyVal(KeyPins[x]), octave, CI.Channels);
+				//note_picker_multi(KeyVal(KeyPins[x]), octave, CI.Channels);
 				CI = channel_handler(CI); 
 			}
 		}
@@ -809,4 +815,80 @@ Channel_Info channel_handler(Channel_Info CI){ //for multichannel mode
 	}
 	CI.Channels = CI.Prev_Channels;
 	return CI; //return the struct containing channel information
+}
+
+////////////////MIDI FUNCTIONS  /////////////////////////
+int MIDI_2612(char * path, char * direction, char * value, char* active_low, int str_pos){
+	
+   keyboard_setup(path, direction, value, active_low, str_pos);
+   
+   int status;
+   int mode = SND_RAWMIDI_NONBLOCK;
+   snd_rawmidi_t* midiin = NULL;
+   const char* portname = "hw:1,0,0";  // see alsarawportlist.c example program
+   
+   if ((status = snd_rawmidi_open(&midiin, NULL, portname, mode)) < 0) {
+      MIDI_errormessage("Problem opening MIDI input: %s", snd_strerror(status));
+      exit(1);
+   }
+
+   //int maxcount = 1000;   // Exit after this many bytes have been received.
+   int count = 0;         // Current count of bytes received.
+   char buffer[1];        // Storage for input buffer received
+   unsigned char * output = malloc(3);
+   while (1) {
+      status = 0;
+      while (status != -EAGAIN) {
+         status = snd_rawmidi_read(midiin, buffer, 1);
+         
+         MIDI_menu(path, direction, value, active_low, str_pos);
+         
+         if ((status < 0) && (status != -EBUSY) && (status != -EAGAIN)) {
+            MIDI_errormessage("Problem reading MIDI input: %s",snd_strerror(status));
+         } else if (status >= 0) {
+            //count++;
+            if ((unsigned char)buffer[0] >= 0x80) {  // print command in hex
+               //printf("0x%x ", (unsigned char)buffer[0]);
+               output[count] = (unsigned char)buffer[0]; //put buffered value into output array
+
+            } else {
+               //printf("%d ", (unsigned char)buffer[0]);
+               output[count+1] = (unsigned char)buffer[0]; //put buffered value into output array
+               count++;
+            }
+            fflush(stdout);
+            if (count == 2) {
+               //printf("\n");
+               printf("Stored Output Value: 0x%x %d %d\n", output[0], output[1], output[2]); //print the stored output value
+               count = 0;
+            }
+         }
+      }
+   }
+
+   snd_rawmidi_close(midiin);
+   midiin  = NULL;    // snd_rawmidi_close() does not clear invalid pointer,
+   return 0;          // so might be a good idea to erase it after closing.
+}
+
+void MIDI_errormessage(const char *format, ...) {
+   va_list ap;
+   va_start(ap, format);
+   vfprintf(stderr, format, ap);
+   va_end(ap);
+   putc('\n', stderr);
+}
+
+void MIDI_menu(char * path, char * direction, char * value, char* active_low, int str_pos){
+	 if(pin_read("15", value, path, str_pos) == 0x31){
+			usleep(150000);
+			printf("Menu button press registered!\n\n");
+		}
+}
+
+uint8_t GetMirrorValue(uint8_t address, bool bank){
+	if(bank == true){
+		return array1[address-0x30];
+	}
+	else return array0[address-0x21];
 }
