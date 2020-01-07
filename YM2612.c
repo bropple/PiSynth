@@ -3,6 +3,7 @@
 #include "YM2612_Presets.h"
 #include "YM2612_Note_Picker.h"
 #include "YM2612_Songs.h"
+#include "YM_MIDI_KeyCodes.h"
 
 static const int bus = 0;			//MCP23S17 parameters
 static int chip_select; //this is defined later, multiple SPI expanders can be involved
@@ -45,7 +46,7 @@ static uint8_t YM_CTRL_PORT = 0x00; //keeping track of the control port value
 
 int Play_YM2612(int mode, char * path, char * direction, char * value, char* active_low, int str_pos){  //Play the YM2612 on the keyboard
 	
-	Channel_Info CI = {{0,0,0,0,0,0},{0,0,0,0,0,0},0,0}; //initialize all members of the channel info struct
+	//Channel_Info CI = {{0,0,0,0,0,0},{0,0,0,0,0,0},0,0}; //initialize all members of the channel info struct
 	
 	char * Current_Voice = "Gnd Piano       "; //The default instrument is the piano
 	int cur_voice = 0;
@@ -81,7 +82,7 @@ int Play_YM2612(int mode, char * path, char * direction, char * value, char* act
 			LCD_sendString(Keyboard_Basic_Mode, 1); //reflect mode change
 		}
 		if(mode == 1) {
-			scan_multiKeys(path, direction, value, active_low, str_pos, CI); //WIP -> Enable polyphony
+			//scan_multiKeys(path, direction, value, active_low, str_pos, CI); //WIP -> Enable polyphony
 			LCD_sendString(Keyboard_Advanced_Mode, 1); //reflect mode change
 																
 		}
@@ -550,10 +551,10 @@ void setreg(uint8_t reg, uint8_t data, uint8_t isYM_A1){
 	 */
 	
 	if(isYM_A1 > 0){
-		YM_CTRL_PORT |= _BV(YM_A1);
-		array1[reg-0x30] = data;
+		//YM_CTRL_PORT |= _BV(YM_A1);
+		//array1[reg-0x30] = data;
 	}
-	else array0[reg-0x21] = data;
+	//else array0[reg-0x21] = data;
 	
 	YM_CTRL_PORT &= ~_BV(YM_A0); // A0 low (select register), tell chip we are choosing register to write to
 	//printf("				setreg addr ST_CTRL %02X\n", YM_CTRL_PORT); //debug information
@@ -666,34 +667,34 @@ void scan_keys(char * path, char * direction, char * value, char* active_low, in
 	}
 }
 
-void scan_multiKeys(char * path, char * direction, char * value, char* active_low, int str_pos, Channel_Info CI){ //WIP	
-	int coctave;																			 					  //when completed, scan_keys will be depreciated
-	for(int x = 0; x < 12; x++){
-		if(pin_read(KeyPins[x], value, path, str_pos) == 0x31){
-			KeyStatus[x] = 1;
-			if(KeyStatus[x] != Prev_KeyStatus[x]){
-				CI.Channels++;
-				//note_picker_multi(KeyVal(KeyPins[x]), octave, CI.Channels);
-				CI = channel_handler(CI); 
-			}
-		}
-	}
-	
-	for(int x = 0; x < 12; x++){
-		if(pin_read(KeyPins[x], value, path, str_pos) != 0x31){
-			KeyStatus[x] = 0;
-			if(KeyStatus[x] != Prev_KeyStatus[x]){
-				CI.Channels--;
-			    CI = channel_handler(CI); 
-			}
-		}
-	}
-	
-	memcpy(KeyStatus, Prev_KeyStatus, sizeof(KeyStatus)); //set both arrays equal at the end
-	
-	printf("					Current Channels = %d\n", CI.Channels);
-	printf("					Previous Channels = %d\n\n", CI.Prev_Channels);
-}
+//void scan_multiKeys(char * path, char * direction, char * value, char* active_low, int str_pos, Channel_Info CI){ //WIP	
+//	int coctave;																			 					  //when completed, scan_keys will be depreciated
+//	for(int x = 0; x < 12; x++){
+//		if(pin_read(KeyPins[x], value, path, str_pos) == 0x31){
+//			KeyStatus[x] = 1;
+//			if(KeyStatus[x] != Prev_KeyStatus[x]){
+//				CI.Channels++;
+//				//note_picker_multi(KeyVal(KeyPins[x]), octave, CI.Channels);
+//				CI = channel_handler(CI); 
+//			}
+//		}
+//	}
+//	
+//	for(int x = 0; x < 12; x++){
+//		if(pin_read(KeyPins[x], value, path, str_pos) != 0x31){
+//			KeyStatus[x] = 0;
+//			if(KeyStatus[x] != Prev_KeyStatus[x]){
+//				CI.Channels--;
+//			    CI = channel_handler(CI); 
+//			}
+//		}
+//	}
+//	
+//	memcpy(KeyStatus, Prev_KeyStatus, sizeof(KeyStatus)); //set both arrays equal at the end
+//	
+//	printf("					Current Channels = %d\n", CI.Channels);
+//	printf("					Previous Channels = %d\n\n", CI.Prev_Channels);
+//}
 
 //static char * KeyPins[13] = {"17","27","22","5","6","13","19","26","21","20","16","12","25"}
 int KeyVal(char * key){ //return int keycodes to set notes, intended to be used with note_picker
@@ -794,33 +795,12 @@ static void Note_ToggleHandler(char * state, int ch){ //toggles a note on and of
 	printf("Channel %d: %s\n\n", ch, state);
 }
 
-Channel_Info channel_handler(Channel_Info CI){ //for multichannel mode
-	if(CI.Channels < CI.Prev_Channels){ //if we need to remove a channel
-		for(int x = 5; x > -1; x--){  //find the last occupied spot
-			if(CI.Current_Channels[x] == 1) { 
-				CI.Current_Channels[x] = 0; //turn off note on occupied channel
-				Note_ToggleHandler("OFF", x+1);
-			}
-			break; //exit loop immediately after turning channel off
-		}
-	}
-	if(CI.Channels > CI.Prev_Channels){
-		for(int x = 0; x <  6; x++){ //find the first free spot
-			if(CI.Current_Channels[x] == 0){
-				 CI.Current_Channels[x] = 1;
-				 Note_ToggleHandler("ON", x+1); //turn on note at free channel
-			 }
-			break; //exit loop immediately after turning channel on
-		}
-	}
-	CI.Channels = CI.Prev_Channels;
-	return CI; //return the struct containing channel information
-}
-
 ////////////////MIDI FUNCTIONS  /////////////////////////
 int MIDI_2612(char * path, char * direction, char * value, char* active_low, int str_pos){
 	
    keyboard_setup(path, direction, value, active_low, str_pos);
+   setup_chips();
+   YM2612_Square();
    
    int status;
    int mode = SND_RAWMIDI_NONBLOCK;
@@ -835,7 +815,7 @@ int MIDI_2612(char * path, char * direction, char * value, char* active_low, int
    //int maxcount = 1000;   // Exit after this many bytes have been received.
    int count = 0;         // Current count of bytes received.
    char buffer[1];        // Storage for input buffer received
-   unsigned char * output = malloc(3);
+   char * output = malloc(3);
    while (1) {
       status = 0;
       while (status != -EAGAIN) {
@@ -849,17 +829,19 @@ int MIDI_2612(char * path, char * direction, char * value, char* active_low, int
             //count++;
             if ((unsigned char)buffer[0] >= 0x80) {  // print command in hex
                //printf("0x%x ", (unsigned char)buffer[0]);
-               output[count] = (unsigned char)buffer[0]; //put buffered value into output array
+               output[count] = buffer[0]; //put buffered value into output array
 
             } else {
                //printf("%d ", (unsigned char)buffer[0]);
-               output[count+1] = (unsigned char)buffer[0]; //put buffered value into output array
+               output[count+1] = buffer[0]; //put buffered value into output array
                count++;
             }
             fflush(stdout);
             if (count == 2) {
                //printf("\n");
                printf("Stored Output Value: 0x%x %d %d\n", output[0], output[1], output[2]); //print the stored output value
+               if(output[0] == 0x90) MIDI_NoteOn(output[1], output[2]);
+               if(output[0] == 0x80) MIDI_NoteOff(output[1], output[2]);
                count = 0;
             }
          }
@@ -891,4 +873,12 @@ uint8_t GetMirrorValue(uint8_t address, bool bank){
 		return array1[address-0x30];
 	}
 	else return array0[address-0x21];
+}
+
+void MIDI_NoteOn(char key, unsigned char velocity){
+	if(YM_MIDI_NotePicker(key, 0) == 0) setreg(0x28, 0xf0, 0); // CH1 Key on
+}
+
+void MIDI_NoteOff(char key, unsigned char velocity){
+	setreg(0x28, 0x00, 0); // CH1 Key off
 }

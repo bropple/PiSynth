@@ -16,7 +16,7 @@
 #include "i2c_1602.h"
 #include "Keyboard.h"
 #include "mcps.h"
-#include "YM2612_Note_Picker.h"
+//#include "YM2612_Note_Picker.h"
 
 /* Pin Connections from MCP23S17 to YM3438
  * 
@@ -52,13 +52,6 @@
 unsigned char array0[0xB7-0x21]; //Mirror register arrays
 unsigned char array1[0xB7-0x30];
 
-typedef struct { //struct contains important channel information, allowing us to return multiple vars at once from a single function
-	int Current_Channels[6]; //keep track of each channel, using array to make sure the same one keeps playing on the actual hardware when it's supposed to
-	int Previous_Channels[6]; //holds last values of last channels so we can compare it to current values, shut off any we don't need anymore
-	int Channels; //the number of channels that are playing
-	int Prev_Channels; //the int number of channels playing previously
-}Channel_Info;
-
 int Play_YM2612(int mode, char * path, char * direction, char * value, char* active_low, int str_pos);
 static int MCPS_init(int num_YMchips);
 static void write_2612(uint8_t data);
@@ -70,13 +63,15 @@ static void YM_Test();
 static char * Octave_String(int octave);
 static void Quiet_SN(void);
 void scan_keys(char * path, char * direction, char * value, char* active_low, int str_pos);
-void scan_multiKeys(char * path, char * direction, char * value, char* active_low, int str_pos, Channel_Info CI);
+//void scan_multiKeys(char * path, char * direction, char * value, char* active_low, int str_pos, Channel_Info CI);
 int KeyVal(char * key);
 char * NoteString(int note_num);
 char * SharpCheck(int note_num);
-static void Note_ToggleHandler(char * state, int ch);
-Channel_Info channel_handler(Channel_Info CI);
+//static void Note_ToggleHandler(char * state, int ch);
+
 
 int MIDI_2612(char * path, char * direction, char * value, char* active_low, int str_pos);
 void MIDI_errormessage(const char *format, ...);
 void MIDI_menu(char * path, char * direction, char * value, char* active_low, int str_pos);
+void MIDI_NoteOn(char key, unsigned char velocity);
+void MIDI_NoteOff(char key, unsigned char velocity);

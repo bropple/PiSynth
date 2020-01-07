@@ -13,7 +13,7 @@ ALSA raw MIDI read code based on code found here:
 https://ccrma.stanford.edu/~craig/articles/linuxmidi/alsa-1.0/alsarawmidiin.c  
 
 Current Status:
-The YM3438 is fully playable, with several presets to choose from. An alarm "song" can also be automatically played back.  
+The YM3438 is fully playable in either MIDI keyboard or GPIO button mode, with several presets to choose from. An alarm "song" can also be automatically played back.  
 The SN76489AN is non-functional at this time.  
   
 A clock function displays the current date and time on the LCD display. An alarm can be set using only the hardware buttons.  
@@ -24,7 +24,7 @@ Currently working on
 ----------------------------------------------------------------------------  
 SN76489AN sound chip support (for full Sega Genesis song support)  
 YM3438 Keyboard mode with polyphony support (up to 6 channels per chip, at once)  
-MIDI keyboard input  
+MIDI Keyboard stuff  
                       
 Future Plans  
 -----------------------------------------------------------------------------  
@@ -45,7 +45,7 @@ Build Instructions
 -------------------------------------------------
 You will need to have ALSA installed on your Raspberry Pi for MIDI functionality. This should be installed by default in Raspbian.  
 In the PiSynth directory, run the following command:  
-gcc -lasound i2c_1602.c i2c_1602.h Keyboard.c Keyboard.h main.c mcps.c mcps.h YM2612.c YM2612.h YM2612_Presets.c YM2612_Presets.h YM2612_Note_Picker.c YM2612_Note_Picker.h YM2612_Songs.c YM2612_Songs.h SN76489AN.c SN76489AN.h Clock.c Clock.h MIDI.c MIDI.h -o PiSynth
+gcc -lasound i2c_1602.c i2c_1602.h Keyboard.c Keyboard.h main.c mcps.c mcps.h YM2612.c YM2612.h YM2612_Presets.c YM2612_Presets.h YM2612_Note_Picker.c YM2612_Note_Picker.h YM2612_Songs.c YM2612_Songs.h SN76489AN.c SN76489AN.h Clock.c Clock.h YM_MIDI_KeyCodes.c YM_MIDI_KeyCodes.h -o PiSynth  
 
 A makefile will be made when the project has most desired functions added.  
   
