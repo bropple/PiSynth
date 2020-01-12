@@ -16,6 +16,7 @@
 #include "i2c_1602.h"
 #include "Keyboard.h"
 #include "mcps.h"
+
 //#include "YM2612_Note_Picker.h"
 
 /* Pin Connections from MCP23S17 to YM3438
@@ -75,3 +76,6 @@ void MIDI_errormessage(const char *format, ...);
 void MIDI_menu(char * path, char * direction, char * value, char* active_low, int str_pos);
 void MIDI_NoteOn(char key, unsigned char velocity);
 void MIDI_NoteOff(char key, unsigned char velocity);
+
+void MIDI_ChannelHandler(char keycode, char key, char * channel_tracker);
+void Slot2Channel(int channel, int OnOff);

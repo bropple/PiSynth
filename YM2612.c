@@ -796,11 +796,17 @@ static void Note_ToggleHandler(char * state, int ch){ //toggles a note on and of
 }
 
 ////////////////MIDI FUNCTIONS  /////////////////////////
+const int YM_MAX_CHANNELS = 6;
+
+char channel_tracker[6] = {0,0,0,0,0,0};
+
 int MIDI_2612(char * path, char * direction, char * value, char* active_low, int str_pos){
+	
+	//for(int i = 0; i < YM_MAX_CHANNELS; i++) channel_tracker[i] = 0; //init all channel placeholders 
 	
    keyboard_setup(path, direction, value, active_low, str_pos);
    setup_chips();
-   YM2612_Square();
+   YM2612_Grand_Piano();
    
    int status;
    int mode = SND_RAWMIDI_NONBLOCK;
@@ -840,8 +846,8 @@ int MIDI_2612(char * path, char * direction, char * value, char* active_low, int
             if (count == 2) {
                //printf("\n");
                printf("Stored Output Value: 0x%x %d %d\n", output[0], output[1], output[2]); //print the stored output value
-               if(output[0] == 0x90) MIDI_NoteOn(output[1], output[2]);
-               if(output[0] == 0x80) MIDI_NoteOff(output[1], output[2]);
+               printf("channel_tracker: %d %d %d %d %d\n", channel_tracker[0], channel_tracker[1], channel_tracker[2], channel_tracker[3], channel_tracker[4], channel_tracker[5]);
+               MIDI_ChannelHandler(output[0], output[1], channel_tracker);
                count = 0;
             }
          }
@@ -876,9 +882,54 @@ uint8_t GetMirrorValue(uint8_t address, bool bank){
 }
 
 void MIDI_NoteOn(char key, unsigned char velocity){
-	if(YM_MIDI_NotePicker(key, 0) == 0) setreg(0x28, 0xf0, 0); // CH1 Key on
+	//if(YM_MIDI_NotePicker(key, 0) == 0) setreg(0x28, 0xf0, 0); // CH0 Key on
+	if(YM_MIDI_NotePicker(key, 1) == 0) setreg(0x28, 0xf1, 0); // CH1 Key On
 }
 
 void MIDI_NoteOff(char key, unsigned char velocity){
-	setreg(0x28, 0x00, 0); // CH1 Key off
+	//setreg(0x28, 0x00, 0); // CH0 Key off
+	setreg(0x28, 0x01, 0); // CH1 Key off
+}
+
+void MIDI_ChannelHandler(char keycode, char key, char * channel_tracker){  //0 = off, 1 = on
+	if(keycode == 0x90) {
+		for(int i = 0; i < YM_MAX_CHANNELS; i++){
+			if(channel_tracker[i] == 0){
+				Slot2Channel(i, 1);
+				YM_MIDI_NotePicker(key, i);
+				channel_tracker[i] = key;
+				break;
+			}
+		}
+	}
+	if(keycode == 0x80) {
+		for(int i = 0; i < YM_MAX_CHANNELS; i++){
+			if(channel_tracker[i] == key){
+				Slot2Channel(i, 0);
+				channel_tracker[i] = 0;
+				break;
+			}
+		}
+	}
+}
+
+void Slot2Channel(int channel, int OnOff){
+	if(OnOff == 0){
+		if(channel == 0)      setreg(0x28, 0x00, 0); //turn off channel 0
+		else if(channel == 1) setreg(0x28, 0x01, 0); //turn off channel 1
+		else if(channel == 2) setreg(0x28, 0x02, 0); //turn off channel 2
+		else if(channel == 3) setreg(0x28, 0x00, 1); //turn off channel 3
+		else if(channel == 4) setreg(0x28, 0x01, 1); //turn off channel 4
+		else if(channel == 5) setreg(0x28, 0x02, 1); //turn off channel 5
+		else printf("Invalid channel OFF command in Slot2Channel!\n");
+	}
+	else if(OnOff == 1){
+		if(channel == 0)      setreg(0x28, 0xf0, 0); //turn on channel 0
+		else if(channel == 1) setreg(0x28, 0xf1, 0); //turn on channel 1
+		else if(channel == 2) setreg(0x28, 0xf2, 0); //turn on channel 2
+		else if(channel == 3) setreg(0x28, 0xf0, 1); //turn on channel 3
+		else if(channel == 4) setreg(0x28, 0xf1, 1); //turn on channel 4
+		else if(channel == 5) setreg(0x28, 0xf2, 1); //turn on channel 5
+		else printf("Invalid channel ON command in Slot2Channel!\n");
+	}
 }
