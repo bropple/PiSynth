@@ -549,23 +549,21 @@ void setreg(uint8_t reg, uint8_t data, uint8_t isYM_A1){
 	/*	To write to channels 4, 5, and 6:
 	 * 	You need to set A1 HIGH as well!
 	 */
-	
-	if(isYM_A1 > 0){
-		//YM_CTRL_PORT |= _BV(YM_A1);
-		//array1[reg-0x30] = data;
-	}
-	//else array0[reg-0x21] = data;
-	
-	YM_CTRL_PORT &= ~_BV(YM_A0); // A0 low (select register), tell chip we are choosing register to write to
+	YM_CTRL_PORT |= _BV(YM_RD); //Set RD HIGH
+	if(isYM_A1 == 0) YM_CTRL_PORT &= ~_BV(YM_A0); // A0 low (select register), tell chip we are choosing register to write to
+	else if(isYM_A1 == 1) YM_CTRL_PORT |= _BV(YM_A1);
 	//printf("				setreg addr ST_CTRL %02X\n", YM_CTRL_PORT); //debug information
 	mcp23s17_write_reg(YM_CTRL_PORT, GPIOA, hw_addr, mcp23s17_fd); //apply change
 	write_2612(reg); //tell chip what address we want to address
 	YM_CTRL_PORT |= _BV(YM_A0);  // A0 high (write register), tells chip that we are writing values to previously selected register
+	//if(isYM_A1 == 1) YM_CTRL_PORT |= _BV(YM_A1); //set A1 high if applied.
 	mcp23s17_write_reg(YM_CTRL_PORT, GPIOA, hw_addr, mcp23s17_fd); //apply change
 	write_2612(data); //write the data to the chosen register from earlier
 	//printf("				setreg data ST_CTRL %02X\n", YM_CTRL_PORT); //debug information
 	YM_CTRL_PORT &= ~_BV(YM_A0); //Set A0 low for next time
 	YM_CTRL_PORT &= ~_BV(YM_A1); //Set A1 low if it already isn't (for addressing parallel banks)
+	YM_CTRL_PORT &= ~_BV(YM_RD);
+	mcp23s17_write_reg(YM_CTRL_PORT, GPIOA, hw_addr, mcp23s17_fd); //apply change
 }
 
 void reset_2612(void){
@@ -806,7 +804,66 @@ int MIDI_2612(char * path, char * direction, char * value, char* active_low, int
 	
    keyboard_setup(path, direction, value, active_low, str_pos);
    setup_chips();
-   YM2612_Grand_Piano();
+   //YM2612_Square();
+   
+   setreg(0x22, 0x00, 0); // LFO off
+   setreg(0x27, 0x00, 0); // CH3 Normal
+   setreg(0x28, 0x00, 0); // Note off (channel 0)
+   setreg(0x28, 0x01, 0); // Note off (channel 1)
+   setreg(0x28, 0x02, 0); // Note off (channel 2)
+   setreg(0x28, 0x04, 0); // Note off (channel 3)
+   setreg(0x28, 0x05, 0); // Note off (channel 4)
+   setreg(0x28, 0x06, 0); // Note off (channel 5)
+   setreg(0x2B, 0x00, 0); // DAC off
+   
+   for(int a1 = 0; a1<=1; a1++)
+  {
+    for(int i=0; i<3; i++)
+    {
+          //Operator 1
+          setreg(0x30 + i, 0x71, a1); //DT1/Mul
+          setreg(0x40 + i, 0x23, a1); //Total Level
+          setreg(0x50 + i, 0x5F, a1); //RS/AR
+          setreg(0x60 + i, 0x05, a1); //AM/D1R
+          setreg(0x70 + i, 0x02, a1); //D2R
+          setreg(0x80 + i, 0x11, a1); //D1L/RR
+          setreg(0x90 + i, 0x00, a1); //SSG EG
+           
+          //Operator 2
+          setreg(0x34 + i, 0x0D, a1); //DT1/Mul
+          setreg(0x44 + i, 0x2D, a1); //Total Level
+          setreg(0x54 + i, 0x99, a1); //RS/AR
+          setreg(0x64 + i, 0x05, a1); //AM/D1R
+          setreg(0x74 + i, 0x02, a1); //D2R
+          setreg(0x84 + i, 0x11, a1); //D1L/RR
+          setreg(0x94 + i, 0x00, a1); //SSG EG
+           
+         //Operator 3
+          setreg(0x38 + i, 0x33, a1); //DT1/Mul
+          setreg(0x48 + i, 0x26, a1); //Total Level
+          setreg(0x58 + i, 0x5F, a1); //RS/AR
+          setreg(0x68 + i, 0x05, a1); //AM/D1R
+          setreg(0x78 + i, 0x02, a1); //D2R
+          setreg(0x88 + i, 0x11, a1); //D1L/RR
+          setreg(0x98 + i, 0x00, a1); //SSG EG
+                   
+         //Operator 4
+          setreg(0x3C + i, 0x01, a1); //DT1/Mul
+          setreg(0x4C + i, 0x00, a1); //Total Level
+          setreg(0x5C + i, 0x94, a1); //RS/AR
+          setreg(0x6C + i, 0x07, a1); //AM/D1R
+          setreg(0x7C + i, 0x02, a1); //D2R
+          setreg(0x8C + i, 0xA6, a1); //D1L/RR
+          setreg(0x9C + i, 0x00, a1); //SSG EG
+          
+          setreg(0xB0 + i, 0x32, 0); // Ch FB/Algo
+          setreg(0xB4 + i, 0xC0, 0); // Both Spks on
+          setreg(0xA4 + i, 0x22, 0); // Set Freq MSB
+          setreg(0xA0 + i, 0x69, 0); // Freq LSB
+		}
+	}	
+	setreg(0xB4, 0xC0, 0); // Both speakers on
+	setreg(0x28, 0x00, 0); // Key off
    
    int status;
    int mode = SND_RAWMIDI_NONBLOCK;
@@ -845,9 +902,8 @@ int MIDI_2612(char * path, char * direction, char * value, char* active_low, int
             fflush(stdout);
             if (count == 2) {
                //printf("\n");
-               printf("Stored Output Value: 0x%x %d %d\n", output[0], output[1], output[2]); //print the stored output value
-               printf("channel_tracker: %d %d %d %d %d\n", channel_tracker[0], channel_tracker[1], channel_tracker[2], channel_tracker[3], channel_tracker[4], channel_tracker[5]);
-               MIDI_ChannelHandler(output[0], output[1], channel_tracker);
+               //printf("Stored Output Value: 0x%x %d %d\n", output[0], output[1], output[2]); //print the stored output value
+               if(output[0] == 0x90 || output[0] == 0x80) MIDI_ChannelHandler(output[0], output[1], channel_tracker);
                count = 0;
             }
          }
@@ -891,19 +947,29 @@ void MIDI_NoteOff(char key, unsigned char velocity){
 	setreg(0x28, 0x01, 0); // CH1 Key off
 }
 
+int channels = 0;
+
 void MIDI_ChannelHandler(char keycode, char key, char * channel_tracker){  //0 = off, 1 = on
 	if(keycode == 0x90) {
 		for(int i = 0; i < YM_MAX_CHANNELS; i++){
 			if(channel_tracker[i] == 0){
-				Slot2Channel(i, 1);
-				YM_MIDI_NotePicker(key, i);
-				channel_tracker[i] = key;
+				if(YM_MIDI_NotePicker(key, i) != -1){
+					Slot2Channel(i, 1);
+					channels++;
+					channel_tracker[i] = key;
+					break;
+				}
+			}
+			else if(channel_tracker[i] == key){
+				printf("\n\nA note in the array does not belong! Removing...\n\n");
+				channel_tracker[i] = 0;
+				channels--;
 				break;
 			}
 		}
 	}
-	if(keycode == 0x80) {
-		for(int i = 0; i < YM_MAX_CHANNELS; i++){
+	else if(keycode == 0x80) {
+		for(int i = YM_MAX_CHANNELS-1; i > -1; i--){
 			if(channel_tracker[i] == key){
 				Slot2Channel(i, 0);
 				channel_tracker[i] = 0;
@@ -911,6 +977,7 @@ void MIDI_ChannelHandler(char keycode, char key, char * channel_tracker){  //0 =
 			}
 		}
 	}
+	printf("channel_tracker: %d %d %d %d %d %d\n", channel_tracker[0], channel_tracker[1], channel_tracker[2], channel_tracker[3], channel_tracker[4], channel_tracker[5]);
 }
 
 void Slot2Channel(int channel, int OnOff){
