@@ -73,7 +73,7 @@ char * SharpCheck(int note_num);
 
 int MIDI_2612(char * path, char * direction, char * value, char* active_low, int str_pos);
 void MIDI_errormessage(const char *format, ...);
-void MIDI_menu(char * path, char * direction, char * value, char* active_low, int str_pos);
+int MIDI_menu(char * path, char * direction, char * value, char* active_low, int str_pos, int menu_active, int selection);
 void MIDI_NoteOn(char key, unsigned char velocity);
 void MIDI_NoteOff(char key, unsigned char velocity);
 

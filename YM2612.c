@@ -549,21 +549,18 @@ void setreg(uint8_t reg, uint8_t data, uint8_t isYM_A1){
 	/*	To write to channels 4, 5, and 6:
 	 * 	You need to set A1 HIGH as well!
 	 */
-	YM_CTRL_PORT |= _BV(YM_RD); //Set RD HIGH
-	if(isYM_A1 == 0) YM_CTRL_PORT &= ~_BV(YM_A0); // A0 low (select register), tell chip we are choosing register to write to
-	else if(isYM_A1 == 1) YM_CTRL_PORT |= _BV(YM_A1);
+	YM_CTRL_PORT &= ~_BV(YM_A0); // A0 low (select register), tell chip we are choosing register to write to
+	if(isYM_A1 == 1) YM_CTRL_PORT |= _BV(YM_A1);
 	//printf("				setreg addr ST_CTRL %02X\n", YM_CTRL_PORT); //debug information
 	mcp23s17_write_reg(YM_CTRL_PORT, GPIOA, hw_addr, mcp23s17_fd); //apply change
 	write_2612(reg); //tell chip what address we want to address
-	YM_CTRL_PORT |= _BV(YM_A0);  // A0 high (write register), tells chip that we are writing values to previously selected register
-	//if(isYM_A1 == 1) YM_CTRL_PORT |= _BV(YM_A1); //set A1 high if applied.
+	if (isYM_A1 == 0) YM_CTRL_PORT |= _BV(YM_A0);  // A0 high (write register), tells chip that we are writing values to previously selected register
+	if(isYM_A1 == 1) YM_CTRL_PORT |= _BV(YM_A1); //set A1 high if applied.
 	mcp23s17_write_reg(YM_CTRL_PORT, GPIOA, hw_addr, mcp23s17_fd); //apply change
 	write_2612(data); //write the data to the chosen register from earlier
 	//printf("				setreg data ST_CTRL %02X\n", YM_CTRL_PORT); //debug information
 	YM_CTRL_PORT &= ~_BV(YM_A0); //Set A0 low for next time
 	YM_CTRL_PORT &= ~_BV(YM_A1); //Set A1 low if it already isn't (for addressing parallel banks)
-	YM_CTRL_PORT &= ~_BV(YM_RD);
-	mcp23s17_write_reg(YM_CTRL_PORT, GPIOA, hw_addr, mcp23s17_fd); //apply change
 }
 
 void reset_2612(void){
@@ -798,72 +795,19 @@ const int YM_MAX_CHANNELS = 6;
 
 char channel_tracker[6] = {0,0,0,0,0,0};
 
+static int menu_active = 0;
+static int selection = 0;
+
 int MIDI_2612(char * path, char * direction, char * value, char* active_low, int str_pos){
 	
 	//for(int i = 0; i < YM_MAX_CHANNELS; i++) channel_tracker[i] = 0; //init all channel placeholders 
+	LCD_sendString("YM3438  Loading ", 1);
+	LCD_sendString("Please wait...  ", 2);
 	
-   keyboard_setup(path, direction, value, active_low, str_pos);
-   setup_chips();
-   //YM2612_Square();
-   
-   setreg(0x22, 0x00, 0); // LFO off
-   setreg(0x27, 0x00, 0); // CH3 Normal
-   setreg(0x28, 0x00, 0); // Note off (channel 0)
-   setreg(0x28, 0x01, 0); // Note off (channel 1)
-   setreg(0x28, 0x02, 0); // Note off (channel 2)
-   setreg(0x28, 0x04, 0); // Note off (channel 3)
-   setreg(0x28, 0x05, 0); // Note off (channel 4)
-   setreg(0x28, 0x06, 0); // Note off (channel 5)
-   setreg(0x2B, 0x00, 0); // DAC off
-   
-   for(int a1 = 0; a1<=1; a1++)
-  {
-    for(int i=0; i<3; i++)
-    {
-          //Operator 1
-          setreg(0x30 + i, 0x71, a1); //DT1/Mul
-          setreg(0x40 + i, 0x23, a1); //Total Level
-          setreg(0x50 + i, 0x5F, a1); //RS/AR
-          setreg(0x60 + i, 0x05, a1); //AM/D1R
-          setreg(0x70 + i, 0x02, a1); //D2R
-          setreg(0x80 + i, 0x11, a1); //D1L/RR
-          setreg(0x90 + i, 0x00, a1); //SSG EG
-           
-          //Operator 2
-          setreg(0x34 + i, 0x0D, a1); //DT1/Mul
-          setreg(0x44 + i, 0x2D, a1); //Total Level
-          setreg(0x54 + i, 0x99, a1); //RS/AR
-          setreg(0x64 + i, 0x05, a1); //AM/D1R
-          setreg(0x74 + i, 0x02, a1); //D2R
-          setreg(0x84 + i, 0x11, a1); //D1L/RR
-          setreg(0x94 + i, 0x00, a1); //SSG EG
-           
-         //Operator 3
-          setreg(0x38 + i, 0x33, a1); //DT1/Mul
-          setreg(0x48 + i, 0x26, a1); //Total Level
-          setreg(0x58 + i, 0x5F, a1); //RS/AR
-          setreg(0x68 + i, 0x05, a1); //AM/D1R
-          setreg(0x78 + i, 0x02, a1); //D2R
-          setreg(0x88 + i, 0x11, a1); //D1L/RR
-          setreg(0x98 + i, 0x00, a1); //SSG EG
-                   
-         //Operator 4
-          setreg(0x3C + i, 0x01, a1); //DT1/Mul
-          setreg(0x4C + i, 0x00, a1); //Total Level
-          setreg(0x5C + i, 0x94, a1); //RS/AR
-          setreg(0x6C + i, 0x07, a1); //AM/D1R
-          setreg(0x7C + i, 0x02, a1); //D2R
-          setreg(0x8C + i, 0xA6, a1); //D1L/RR
-          setreg(0x9C + i, 0x00, a1); //SSG EG
-          
-          setreg(0xB0 + i, 0x32, 0); // Ch FB/Algo
-          setreg(0xB4 + i, 0xC0, 0); // Both Spks on
-          setreg(0xA4 + i, 0x22, 0); // Set Freq MSB
-          setreg(0xA0 + i, 0x69, 0); // Freq LSB
-		}
-	}	
-	setreg(0xB4, 0xC0, 0); // Both speakers on
-	setreg(0x28, 0x00, 0); // Key off
+	
+	keyboard_setup(path, direction, value, active_low, str_pos);
+	setup_chips();
+	YM2612_Grand_Piano();
    
    int status;
    int mode = SND_RAWMIDI_NONBLOCK;
@@ -884,12 +828,11 @@ int MIDI_2612(char * path, char * direction, char * value, char* active_low, int
       while (status != -EAGAIN) {
          status = snd_rawmidi_read(midiin, buffer, 1);
          
-         MIDI_menu(path, direction, value, active_low, str_pos);
+         if(MIDI_menu(path, direction, value, active_low, str_pos, menu_active, selection) == -1);
          
          if ((status < 0) && (status != -EBUSY) && (status != -EAGAIN)) {
             MIDI_errormessage("Problem reading MIDI input: %s",snd_strerror(status));
-         } else if (status >= 0) {
-            //count++;
+         } else if (status >= 0) 
             if ((unsigned char)buffer[0] >= 0x80) {  // print command in hex
                //printf("0x%x ", (unsigned char)buffer[0]);
                output[count] = buffer[0]; //put buffered value into output array
@@ -901,14 +844,14 @@ int MIDI_2612(char * path, char * direction, char * value, char* active_low, int
             }
             fflush(stdout);
             if (count == 2) {
-               //printf("\n");
                //printf("Stored Output Value: 0x%x %d %d\n", output[0], output[1], output[2]); //print the stored output value
                if(output[0] == 0x90 || output[0] == 0x80) MIDI_ChannelHandler(output[0], output[1], channel_tracker);
+               printf("selection = %d\n", selection);
                count = 0;
             }
          }
       }
-   }
+   //}
 
    snd_rawmidi_close(midiin);
    midiin  = NULL;    // snd_rawmidi_close() does not clear invalid pointer,
@@ -923,11 +866,41 @@ void MIDI_errormessage(const char *format, ...) {
    putc('\n', stderr);
 }
 
-void MIDI_menu(char * path, char * direction, char * value, char* active_low, int str_pos){
+int MIDI_menu(char * path, char * direction, char * value, char* active_low, int str_pos, int menu_active, int selection){ //the goal of the special MIDI menu is for it to be completely interactive; so you can keep playing while in the menu!
 	 if(pin_read("15", value, path, str_pos) == 0x31){
 			usleep(150000);
-			printf("Menu button press registered!\n\n");
+			if(menu_active == 0){
+				 menu_active = 1;
+				 LCD_sendString("YM3438 Main Menu", 1);
+			 }
+			else if((menu_active == 1) && (selection == 0)){
+				LCD_sendString("YM3438      MIDI", 1);
+				menu_active = 0;
+			}
+			else if((menu_active == 1) && (selection == 2)) return 1;
 		}
+		
+	else if((pin_read("18", value, path, str_pos) == 0x31) && (menu_active == 1)){
+		usleep(150000);
+		selection--;
+		printf("selection = %d\n", selection);
+		if(selection<0) selection = 0;
+		return 0;
+	}
+	
+	else if((pin_read("14", value, path, str_pos) == 0x31) && (menu_active == 1)){
+		usleep(150000);
+		selection++;
+		printf("selection = %d\n", selection);
+		if(selection>2) selection = 2;
+		return 0;
+	}
+	
+	if((menu_active == 1) && (selection == 0)) LCD_sendString("->Resume   Patch", 2);
+	if((menu_active == 1) && (selection == 1)) LCD_sendString("->Patch     Exit", 2);
+	if((menu_active == 1) && (selection == 2)) LCD_sendString("  Patch   ->Exit", 2);
+	
+	return 0;
 }
 
 uint8_t GetMirrorValue(uint8_t address, bool bank){
@@ -977,7 +950,7 @@ void MIDI_ChannelHandler(char keycode, char key, char * channel_tracker){  //0 =
 			}
 		}
 	}
-	printf("channel_tracker: %d %d %d %d %d %d\n", channel_tracker[0], channel_tracker[1], channel_tracker[2], channel_tracker[3], channel_tracker[4], channel_tracker[5]);
+	printf("channel_tracker: %d %d %d %d %d %d\n", channel_tracker[0], channel_tracker[1], channel_tracker[2], channel_tracker[3], channel_tracker[4], channel_tracker[5]); //DEBUG see which channel each MIDI key is assigned to
 }
 
 void Slot2Channel(int channel, int OnOff){
@@ -985,18 +958,18 @@ void Slot2Channel(int channel, int OnOff){
 		if(channel == 0)      setreg(0x28, 0x00, 0); //turn off channel 0
 		else if(channel == 1) setreg(0x28, 0x01, 0); //turn off channel 1
 		else if(channel == 2) setreg(0x28, 0x02, 0); //turn off channel 2
-		else if(channel == 3) setreg(0x28, 0x00, 1); //turn off channel 3
-		else if(channel == 4) setreg(0x28, 0x01, 1); //turn off channel 4
-		else if(channel == 5) setreg(0x28, 0x02, 1); //turn off channel 5
+		else if(channel == 3) setreg(0x28, 0x04, 0); //turn off channel 3
+		else if(channel == 4) setreg(0x28, 0x05, 0); //turn off channel 4
+		else if(channel == 5) setreg(0x28, 0x06, 0); //turn off channel 5
 		else printf("Invalid channel OFF command in Slot2Channel!\n");
 	}
 	else if(OnOff == 1){
 		if(channel == 0)      setreg(0x28, 0xf0, 0); //turn on channel 0
 		else if(channel == 1) setreg(0x28, 0xf1, 0); //turn on channel 1
 		else if(channel == 2) setreg(0x28, 0xf2, 0); //turn on channel 2
-		else if(channel == 3) setreg(0x28, 0xf0, 1); //turn on channel 3
-		else if(channel == 4) setreg(0x28, 0xf1, 1); //turn on channel 4
-		else if(channel == 5) setreg(0x28, 0xf2, 1); //turn on channel 5
+		else if(channel == 3) setreg(0x28, 0xf4, 0); //turn on channel 3
+		else if(channel == 4) setreg(0x28, 0xf5, 0); //turn on channel 4
+		else if(channel == 5) setreg(0x28, 0xf6, 0); //turn on channel 5
 		else printf("Invalid channel ON command in Slot2Channel!\n");
 	}
 }

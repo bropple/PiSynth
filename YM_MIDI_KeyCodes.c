@@ -9,11 +9,12 @@ int YM_MIDI_NotePicker(char key, int channel){
 	 * Channels are handled by the int 'channel'. The channel number ranges from zero to the maximum
 	 * number of channels that can be used, depending on the number of YM3438 chips in the configuration.
 	 * 
-	 * This code ony turns on notes according to the channel number passed to it. The handling is done
-	 * in an external function, which will be in charge of activating this function.
+	 * This code ony sets the note for the channel number passed to it. The handling is done
+	 * in an external function, which will be in charge of activating this function and sending the
+	 * "note on" command.
 	 * 
-	 * The minimum note is C0, while the maximum note is B7. (In theory)
-	 * -> Cannot handle MIDI note codes below 12 and above 107!
+	 * The minimum note is C0#, while the maximum note is B7.\
+	 * -> Cannot handle MIDI note codes below 13 and above 107!
 	 * 
 	 * Will hopefully make this more elegant than just a predefined list at some point.
 	 * 
