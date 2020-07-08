@@ -79,3 +79,4 @@ void MIDI_NoteOff(char key, unsigned char velocity);
 
 void MIDI_ChannelHandler(char keycode, char key, char * channel_tracker);
 void Slot2Channel(int channel, int OnOff);
+int Play_MIDI(char * path, char * direction, char * value, char* active_low, int str_pos);

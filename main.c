@@ -54,60 +54,8 @@ int main(void){
 					menu_select = 1;
 				}
 				if(pin_read("15", value, path, str_pos) == 0x31){
-					 int mode_picker = 1;
-					 int mode_selection = 0;
-					 usleep(150000);
-					 while(mode_picker == 1){
-						LCD_sendString("Mode Selection  ", 1);
-						while(mode_selection == 0) {
-							LCD_sendString("->Basic   Adv.  ", 2);
-							if(pin_read("15", value, path, str_pos) == 0x31){
-								usleep(150000);
-								Inst_Active = Play_YM2612(mode_selection, path, direction, value, active_low, str_pos);
-							}
-							if(pin_read("18", value, path, str_pos) == 0x31){
-								usleep(150000);
-								mode_selection = 2;
-							}
-							if(pin_read("14", value, path, str_pos) == 0x31){
-								usleep(150000);
-								mode_selection = 1;
-							}
-							if(Inst_Active == 0) goto menu_start;
-						}
-						while(mode_selection == 1){
-							LCD_sendString("  Basic ->Adv.  ", 2);
-							if(pin_read("15", value, path, str_pos) == 0x31){
-								usleep(150000);
-								Inst_Active = Play_YM2612(mode_selection, path, direction, value, active_low, str_pos);
-							}
-							if(pin_read("18", value, path, str_pos) == 0x31){
-								usleep(150000);
-								mode_selection = 0;
-							}
-							if(pin_read("14", value, path, str_pos) == 0x31){
-								usleep(150000);
-								mode_selection = 2;
-							}
-							if(Inst_Active == 0) goto menu_start;
-						}
-						while(mode_selection == 2){
-							LCD_sendString("  Adv.  ->MIDI  ", 2);
-							if(pin_read("15", value, path, str_pos) == 0x31){
-								usleep(150000);
-								Inst_Active = MIDI_2612(path, direction, value, active_low, str_pos);
-							}
-							if((pin_read("18", value, path, str_pos) == 0x31) || (pin_read("14", value, path, str_pos) == 0x31)){
-								usleep(150000);
-								mode_selection = 1;
-							}
-							if(pin_read("14", value, path, str_pos) == 0x31){
-								usleep(150000);
-								mode_selection = 0;
-							}
-							if(Inst_Active == 0) goto menu_start;
-						}
-					}
+					Play_YM2612(0, path, direction, value, active_low, str_pos);
+
 				 }
 			}
 			while(menu_select == 1) {

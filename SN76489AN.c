@@ -8,7 +8,8 @@ static const uint8_t YM_WR = 1;
 static const uint8_t YM_RD = 2;
 static const uint8_t YM_CS = 0; //YM registers aren't used here, but are kept just in case
 
-static const uint8_t SN_CE = 6;
+//static const uint8_t SN_CE = 6; //CE not used
+static const uint8_t SN_RDY = 6;
 static const uint8_t SN_WE = 7; //these are both inverted signals 
 
 static const int bus = 0;			//MCP23S17 parameters
@@ -27,9 +28,13 @@ int Play_SN(char * path, char * direction, char * value, char* active_low, int s
 	int menu;
 	int run = 1;
 	
+	write_SN(0x83); // sets channel 0 tone to 0x123
+	write_SN(0x90); // sets channel 0 to loudest possible
+	
 	LCD_sendString("SN76    Keyboard", 1);
 	
 	while(run == 1){
+	    
 		if(pin_read("15", value, path, str_pos) == 0x31) { //Open menu for piezo module, a way to switch or quit programs
 				usleep(150000); //gives user time to release button without menu exiting (150ms)
 				LCD_sendString("SN76 Mode Menu  ", 1);
@@ -78,11 +83,11 @@ void reset_SN(uint8_t SN_CTRL_PORT,int mcp23s17_fd){
 	SN_CTRL_PORT |= _BV(SN_WE); //Set WE HIGH
 	mcp23s17_write_reg(SN_CTRL_PORT, GPIOA, hw_addr, mcp23s17_fd); //write change
 	write_SN(0x9F);	//this data sequence resets the chip's state
-    write_SN(0xBF);
-    write_SN(0xDF);
-    write_SN(0xFF);
-    SN_CTRL_PORT &= ~_BV(SN_WE); //set WE LOW
-    mcp23s17_write_reg(SN_CTRL_PORT, GPIOA, hw_addr, mcp23s17_fd); //write change
+	write_SN(0xBF);
+	write_SN(0xDF);
+	write_SN(0xFF);
+	SN_CTRL_PORT &= ~_BV(SN_WE); //set WE LOW
+	mcp23s17_write_reg(SN_CTRL_PORT, GPIOA, hw_addr, mcp23s17_fd); //write change
 }
 
 void write_SN(uint8_t data){
@@ -91,8 +96,9 @@ void write_SN(uint8_t data){
 	mcp23s17_write_reg(data, GPIOB, hw_addr, mcp23s17_fd); //write data to register
 	SN_CTRL_PORT &= ~_BV(SN_WE); //set WE LOW
 	mcp23s17_write_reg(SN_CTRL_PORT, GPIOA, hw_addr, mcp23s17_fd); //write change
-	usleep(14);
+	usleep(25);
 	SN_CTRL_PORT |= _BV(SN_WE); //set WE HIGH
+	mcp23s17_write_reg(SN_CTRL_PORT, GPIOA, hw_addr, mcp23s17_fd); //write change
 }
 
 static int MCPS_init_SN(void){
@@ -111,7 +117,7 @@ static int MCPS_init_SN(void){
                              
     mcp23s17_write_reg(ioconfig, IOCON, hw_addr, mcp23s17_fd);
     
-    mcp23s17_write_reg(0x3F, IODIRA, hw_addr, mcp23s17_fd); //only SN control pins are active on GPIOA
+    mcp23s17_write_reg(0xC0, IODIRA, hw_addr, mcp23s17_fd); //only SN control pins are active on GPIOA
     mcp23s17_write_reg(0x00, IODIRB, hw_addr, mcp23s17_fd); //0x00 turns all output, 0xff turns all input
     
     mcp23s17_write_reg(0xff, GPPUA, hw_addr, mcp23s17_fd); //Turn off pull-up resistors for both

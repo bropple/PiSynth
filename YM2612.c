@@ -22,8 +22,7 @@ static int last_octave = 0;
 
 static int note_num;
 
-static char Keyboard_Basic_Mode[16] = "YM3438     Basic";
-static char Keyboard_Advanced_Mode[16] = "YM3438          ";
+static char Keyboard_Mode[16] = "YM3438      MIDI";
 
 static char * KeyPins[13] = {"17","27","22","5","6","13","19","26","21","20","16","12","25"}; //Corresponding GPIO pin numbers for each key, in an array for scanning
 																							  //Ordered w/ sharps, as shown below:
@@ -48,7 +47,7 @@ int Play_YM2612(int mode, char * path, char * direction, char * value, char* act
 	
 	//Channel_Info CI = {{0,0,0,0,0,0},{0,0,0,0,0,0},0,0}; //initialize all members of the channel info struct
 	
-	char * Current_Voice = "Gnd Piano       "; //The default instrument is the piano
+	char * Current_Voice = "Basic           "; //The default instrument is the piano
 	int cur_voice = 0;
 	int last_voice = 1;
 	int returning_from_menu = 0;
@@ -58,7 +57,7 @@ int Play_YM2612(int mode, char * path, char * direction, char * value, char* act
 	LCD_sendString("YM3438  Loading ", 1);
 	LCD_sendString("Please wait...  ", 2);
 	setup_chips();
-	YM2612_Grand_Piano(); //Default voice is the Grand Piano from the Application manual
+	YM_Basic(); //Default voice is the Grand Piano from the Application manual
 	LCD_sendString(Current_Voice, 2);
 	LCD_WritePos(2, 14, Current_Octave);
 	LCD_WritePos(2, 13, Default_Note);
@@ -73,19 +72,16 @@ int Play_YM2612(int mode, char * path, char * direction, char * value, char* act
 	int preset_select; //Selection in preset menu
 	int preset_menu;
 	
+	//YM2612_Square();
+	//while(1) YM_Test();
+	
 	while(run == 1)
 	{
 		YM2612_Begin:
 		
-		if(mode == 0) {
-			scan_keys(path, direction, value, active_low, str_pos); //play one note at a time
-			LCD_sendString(Keyboard_Basic_Mode, 1); //reflect mode change
-		}
-		if(mode == 1) {
-			//scan_multiKeys(path, direction, value, active_low, str_pos, CI); //WIP -> Enable polyphony
-			LCD_sendString(Keyboard_Advanced_Mode, 1); //reflect mode change
-																
-		}
+		MIDI_2612(path, direction, value, active_low, str_pos);
+		LCD_sendString(Keyboard_Mode, 1);
+		
 		if(pin_read("15", value, path, str_pos) == 0x31) { //Open menu for YM module, a way to switch or quit programs
 			YM_menu_start:
 			usleep(150000); //gives user time to release button without menu exiting (150ms)
@@ -445,8 +441,7 @@ int Play_YM2612(int mode, char * path, char * direction, char * value, char* act
 			
 		}
 		else { //everything here is lower priority than the keys!
-			if (mode == 0) LCD_sendString(Keyboard_Basic_Mode, 1);
-			if (mode == 1) LCD_sendString(Keyboard_Advanced_Mode, 1);
+			LCD_sendString(Keyboard_Mode, 1);
 			if(cur_voice != last_voice){
 				LCD_sendString(Current_Voice, 2); //show nothing for note
 				cur_voice = last_voice;
@@ -545,17 +540,19 @@ static void write_2612(uint8_t data){
 	//printf("				WR_CTRL %02X\n", YM_CTRL_PORT); //debug info
 }
 
-void setreg(uint8_t reg, uint8_t data, uint8_t isYM_A1){
+void setreg(uint8_t reg, uint8_t data, uint8_t channel){
 	/*	To write to channels 4, 5, and 6:
 	 * 	You need to set A1 HIGH as well!
 	 */
 	YM_CTRL_PORT &= ~_BV(YM_A0); // A0 low (select register), tell chip we are choosing register to write to
-	if(isYM_A1 == 1) YM_CTRL_PORT |= _BV(YM_A1);
+	if(channel > 2) {
+		YM_CTRL_PORT |= _BV(YM_A1);
+		data += ((channel << 2)&1);
+	}
 	//printf("				setreg addr ST_CTRL %02X\n", YM_CTRL_PORT); //debug information
 	mcp23s17_write_reg(YM_CTRL_PORT, GPIOA, hw_addr, mcp23s17_fd); //apply change
 	write_2612(reg); //tell chip what address we want to address
-	if (isYM_A1 == 0) YM_CTRL_PORT |= _BV(YM_A0);  // A0 high (write register), tells chip that we are writing values to previously selected register
-	if(isYM_A1 == 1) YM_CTRL_PORT |= _BV(YM_A1); //set A1 high if applied.
+	YM_CTRL_PORT |= _BV(YM_A0);  // A0 high (write register), tells chip that we are writing values to previously selected register
 	mcp23s17_write_reg(YM_CTRL_PORT, GPIOA, hw_addr, mcp23s17_fd); //apply change
 	write_2612(data); //write the data to the chosen register from earlier
 	//printf("				setreg data ST_CTRL %02X\n", YM_CTRL_PORT); //debug information
@@ -635,32 +632,33 @@ static char * Octave_String(int octave){ //returns an octave string from a repre
 		return retval;
 }
 
-void scan_keys(char * path, char * direction, char * value, char* active_low, int str_pos) { //one key at a time, much more efficient than previous implementation
-	int coctave;
-	for(int arrnum = 0; arrnum<13; arrnum++){ //scan through the KeyPin array using arrnum index
-		if(pin_read(KeyPins[arrnum], value, path, str_pos) == 0x31){ //read the GPIO pin specified at the "arrnum"th position in the KeyPin array
+//SCAN KEYS: depreciated
+//void scan_keys(char * path, char * direction, char * value, char* active_low, int str_pos) { //one key at a time, much more efficient than previous implementation
+	//int coctave;
+	//for(int arrnum = 0; arrnum<13; arrnum++){ //scan through the KeyPin array using arrnum index
+		//if(pin_read(KeyPins[arrnum], value, path, str_pos) == 0x31){ //read the GPIO pin specified at the "arrnum"th position in the KeyPin array
 			
-			if(strcmp("25", KeyPins[arrnum]) == 0) coctave = octave+1; //Key 25 is the additional C key in the next octave
-			else coctave = octave;
+			//if(strcmp("25", KeyPins[arrnum]) == 0) coctave = octave+1; //Key 25 is the additional C key in the next octave
+			//else coctave = octave;
 			
-			note_num = KeyVal(KeyPins[arrnum]);
-			note_picker(note_num, coctave);
+			//note_num = KeyVal(KeyPins[arrnum]);
+			//note_picker(note_num, coctave);
 	
-			setreg(0x28, 0xf0, 0); // CH1 Key on
+			//setreg(0x28, 0xf0, 0); // CH1 Key on
 			
-			while(pin_read(KeyPins[arrnum], value, path, str_pos) == 0x31){
-				LCD_WritePos(2, 13, NoteString(note_num)); //convert note number to corresponding string and write it to lcd
-				LCD_WritePos(2, 14, Octave_String(coctave)); //write octave to lcd
-				LCD_WritePos(2, 15, SharpCheck(note_num)); //write a sharp indicator to the screen if it is indeed a sharp (black key)
-			}
+			//while(pin_read(KeyPins[arrnum], value, path, str_pos) == 0x31){
+				//LCD_WritePos(2, 13, NoteString(note_num)); //convert note number to corresponding string and write it to lcd
+				//LCD_WritePos(2, 14, Octave_String(coctave)); //write octave to lcd
+				//LCD_WritePos(2, 15, SharpCheck(note_num)); //write a sharp indicator to the screen if it is indeed a sharp (black key)
+			//}
 			
-			setreg(0x28, 0x00, 0); // CH1 Key off
+			//setreg(0x28, 0x00, 0); // CH1 Key off
 			
-			last_octave = coctave;
+			//last_octave = coctave;
 			
-		}
-	}
-}
+		//}
+	//}
+//}
 
 //void scan_multiKeys(char * path, char * direction, char * value, char* active_low, int str_pos, Channel_Info CI){ //WIP	
 //	int coctave;																			 					  //when completed, scan_keys will be depreciated
@@ -801,13 +799,13 @@ static int selection = 0;
 int MIDI_2612(char * path, char * direction, char * value, char* active_low, int str_pos){
 	
 	//for(int i = 0; i < YM_MAX_CHANNELS; i++) channel_tracker[i] = 0; //init all channel placeholders 
-	LCD_sendString("YM3438  Loading ", 1);
-	LCD_sendString("Please wait...  ", 2);
+	//LCD_sendString("YM3438  Loading ", 1);
+	//LCD_sendString("Please wait...  ", 2);
 	
 	
-	keyboard_setup(path, direction, value, active_low, str_pos);
-	setup_chips();
-	YM2612_Grand_Piano();
+	//keyboard_setup(path, direction, value, active_low, str_pos);
+	//setup_chips();
+	//YM2612_Grand_Piano();
    
    int status;
    int mode = SND_RAWMIDI_NONBLOCK;
@@ -828,7 +826,7 @@ int MIDI_2612(char * path, char * direction, char * value, char* active_low, int
       while (status != -EAGAIN) {
          status = snd_rawmidi_read(midiin, buffer, 1);
          
-         if(MIDI_menu(path, direction, value, active_low, str_pos, menu_active, selection) == -1);
+         //if(MIDI_menu(path, direction, value, active_low, str_pos, menu_active, selection) == -1);
          
          if ((status < 0) && (status != -EBUSY) && (status != -EAGAIN)) {
             MIDI_errormessage("Problem reading MIDI input: %s",snd_strerror(status));
@@ -845,16 +843,19 @@ int MIDI_2612(char * path, char * direction, char * value, char* active_low, int
             fflush(stdout);
             if (count == 2) {
                //printf("Stored Output Value: 0x%x %d %d\n", output[0], output[1], output[2]); //print the stored output value
-               if(output[0] == 0x90 || output[0] == 0x80) MIDI_ChannelHandler(output[0], output[1], channel_tracker);
-               printf("selection = %d\n", selection);
+               if(output[0] == 0x90 || output[0] == 0x80) {
+				   MIDI_ChannelHandler(output[0], output[1], channel_tracker);
+				   printf("selection = %d\n", selection);
+			   }
                count = 0;
             }
+            
          }
       }
    //}
 
    snd_rawmidi_close(midiin);
-   midiin  = NULL;    // snd_rawmidi_close() does not clear invalid pointer,
+   midiin  = NULL;    // snd_rawmidi_close() does not clear invalid pointer
    return 0;          // so might be a good idea to erase it after closing.
 }
 
@@ -866,41 +867,8 @@ void MIDI_errormessage(const char *format, ...) {
    putc('\n', stderr);
 }
 
-int MIDI_menu(char * path, char * direction, char * value, char* active_low, int str_pos, int menu_active, int selection){ //the goal of the special MIDI menu is for it to be completely interactive; so you can keep playing while in the menu!
-	 if(pin_read("15", value, path, str_pos) == 0x31){
-			usleep(150000);
-			if(menu_active == 0){
-				 menu_active = 1;
-				 LCD_sendString("YM3438 Main Menu", 1);
-			 }
-			else if((menu_active == 1) && (selection == 0)){
-				LCD_sendString("YM3438      MIDI", 1);
-				menu_active = 0;
-			}
-			else if((menu_active == 1) && (selection == 2)) return 1;
-		}
-		
-	else if((pin_read("18", value, path, str_pos) == 0x31) && (menu_active == 1)){
-		usleep(150000);
-		selection--;
-		printf("selection = %d\n", selection);
-		if(selection<0) selection = 0;
-		return 0;
-	}
-	
-	else if((pin_read("14", value, path, str_pos) == 0x31) && (menu_active == 1)){
-		usleep(150000);
-		selection++;
-		printf("selection = %d\n", selection);
-		if(selection>2) selection = 2;
-		return 0;
-	}
-	
-	if((menu_active == 1) && (selection == 0)) LCD_sendString("->Resume   Patch", 2);
-	if((menu_active == 1) && (selection == 1)) LCD_sendString("->Patch     Exit", 2);
-	if((menu_active == 1) && (selection == 2)) LCD_sendString("  Patch   ->Exit", 2);
-	
-	return 0;
+int YM_Menu(char * path, char * direction, char * value, char* active_low, int str_pos, int menu_active, int selection){ //the goal of the special MIDI menu is for it to be completely interactive; so you can keep playing while in the menu!
+	 
 }
 
 uint8_t GetMirrorValue(uint8_t address, bool bank){

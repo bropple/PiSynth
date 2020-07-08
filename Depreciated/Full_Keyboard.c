@@ -70,14 +70,14 @@ char * insert_string(char * str1, char * str2, char * str3, int location){ //all
  */
 
 void keyboard_setup(char * path, char * direction, char * value, char* active_low, int str_pos) {
-	//setup GPIO pins, active low
-	char *pins[3] = {"14", "15", "18"}; //only the menu keys now, notes are played with USB MIDI keyboard
+	//setup GPIO pins 17, 27, 22, 05, 06, 13, 19, 26, 20, 16, and 12 as input, active low
+	char *pins[17] = {"17","27","22","26","5","6","13","19","21","20","16","12","25", "14", "15", "18", "24"}; //24 is the rotary encoder's push button
 	int i;
 	//do all these actions at once, one pin at a time
-	for(i=0; i<3; i++){
+	for(i=0; i<17; i++){
 		pin_enable(pins[i], 2); //enable pins
 		pin_direction(pins[i], direction, path, "in", 2, str_pos); //input direction
 	}
-	//pin_active_low("24", active_low, path, "0", str_pos); //Doing HW implementation for now instead of messing with internal PUDs
+	pin_active_low("24", active_low, path, "0", str_pos); //Doing HW implementation for now instead of messing with internal PUDs
 	printf("Keyboard setup is complete!\n");
 }

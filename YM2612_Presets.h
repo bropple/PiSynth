@@ -8,3 +8,4 @@ void YM2612_Drums(void);
 void YM2612_SSEG(void);
 void YM2612_DistBass(void);
 void YM2612_Weird(void);
+void YM_Basic(void);

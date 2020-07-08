@@ -34,7 +34,7 @@
 static int tx_bytes = 4;
 int fd;
 int result;
-int address = 0x3F; //address of i2c display
+int address = 0x27; //address of i2c display
 
 //LCD commands and flags are listed in the i2c_1602.h file.
 
@@ -72,10 +72,10 @@ int address = 0x3F; //address of i2c display
 
 void i2c_transact(unsigned char * buffer, int nBytes){ //Consolidates a i2c transaction.
 	result = write(fd, buffer, nBytes);
-	if (result != nBytes) {
-		printf("An error occured during the I2C tranaction.\n\n");
-		usleep(1000000);
-	}
+	//if (result != nBytes) {
+	//	printf("An error occured during the I2C tranaction.\n\n");
+	//	usleep(1000000);
+	//}
 	//return result;
 }
 
