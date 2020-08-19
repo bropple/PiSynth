@@ -12,26 +12,26 @@ This library can be found at https://github.com/piface/libmcp23s17
 ALSA raw MIDI read code based on code found here:  
 https://ccrma.stanford.edu/~craig/articles/linuxmidi/alsa-1.0/alsarawmidiin.c  
 
-Current Status:
-The YM3438 is fully playable in MIDI keyboard mode with several presets to choose from.
-3 GPIO buttons are used for menu navigation.
-GPIO input for note playback is depreciated. May bring back as an option later, but the code is still here to do it.
+Current Status:  
+The YM3438 is fully playable in MIDI keyboard mode with several presets to choose from.  
+3 GPIO buttons are used for menu navigation.  
+GPIO input for note playback is depreciated. May bring back as an option later, but the code is still here to do it.  
 
 An alarm "song" can also be automatically played back.  
 The SN76489AN is non-functional at this time.  
   
 A clock function displays the current date and time on the LCD display. An alarm can be set using only the hardware buttons.  
 
-YM2151 stuff may work with some modifications. I cannot test that, however, since I do not have a working YM2151/YM3012 to test it with at this time.
+YM2151 stuff may work with some modifications. I cannot test that, however, since I do not have a working YM2151/YM3012 to test it with at this time.  
 
 Currently working on  
 ----------------------------------------------------------------------------  
 SN76489AN sound chip support (for full Sega Genesis song support)  
 YM3438 Keyboard mode with polyphony support (up to 6 channels per chip, at once)  
-MIDI Keyboard stuff
-.VGM file parsing
-Instrument data storage using .DMP files
-Code optimization
+MIDI Keyboard stuff  
+.VGM file parsing  
+Instrument data storage using .DMP files  
+Code optimization  
                       
 Future Plans  
 -----------------------------------------------------------------------------  
@@ -40,7 +40,7 @@ Add rotary encoders for ADSR envelope / LFO adjustment (number matching amount o
 Support up to 3 YM3438 chips at once to support up to 18 channels  
 Add the ability to create and save your own custom patches  
 Add ability to record songs entirely with the hardware, without needing a DAW
-An optional graphical application
+An optional graphical application  
 Additional output circuitry to add advanced afterFX (reverb, chorus)
 MIDI input/output support(eventually)  
   - Input, for using an external MIDI device to play notes and adjust YM3438, instead of GPIO buttons  
