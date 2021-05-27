@@ -52,10 +52,9 @@ Add Schematic and PCB files
 Build Instructions  
 -------------------------------------------------
 You will need to have libasound2-dev installed on your Raspberry Pi for MIDI functionality.
-In the PiSynth directory, run the following command:  
-gcc -lasound i2c_1602.c i2c_1602.h Keyboard.c Keyboard.h main.c mcps.c mcps.h YM2612.c YM2612.h YM2612_Presets.c YM2612_Presets.h YM2612_Note_Picker.c YM2612_Note_Picker.h YM2612_Songs.c YM2612_Songs.h SN76489AN.c SN76489AN.h Clock.c Clock.h YM_MIDI_KeyCodes.c YM_MIDI_KeyCodes.h -o PiSynth  
 
-A makefile will be made when the project has most desired functions added.  
+To compile the program, simply run the following command in the PiSynth directory: `make`.
+You can also run a `make clean` to remove the compiled objects and program file at any time.
   
 Licensing  
 -------------------------------------------------  
